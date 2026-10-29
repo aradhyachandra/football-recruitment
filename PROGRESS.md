@@ -84,3 +84,41 @@ Reproduce (after R1 and R2):
 
 Next: R4, similarity, split-half stability, value-for-money frontier and score, shortlist. R4 must
 decide how to treat stale valuations (6 players at 900 minutes, 1 in the Central midfielder pool).
+
+## R4: similarity, stability, value for money, shortlist (2026-10-29): done, nothing committed
+
+Config first: `config/similarity.yaml` (pool, metric groups and weights with reasons tied to Kanté's
+R2 percentiles, possession-adjusted defensive metrics, z-scores clipped at +/-3, distance-to-score
+rule, cosine check, split-half settings, frontier rule, value-score weights, constraints, stale and
+unpriced rules) was written and fingerprinted before any run on real data:
+    554dedea75d9565502e14ffa3e24c30e4bb612d89ee7b87b2df7adb4887fd77b
+Unchanged through every run (no weight was changed after seeing names); the hash is saved in
+results/r4_shortlist.json and checked against this line by eye.
+
+Built:
+- `src/recruit/similarity.py`: pure maths (metric weights, profile matrix, standardise and clip,
+  weighted Euclidean distance, 0-100 score, cosine, group gaps, percent_rank, split-half self-match
+  ranks, weak-dominance frontier, constraints, value score and ranking).
+- `sql/r4_half_profiles.sql`: per-player half-season per-90 values (split at 2016-01-01), same
+  arithmetic as r2_player_season; the run checks half minutes add up to season minutes.
+- `src/recruit/run_r4.py`: `analyse()` (pure, tested on hand-made data), writes
+  `data/processed/r4/r4_similarity.parquet` (every pool player, gitignored),
+  `results/r4_shortlist.json` (shortlist, top-similar, frontier, target, stability, config sha256),
+  `docs/R4_shortlist.md` (from `docs/templates/R4_shortlist.md`).
+- `src/recruit/r4_figures.py`: `docs/figures/r4_similarity_vs_value.png` (frontier and shortlist
+  numbered with a key, others unlabelled) and `docs/figures/r4_profile_comparison.png` (Kanté vs top
+  3 of the shortlist, pool percentiles); both carry the StatsBomb source credit as text.
+- `requirements.txt`: matplotlib==3.10.7 added (figures).
+- PROJECT_PLAN.md section 4: Euclidean distance as primary similarity, cosine as a check (reason given).
+- Tests: 31 new (136 in all), hand-made profiles in `tests/test_similarity.py` and `tests/test_run_r4.py`.
+
+Key numbers are in docs/R4_shortlist.md (pool 307; 134 candidates meet the constraints; split-half:
+own profile closest for 21.0% and in the top 5 for 48.8% of 248 players, Kanté 11th).
+
+Reproduce (after R1-R3):
+    .venv/bin/pip install -r requirements.txt
+    .venv/bin/python -m recruit.run_r4      # about 2 s
+
+Next: R5, sensitivity (weights perturbed with a fixed seed, minutes threshold, valuation date,
+value-score weights, dropping stale valuations, raw vs adjusted defensive metrics) and the report.
+Open R4 points in NOTES.md.

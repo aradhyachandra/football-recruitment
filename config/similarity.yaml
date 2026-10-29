@@ -1,0 +1,202 @@
+# R4: similarity to the departing player, split-half stability, value for money and the shortlist.
+# Written and fingerprinted (sha256 in PROGRESS.md) BEFORE the first run on real data. Weights are not
+# changed after seeing names; any later change is reported with its reason and the before/after
+# shortlist. The reasons below refer to Kante's 2015/16 profile as saved in R2
+# (results/r2_profiles_summary.json, percentile ranks within the Central midfielder pool of 307).
+
+pool:
+  role: Central midfielder
+  min_minutes: 900
+  target_statsbomb_player_id: 3961
+  target_in_standardisation: true
+  reason: >-
+    The comparison pool is the departing player's role (config/roles.yaml) with the R2 minutes
+    threshold (config/profiles.yaml, 900). Kante is part of the pool when means and spreads are
+    computed (he is one of its 307 players, like any other), but he is only the target: he is never a
+    candidate, in the frontier, the shortlist or the top-similar list.
+
+# Metric groups. Group weights add up to 1 and are the share of the squared distance each group can
+# contribute. Inside a group, relative metric weights are normalised to the group weight.
+groups:
+  - name: ball_winning
+    label: Ball-winning
+    weight: 0.40
+    reason: >-
+      What Kante contributed most: possession-adjusted percentile ranks 0.96 interceptions, 0.93 blocks,
+      0.92 tackles won, 0.81 ball recoveries (raw 0.93-0.99). The plan's case is "replace ball-winning
+      and progression, not goals", so this group carries the largest weight.
+    metrics:
+      - {name: tackles_won, weight: 1.0, reason: "Core ball-winning action; Kante 0.92 (padj)."}
+      - {name: interceptions, weight: 1.0, reason: "Core ball-winning action; Kante 0.96 (padj), his highest."}
+      - {name: ball_recoveries, weight: 1.0, reason: "Winning loose balls; Kante 0.81 (padj)."}
+      - {name: blocks, weight: 1.0, reason: "Kante 0.93 (padj); part of how he stopped attacks."}
+      - name: pressures
+        weight: 0.5
+        reason: >-
+          Half weight: pressure regains are a subset of pressures, so at full weight both would count
+          pressing activity twice. Pressing volume still matters for the role (Kante 0.63 padj).
+      - name: pressure_regains
+        weight: 0.5
+        reason: "Half weight for the same overlap; regains are the productive part of pressing (Kante 0.69 padj)."
+  - name: progression
+    label: Progression
+    weight: 0.30
+    reason: >-
+      The second half of the plan's case. Kante moved the ball forward mainly by carrying: progressive
+      carries 0.84 and successful dribbles 0.88, while his passing progression was mid-pool
+      (progressive passes 0.53, passes into the final third 0.36). A replacement should match that
+      mix, so all four enter.
+    metrics:
+      - {name: progressive_carries, weight: 1.0, reason: "Kante's main way to progress (0.84)."}
+      - {name: successful_dribbles, weight: 1.0, reason: "Beating a man to carry forward (0.88)."}
+      - {name: progressive_passes, weight: 1.0, reason: "Progression by passing (0.53); level matters too."}
+      - {name: passes_into_final_third, weight: 1.0, reason: "Final-third entries by pass (0.36)."}
+  - name: passing_security
+    label: Passing security
+    weight: 0.15
+    reason: >-
+      How much of the team's passing he handled and how safely: passes completed 0.28 (low volume),
+      completion 0.54. A deep playmaker with twice the passing volume plays a different job, so the
+      group enters, but with less weight than the two groups that define his contribution.
+    metrics:
+      - {name: passes_completed, weight: 1.0, reason: "Passing volume (0.28): Kante was not the team's hub."}
+      - {name: pass_completion, weight: 1.0, reason: "Ball security (0.54); a share, not a per-90 rate."}
+  - name: attacking_output
+    label: Attacking output
+    weight: 0.15
+    reason: >-
+      Not what Kante was valued for (shots 0.24, non-penalty xG 0.15, key passes 0.51). Kept at a low
+      weight because level matters: an attacking midfielder who also defends a lot is a different
+      player, and this group lets the distance see that.
+    metrics:
+      - {name: shots, weight: 1.0, reason: "Shot volume (0.24, low)."}
+      - {name: np_xg, weight: 1.0, reason: "Quality of chances shot from (0.15, low)."}
+      - {name: key_passes, weight: 1.0, reason: "Chance creation (0.51, mid-pool)."}
+excluded_metrics:
+  - name: fouls_committed
+    reason: >-
+      Left out of the distance: fouling is a by-product of defending, not a contribution a club wants to
+      replace, and its meaning is ambiguous (aggression, tactical fouls or poor timing). Kante was low
+      (0.20 padj). Shown in tables for context only.
+
+possession_adjusted:
+  use_adjusted_for_defensive: true
+  reason: >-
+    Defensive metrics (the seven marked possession_adjusted in config/metrics.yaml) enter as their
+    possession-adjusted per-90 values. Leicester had the ball about 42% of the time in Kante's
+    matches (R2), so he faced more opponent possession than most; a buying club needs output that
+    carries over to a team with a different possession share, not a count inflated or deflated by his
+    team's style. Raw values stay in data/processed/ and the raw-vs-adjusted choice is a candidate for
+    the R5 sensitivity check.
+
+standardisation:
+  method: z_score_within_pool
+  ddof: 0
+  clip: 3.0
+  reason: >-
+    Each metric becomes (value - pool mean) / pool standard deviation (population form, ddof 0), so
+    metrics measured in different units count on one scale. Values are then clipped to +/-3: a squared
+    distance lets one extreme value (for example a midfielder who takes many shots) dominate the whole
+    comparison; beyond 3 standard deviations a player is already "extreme" on that metric and the
+    exact size adds little. The number of clipped values (and whether the target has any) is saved.
+
+similarity:
+  distance: weighted_euclidean
+  score: linear_to_max
+  reason: >-
+    Primary similarity is the weighted Euclidean distance d = sqrt(sum_m w_m (z_m - z_target,m)^2),
+    with metric weights adding up to 1, so d is a weighted root-mean-square gap in standard
+    deviations. Level matters for a replacement: a player with half Kante's output in the same
+    proportions is not a replacement, and a distance sees that while a cosine does not. The score is
+    100 * (1 - d / (2 * clip)): 2 * clip is the largest possible d after clipping (every metric at the
+    opposite clip limit), so 100 = identical profile and 0 = the furthest possible. The scale is fixed
+    (not fitted to the pool), so scores keep their meaning when the pool changes; ranks follow d.
+  cosine_check:
+    on: weighted_z
+    reason: >-
+      Cosine similarity of the weighted z-vectors (sqrt(w_m) * z_m) of player and target, reported
+      next to the score as a check of profile shape (proportions relative to the pool average)
+      regardless of level. A high cosine with a low score means the same shape at a different level.
+
+percentiles:
+  key_metrics: [tackles_won, interceptions, ball_recoveries, blocks, pressure_regains, progressive_carries,
+                successful_dribbles, progressive_passes, passes_completed, pass_completion]
+  method: percent_rank
+  reason: >-
+    Percentile ranks within the pool (same method as R2: (players with a lower value) / (pool size -
+    1)), on the values used in the distance (possession-adjusted for defensive metrics). The key
+    metrics are the ones that carry most of the weight above, plus passing volume and security.
+    Used in results/r4_shortlist.json and the profile figure.
+
+stability:
+  split_date: "2016-01-01"
+  min_minutes_per_half: 450
+  top_k: [1, 5]
+  reason: >-
+    Split-half check of whether profiles are stable enough to compare. Matches before split_date form
+    the first half, matches on or after it the second. 1 January sits at the middle of the four
+    leagues' calendars (first match 7 Aug 2015, last 17 May 2016; midpoint about 27 Dec; winter
+    breaks fall around it). Each half-profile uses the same metrics, adjustment, standardisation
+    (within the players who qualify in that half), clip and weights as the full season. A player
+    qualifies with 450 minutes in each half: half the season threshold, so each half rests on at least
+    five full matches. For each qualifying player, his first-half profile is compared with every
+    second-half profile; his rank is where his own second-half profile lands (1 = closest). The share
+    of players whose own profile is in the top 1 and the top 5 is saved, with the chance rate (k /
+    number of players) for comparison, and the same rank for Kante.
+
+frontier:
+  dominance: weak
+  reason: >-
+    Weight-free view of value for money among all priced pool candidates (before the shortlist
+    constraints, which are shown as a flag). A player is on the frontier when no other candidate is
+    at least as similar and at least as cheap, and strictly better on one of the two. The weak form is
+    used because market values are round numbers with many ties: under a strict "both better" rule a
+    player would survive next to a much more similar player at the same price.
+
+value_score:
+  similarity_weight: 0.7
+  price_weight: 0.3
+  scale: percentile_within_candidates
+  reason: >-
+    value score = 0.7 * similarity percentile + 0.3 * cheapness percentile, both as percentile ranks
+    (0-100) among the priced candidates who meet the constraints, so the two terms have the same
+    spread and the stated weights are the weights that act. (The similarity score sits in a narrow
+    band, so mixing it raw with a price scale would let price dominate.) Similarity leads because
+    the job is to replace a contribution; price separates candidates of similar profile. The
+    frontier above gives the view without any weight. Ties in the score are broken by similarity.
+  cheapness: lower_market_value_is_higher
+
+constraints:
+  budget_cap_eur: 10000000
+  budget_reason: >-
+    Half of Kante's own market value at the date (EUR 20,000,000, valued 2016-06-01; R3). The case is
+    recruitment on a budget: replace his contribution for clearly less than his own price. A stated
+    assumption, tested in R5. Inclusive (a player valued exactly at the cap qualifies).
+  age_min: 20
+  age_max: 28
+  age_reason: >-
+    Age in whole years at the valuation date (2016-07-01), inclusive. 20+: a player expected to start
+    straight away in a title-winning side (Kante played 37 league matches). Up to 28: several peak
+    years left and resale value kept, which matters for a club buying on a budget. Kante was 25.
+  exclude_teams:
+    - {statsbomb_team_id: 22, name: Leicester City, reason: "The buying club; its own players are not targets."}
+  exclude_teams_rule: any_minutes
+  exclude_teams_rule_reason: "A player who played for an excluded team at any point of 2015/16 is excluded."
+  stale_valuations: flag
+  stale_reason: >-
+    Decided by Aradhya after R3: valuations older than 183 days (config/matching.yaml) stay in the
+    ranking but carry a visible flag in every output; R5 tests dropping them.
+  unpriced: excluded_from_value
+  unpriced_reason: >-
+    Players without a Transfermarkt match or without a valuation on or before the date stay in the
+    similarity tables and the top-similar list but cannot enter the frontier, value score or shortlist;
+    their count is saved.
+
+outputs:
+  shortlist_size: 10
+  top_similar_size: 10
+  figure_top_profiles: 3
+  reason: >-
+    Ten candidates is a workable list for a scouting department to watch; the top-similar list of ten
+    without price is context for what the shortlist gives up. The profile figure compares Kante with
+    the top three of the shortlist.

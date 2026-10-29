@@ -88,10 +88,13 @@ priced; the report gives the count.
 - **Possession adjustment:** defensive actions scaled to a common possession level using the team's
   possession share in the matches the player played (formula in config). Possession is estimated from
   StatsBomb possession sequences; method decided and tested in R2.
-- **Similarity:** standardise metrics within the role pool (z-scores), apply feature weights (config,
-  each with a reason), cosine similarity to the departing player. A split-half check (first vs second
-  half of the season) measures how often a player's nearest neighbour is himself, as an honest test of
-  whether the profiles are stable enough to compare.
+- **Similarity:** standardise metrics within the role pool (z-scores, clipped), apply feature weights
+  (config, each with a reason). Primary similarity is a weighted Euclidean distance to the departing
+  player, turned into a 0-100 score; cosine similarity is reported alongside as a check of profile
+  shape. *Changed in R4 (decided by Aradhya), reason:* level matters for a replacement: a player with
+  half Kante's output in the same proportions is not a replacement, and cosine alone would rate him a
+  perfect match. A split-half check (first vs second half of the season) measures how often a player's
+  nearest neighbour is himself, as an honest test of whether the profiles are stable enough to compare.
 - **Value for money:** two views. (a) Weight-free: the frontier of players for whom no one else is both
   more similar and cheaper. (b) Weighted score combining similarity and price, with weights in config.
   Constraints in config: budget cap, age range at the valuation date, exclude the departing player's

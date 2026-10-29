@@ -8,24 +8,12 @@ date and how they were settled.
 - **StatsBomb logo.** The terms require the StatsBomb logo on every published analysis. The R1 and R2
   pages carry a text credit only; Aradhya will fetch the logo from the Media Pack
   (https://statsbomb.com/media-pack/) before anything goes public on GitHub (not before R6).
-- **R3 override that rests on outside knowledge.** StatsBomb id 42946 "Jiang Guangtai" (Everton, 5
-  matches) is matched to Transfermarkt 156934 "Tyias Browning": same squad, Chinese citizenship, born in
-  England, 5 v 5 appearances. That he later took the Chinese name is general knowledge, not in either
-  dataset. Low stakes (328 minutes, full back), but worth a glance.
 - **Transfermarkt appearances have holes (R3 finding).** Markel Susaeta (Athletic, 1,985 minutes) has
   no Transfermarkt appearances from May 2015 to August 2016, and Rushian Hepburn-Murphy (Aston Villa, 6
   minutes) none before November 2019, so neither is in the squads built from appearances; both are
   matched by override (`outside_squad`). Susaeta is the only plausibility flag (28 StatsBomb matches v 0
   Transfermarkt league appearances). Other players with such a hole would show up the same way; none
   else did.
-- **One-word Transfermarkt names (R3).** 16 matches rest on a one-word Transfermarkt name contained in
-  the StatsBomb legal name (e.g. "Miranda", "Hernanes", "Jordan" for StatsBomb "Jordan Siebatcheu";
-  Transfermarkt's "Jordan" is born 1996-04-26 and plays for Reims); 8 of them reach 900 minutes. All have plausible appearance counts. Worth a skim in
-  `data/processed/r3/r3_player_values.parquet` (method token_subset, score 0.88).
-- **Stale and missing valuations (R3).** At 900 minutes every matched player has a valuation on or
-  before 2016-07-01; 6 are older than 183 days (oldest 391 days; 1 in the Central midfielder pool,
-  Zdravko Kuzmanović, 196 days). Below 900 minutes, 56 matched players have no valuation before the date.
-  R4 should decide whether stale prices enter the value score or only carry a flag.
 - **Unmatched (R3).** Assane Gnoukouri (Inter, 62 minutes) is not in transfermarkt-datasets under any
   spelling found; left unmatched.
 - **Glitched timestamps (R2 finding).** 252 events (almost all Premier League and La Liga; mostly the
@@ -50,7 +38,33 @@ date and how they were settled.
   retries (about 30 s in total) were too short, so it was simply re-run (it resumes). A clean-clone
   check in R7 should expect the same.
 
+- **R4: half the shortlist has no split-half rank.** 5 of the 10 shortlisted players (and 59 of the
+  307 pool players) have under 450 minutes in one half of the season, so the stability check could
+  not rate them; their full-season profiles rest on 1,121-1,547 minutes. Worth weighing when reading
+  the shortlist (docs/R4_shortlist.md).
+- **R4: value score leans towards cheap players.** Percentile cheapness among the 134 eligible
+  players, many valued at EUR 1-2.5m, lets players ranked 41st and 43rd by similarity into the
+  shortlist (ranks 7 and 6). This is the configured 0.7/0.3 weighting acting as written, not changed
+  after seeing names; R5 should test other score weights. The frontier gives the weight-free view.
+- **R4: similarity scores sit in a narrow band.** The fixed 0-100 scale (100 * (1 - d / 6)) puts the
+  top 10 between 84.6 and 90.2, so small score gaps look larger in ranks than they are. Ranks follow
+  the distance either way; the split-half check suggests gaps of a point or two are within noise.
+- **R4: frontier includes players outside the constraints.** 4 of the 10 frontier players are 32-39
+  (the frontier is computed before constraints, by design, and flags them). One (Enzo Maresca) has a
+  valuation dated exactly 2016-07-01, allowed by the "on or before" rule.
+
 ## Resolved
+
+- 2026-10-29 (R4): StatsBomb id 42946 "Jiang Guangtai" = Transfermarkt 156934 "Tyias Browning":
+  confirmed by Aradhya; he took the name on naturalisation in China in 2019. Override kept.
+- 2026-10-29 (R4): The 16 one-word-name matches (method token_subset) were reviewed by hand by
+  Aradhya: all correct.
+- 2026-10-29 (R4): Stale valuations (older than 183 days) stay in the ranking with a visible flag in
+  every output; R5 tests dropping them (Aradhya; config/similarity.yaml constraints.stale_valuations).
+  In the Central midfielder pool 1 priced candidate is stale; none is on the shortlist.
+- 2026-10-29 (R4): Primary similarity is a weighted Euclidean distance on standardised metrics (0-100
+  score), with cosine reported as a shape check (Aradhya). Reason: level matters for a replacement.
+  PROJECT_PLAN.md section 4 updated.
 
 - 2026-10-29 (R2): The 80% valuation gate line is kept (Aradhya, after R1; 95.3% passed). Reason in
   config/audit.yaml.
