@@ -16,6 +16,12 @@ def fmt(value, style=None) -> str:
         return ""
     if style == "pct":
         return f"{value:.1%}"
+    if style == "plain":  # identifiers such as a seed: no thousands separator
+        return str(value)
+    if style == "ord":    # 1st, 2nd, 3rd, 11th, 92nd
+        n = int(round(value))
+        suffix = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+        return f"{n}{suffix}"
     if style == "pct2":   # for shares close to 0% or 100%, where one decimal would round away a gap
         return f"{value:.2%}"
     if isinstance(value, bool):

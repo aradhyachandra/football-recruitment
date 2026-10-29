@@ -122,3 +122,42 @@ Reproduce (after R1-R3):
 Next: R5, sensitivity (weights perturbed with a fixed seed, minutes threshold, valuation date,
 value-score weights, dropping stale valuations, raw vs adjusted defensive metrics) and the report.
 Open R4 points in NOTES.md.
+
+## R5: sensitivity analysis and findings report (2026-10-29): done, nothing committed
+
+Config first: `config/sensitivity.yaml` (16 named one-change scenarios including the base, 300 Dirichlet
+weight draws, robust-core line, recommendation rule) was written and fingerprinted before any run on
+real data:
+    4cea2681f7e3cf717b10a3337a5cccb1e2baa6160232f8c665d9a69844292172   (before any run)
+One change after the first real-data run, reporting only: `outputs.draw_rank_quantiles: [0.05, 0.95]`
+(with reason) moved the rank band shown for the random draws out of the code into config. Scenarios,
+core line and recommendation rule unchanged; robust core and recommendation identical before and after.
+    376748f06bb6b302e7e7ed0e152c86ce9f6d5c16ecfc7508dc273d462e7ae1b5   (current, saved in results)
+`config/similarity.yaml` unchanged (554dedea...); the run stops if it differs from R4's, and the base
+scenario must reproduce the R4 shortlist exactly (it does).
+
+Built:
+- `src/recruit/sensitivity.py`: one-change configs (dotted paths, `group_weights`; unknown keys raise),
+  config fingerprint per scenario, seeded Dirichlet group weights, the runner, robustness counts
+  (top-10 / top-3 shares, median rank, min-max and quantile band), robust core, recommendation rule
+  with fallback, summary.
+- R4 code extended without changing R4 results (checked: rerun gives an identical r4_shortlist.json
+  apart from run time): value-score scales `minmax_log_value_across_pool` and `similarity_only`
+  (`run_r4.value_scores`, `similarity.value_score_minmax_log`), stale rule `exclude`, `with_stability` flag.
+- `src/recruit/run_r5.py`, `src/recruit/r5_figures.py` (docs/figures/r5_top10_by_scenario.png,
+  r5_rank_ranges.png; StatsBomb source text on both), `src/recruit/report_r5.py` (derived figures saved
+  as `report_facts` in results/r5_sensitivity.json, tables, rendering). `report.py`: `ord` and `plain` formats.
+- Outputs: `results/r5_sensitivity.json` (summaries only: per-scenario top lists and fingerprints,
+  34 saved candidates with robustness, core, recommendation), `docs/R5_sensitivity.md` (short plain note),
+  `docs/REPORT.md` (findings report, about 4,700 words with tables) from `docs/templates/`.
+- Tests: 26 new (162 in all): scenario runner, Dirichlet reproducibility and centring, robustness counts,
+  core and recommendation (incl. tie-break and fallback), new value scores and stale rule, wording rules,
+  "every number in the report is in results/" (and the report template holds no literal figures).
+
+Results (docs/REPORT.md): robust core of 7 (value top 10 in at least 12 of 16 scenarios);
+recommendation Sebastián Cristóforo, backups Jessy Pi and Benjamin André, all in the core.
+
+Reproduce (after R1-R4):
+    .venv/bin/python -m recruit.run_r5      # about 7 s, peak memory about 0.3 GB
+
+Next: R6, Streamlit dashboard and README (StatsBomb logo still TO VERIFY).

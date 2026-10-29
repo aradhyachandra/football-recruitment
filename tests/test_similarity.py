@@ -130,7 +130,7 @@ def test_frontier_weak_dominance():
 
 def test_constraints():
     cons = {"budget_cap_eur": 10, "age_min": 20, "age_max": 28,
-            "exclude_teams": [{"statsbomb_team_id": 22}]}
+            "exclude_teams": [{"statsbomb_team_id": 22}], "stale_valuations": "flag"}
     df = pd.DataFrame({"market_value_eur": [10, 11, 5, 5, 5, None], "age": [25, 25, 19, 29, 28, 25],
                        "team_ids": [[1], [1], [1], [1], [3, 22], [1]]}, index=list("ABCDEF"))
     m = sim.constraint_mask(df, cons)

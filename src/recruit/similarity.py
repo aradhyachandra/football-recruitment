@@ -116,6 +116,10 @@ def constraint_mask(df: pd.DataFrame, cons: dict) -> pd.DataFrame:
     m["within_budget"] = value.notna() & (value <= cons["budget_cap_eur"])
     m["age_ok"] = df["age"].between(cons["age_min"], cons["age_max"])
     m["team_ok"] = df["team_ids"].map(lambda ids: not excluded & set(ids))
+    if cons["stale_valuations"] == "exclude":
+        m["stale_ok"] = df["valuation_stale"] != True  # noqa: E712
+    elif cons["stale_valuations"] != "flag":
+        raise ValueError(f"unknown stale_valuations rule {cons['stale_valuations']!r}")
     m["eligible"] = m.all(axis=1)
     return m
 
@@ -125,6 +129,17 @@ def value_score(similarity: pd.Series, price: pd.Series, w_sim: float, w_price: 
     if not np.isclose(w_sim + w_price, 1.0):
         raise ValueError("value-score weights must add up to 1")
     return 100 * (w_sim * percent_rank(similarity) + w_price * percent_rank(-price.astype(float)))
+
+
+def value_score_minmax_log(similarity: pd.Series, price: pd.Series, w_sim: float, w_price: float) -> pd.Series:
+    """w_sim * similarity + w_price * cheapness, each min-max scaled to 0-1 within the rows given;
+    cheapness = -log(market value), so price counts by ratio. Scaled to 0-100."""
+    if not np.isclose(w_sim + w_price, 1.0):
+        raise ValueError("value-score weights must add up to 1")
+    def scale(x):
+        span = x.max() - x.min()
+        return (x - x.min()) / span if span > 0 else x * 0.0
+    return 100 * (w_sim * scale(similarity) + w_price * scale(-np.log(price.astype(float))))
 
 
 def rank_by_value(df: pd.DataFrame) -> list:

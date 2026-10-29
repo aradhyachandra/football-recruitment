@@ -53,6 +53,21 @@ date and how they were settled.
   (the frontier is computed before constraints, by design, and flags them). One (Enzo Maresca) has a
   valuation dated exactly 2016-07-01, allowed by the "on or before" rule.
 
+- **R5: the recommendation leans on price.** Sebastián Cristóforo is in the value top 10 in every named
+  scenario and top 3 in 81.2%, but 13th by similarity alone (similarity top 10 in 12.5% of the
+  similarity scenarios), not rated by the split-half check, and his 1,503 minutes are 3 above the
+  highest threshold tested. The most similar eligible profiles (Jack Cork, Nemanja Radoja) win when
+  price is dropped or log-scaled. The rule was fixed in advance; worth a human view on whether the
+  club's question is "closest we can afford" or "most profile per euro" (docs/REPORT.md).
+- **R5: config amended once after the first run** (reporting only): `outputs.draw_rank_quantiles` in
+  config/sensitivity.yaml; fingerprints before/after in PROGRESS.md. Results unchanged.
+- **R5: results/r1_data_report.json holds Kanté's valuations after 2016-07-01** (R1 gate history,
+  including later clubs). Not used anywhere in R2-R5 or the report, but it is post-date information in
+  a public results file; consider trimming the history to dates on or before the valuation date before
+  publishing (R6/R7).
+- **R5: season label.** The report prints the season as "2015/2016" (config/scope.yaml season_name);
+  figures say "2015/16". Cosmetic.
+
 ## Resolved
 
 - 2026-10-29 (R4): StatsBomb id 42946 "Jiang Guangtai" = Transfermarkt 156934 "Tyias Browning":

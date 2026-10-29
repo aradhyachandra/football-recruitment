@@ -59,8 +59,24 @@ def stability(pool_ids, half_long: pd.DataFrame, cfg: dict, metrics: list[str], 
     return out, ranks
 
 
+def value_scores(priced: pd.DataFrame, eligible: pd.DataFrame, vc: dict) -> pd.Series:
+    """Value score of the eligible players under the configured scale (R4: percentile_within_candidates;
+    R5 sensitivity adds minmax_log_value_across_pool and similarity_only)."""
+    scale = vc["scale"]
+    if scale == "percentile_within_candidates":
+        return sim.value_score(eligible["similarity"], eligible["market_value_eur"],
+                               vc["similarity_weight"], vc["price_weight"])
+    if scale == "minmax_log_value_across_pool":
+        score = sim.value_score_minmax_log(priced["similarity"], priced["market_value_eur"],
+                                           vc["similarity_weight"], vc["price_weight"])
+        return score.loc[eligible.index]
+    if scale == "similarity_only":
+        return eligible["similarity"].copy()
+    raise ValueError(f"unknown value_score scale {scale!r}")
+
+
 def analyse(players: pd.DataFrame, season_long: pd.DataFrame, half_long: pd.DataFrame, cfg: dict,
-            metrics_cfg: dict) -> dict:
+            metrics_cfg: dict, with_stability: bool = True) -> dict:
     """players: one row per player_id with name, club, team_ids, league, role, minutes, age,
     market_value_eur, valuation_date, valuation_stale. season_long / half_long: R2 / r4_half_profiles rows.
     Returns the per-player table (pool) and the pieces of the summary."""
@@ -98,15 +114,15 @@ def analyse(players: pd.DataFrame, season_long: pd.DataFrame, half_long: pd.Data
     for c in cons.columns:
         table[c] = cons[c]
     eligible = cand[cons["eligible"]]
-    vc = cfg["value_score"]
-    table["value_score"] = sim.value_score(eligible["similarity"], eligible["market_value_eur"],
-                                           vc["similarity_weight"], vc["price_weight"])
+    table["value_score"] = value_scores(priced, eligible, cfg["value_score"])
     order = sim.rank_by_value(table.loc[eligible.index])
     table["value_rank"] = pd.Series(range(1, len(order) + 1), index=order)
     table["similarity_rank"] = cand["distance"].rank(method="min").astype(int)
 
-    stab, ranks = stability(pool.index, half_long, cfg, metrics, adjusted, w, target)
-    table["self_match_rank"] = ranks
+    stab = None
+    if with_stability:
+        stab, ranks = stability(pool.index, half_long, cfg, metrics, adjusted, w, target)
+        table["self_match_rank"] = ranks
     out = cfg["outputs"]
     return {
         "table": table, "weights": w, "adjusted": adjusted, "stability": stab,

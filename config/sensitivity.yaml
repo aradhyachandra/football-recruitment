@@ -1,0 +1,214 @@
+# R5: sensitivity of the R4 shortlist, the robust core and the recommendation rule.
+# Written and fingerprinted (sha256 in PROGRESS.md) BEFORE any run on real data. Scenarios, lines and
+# the recommendation rule are not added, dropped or changed after seeing results; any later change is
+# reported with its reason and the before/after result.
+#
+# The base case is config/similarity.yaml exactly as used in R4 (its sha256 is checked on every run
+# against results/r4_shortlist.json, and the base scenario must reproduce the R4 shortlist). Each
+# named scenario changes ONE thing from that base. A change is a dotted path into similarity.yaml
+# (lists of groups are addressed by group name), or `group_weights` for the four group weights at once.
+
+base_config: config/similarity.yaml
+
+scenarios:
+  - id: base
+    label: R4 base case
+    kind: base
+    changes: {}
+    reason: >-
+      The R4 settings unchanged: 900 minutes, possession-adjusted defensive metrics, group weights
+      0.40 / 0.30 / 0.15 / 0.15, percentile value score with 0.7 on similarity, EUR 10m cap, age 20-28,
+      stale valuations flagged and kept. Counted once although several scenario families below
+      contain it as their middle setting (900 minutes, weight 0.7, EUR 10m, age 20-28).
+
+  # ---- value-score definition (similarity unchanged, ranking of eligible players changes) ----
+  - id: value_log_minmax
+    label: "Value score: log value, min-max"
+    kind: value
+    changes: {value_score.scale: minmax_log_value_across_pool}
+    reason: >-
+      The R4 score uses percentile ranks, which treat the step from EUR 1m to 1.5m like the step from
+      5m to 9m and hide how far apart similarity scores are (NOTES.md: the score leans towards cheap
+      players). Here similarity and log market value are each scaled to 0-1 by min-max across all
+      priced candidates in the pool (before constraints, so the scale does not move with the budget
+      or age rule), cheaper = higher; log because price differences matter as ratios. Weights stay
+      0.7 / 0.3.
+  - id: value_similarity_only
+    label: "Value score: similarity only"
+    kind: value
+    changes: {value_score.scale: similarity_only}
+    reason: >-
+      Price ignored inside the constraints: the eligible players ranked by similarity alone. Shows
+      what the shortlist looks like when the budget cap is the only price signal.
+  - id: value_weight_0.5
+    label: "Value score: similarity weight 0.5"
+    kind: value
+    changes: {value_score.similarity_weight: 0.5, value_score.price_weight: 0.5}
+    reason: "Price counts as much as similarity: a club that is very price-sensitive."
+  - id: value_weight_0.9
+    label: "Value score: similarity weight 0.9"
+    kind: value
+    changes: {value_score.similarity_weight: 0.9, value_score.price_weight: 0.1}
+    reason: "Price only separates near-equal profiles: a club that puts the replacement first."
+
+  # ---- group weights (similarity changes) ----
+  - id: weights_equal
+    label: "Group weights: equal"
+    kind: weights
+    changes: {group_weights: {ball_winning: 0.25, progression: 0.25, passing_security: 0.25, attacking_output: 0.25}}
+    reason: >-
+      No view on what matters most: each of the four groups gets a quarter. Tests whether the
+      shortlist depends on the R4 judgement that ball-winning and progression define Kante's job.
+  - id: weights_ball_winning_heavy
+    label: "Group weights: ball-winning heavy"
+    kind: weights
+    changes: {group_weights: {ball_winning: 0.55, progression: 0.25, passing_security: 0.10, attacking_output: 0.10}}
+    reason: >-
+      Ball-winning raised by 0.15, taken equally (0.05 each) from the other three groups: a club whose
+      main loss is the defensive cover.
+  - id: weights_progression_heavy
+    label: "Group weights: progression heavy"
+    kind: weights
+    changes: {group_weights: {ball_winning: 0.35, progression: 0.45, passing_security: 0.10, attacking_output: 0.10}}
+    reason: >-
+      The mirror image: progression raised by 0.15, taken equally (0.05 each) from the other three
+      groups: a club whose main loss is how Kante carried the ball forward.
+
+  # ---- minutes threshold (pool, standardisation and similarity recomputed) ----
+  - id: minutes_600
+    label: "Minutes threshold 600"
+    kind: pool
+    changes: {pool.min_minutes: 600}
+    reason: >-
+      Lower bound of the R2 sensitivity range (config/profiles.yaml): a bigger pool with noisier
+      per-90 rates; players with fewer starts enter. Means and spreads are recomputed in the new pool.
+  - id: minutes_1200
+    label: "Minutes threshold 1,200"
+    kind: pool
+    changes: {pool.min_minutes: 1200}
+    reason: "Upper bound of the R2 sensitivity range: steadier rates, smaller pool."
+  - id: minutes_1500
+    label: "Minutes threshold 1,500"
+    kind: pool
+    changes: {pool.min_minutes: 1500}
+    reason: >-
+      Added for R5: about 17 full matches, close to half of a 38-match season. Several R4 shortlisted
+      players rest on 1,100-1,550 minutes (NOTES.md), so this tests whether the list depends on
+      players with thin samples.
+
+  # ---- metric definition ----
+  - id: defensive_raw
+    label: "Defensive metrics raw (not possession-adjusted)"
+    kind: metrics
+    changes: {possession_adjusted.use_adjusted_for_defensive: false}
+    reason: >-
+      The possession adjustment is linear and a modelling choice (NOTES.md). Here the seven defensive
+      metrics enter as raw per-90 counts, so players in low-possession teams are not scaled down.
+
+  # ---- constraints (similarity unchanged, eligibility changes) ----
+  - id: stale_excluded
+    label: "Stale valuations excluded"
+    kind: constraints
+    changes: {constraints.stale_valuations: exclude}
+    reason: >-
+      R4 keeps valuations older than 183 days with a flag (decided by Aradhya); this drops them, as
+      decided after R3 to be tested here.
+  - id: budget_5m
+    label: "Budget cap EUR 5m"
+    kind: constraints
+    changes: {constraints.budget_cap_eur: 5000000}
+    reason: "A quarter of Kante's EUR 20m value: a tighter budget."
+  - id: budget_15m
+    label: "Budget cap EUR 15m"
+    kind: constraints
+    changes: {constraints.budget_cap_eur: 15000000}
+    reason: "Three quarters of Kante's value: a looser budget that lets better-known players in."
+  - id: age_18_30
+    label: "Age 18-30"
+    kind: constraints
+    changes: {constraints.age_min: 18, constraints.age_max: 30}
+    reason: >-
+      A wider age range: younger players with fewer senior minutes and older players with less resale
+      value both enter.
+
+random_weights:
+  draws: 300
+  seed: 20160701
+  concentration: 40
+  reason: >-
+    Group weights drawn from a Dirichlet distribution centred on the base weights (alpha = concentration
+    x base weight), everything else at the base case. Concentration 40 gives a standard deviation of
+    about 0.08 on the ball-winning weight (0.40) and about 0.06 on the 0.15 groups: weights move by a
+    fifth to a third of their size, enough to show which ranks depend on the exact R4 weights while
+    staying near the stated judgement. 300 draws put the standard error of a 50% top-10 share at about
+    3 points. The seed is the valuation date, as in R3. Reported separately from the named scenarios,
+    which each carry one deliberate change.
+
+views:
+  top_n: 10
+  top_k: 3
+  similarity_view_kinds: [base, weights, pool, metrics]
+  reason: >-
+    top_n = the R4 shortlist size; top_k = the head of the list a club would scout first. The value
+    view ranks eligible players by the value score of each scenario. The similarity view ranks all
+    candidates by similarity alone (no price, no constraints, like the R4 top-similar list); it is
+    reported over the scenarios that change similarity (base, weights, pool, metrics) and the random
+    weight draws, because value and constraint scenarios leave it unchanged.
+
+robust_core:
+  min_share_named_top_n: 0.75
+  reason: >-
+    A player is in the robust core when he is in the value top 10 in at least 75% of the named
+    scenarios (12 of 16). Some scenarios remove players by design (the EUR 5m cap drops anyone valued
+    above it, 1,500 minutes drops thinner samples), so requiring every scenario would punish price or
+    minutes rather than profile; three in four still means the place does not hinge on one
+    assumption. Random-weight shares are shown next to it, not used in the line.
+
+recommendation:
+  rule: >-
+    Among the robust core: highest share of named scenarios in the value top 3; ties broken by the
+    median similarity score across the named scenarios in which the player is in the pool (higher
+    first). The first is the recommendation, the next two the backups.
+  fallback: >-
+    If the robust core has fewer than three players, the remaining places are filled from the other
+    candidates by share of named scenarios in the top 10, then share in the top 3, then median
+    similarity, and the report says that these players are outside the core.
+  count: 3
+  reason: >-
+    Top-3 share rewards players a club would scout first under most assumptions; median similarity
+    as the tie-break puts profile ahead of price, as the case is replacing a contribution. One choice
+    plus two backups because the first target may not be obtainable.
+
+outputs:
+  saved_candidates:
+    min_named_top_n: 1
+    min_draw_top_n_share: 0.05
+    reason: >-
+      results/r5_sensitivity.json keeps only candidates who reach the value or similarity top 10 in at
+      least one named scenario, or the value top 10 in at least 5% of random draws: a summary, not a
+      per-player table.
+  figure_min_share: 0.25
+  figure_reason: >-
+    The frequency and rank-range figures show candidates in the value top 10 in at least a quarter of
+    the named scenarios or random draws, so the chart stays readable.
+  draw_rank_quantiles: [0.05, 0.95]
+  draw_rank_quantiles_reason: >-
+    Added after the first real-data run (reporting only; scenarios, core line and recommendation rule
+    unchanged; before/after fingerprint in PROGRESS.md). The spread of a player's rank over the random
+    weight draws is shown as the 5th-95th percentile: the full min-max of 300 draws is set by a handful
+    of extreme weightings, while this band shows where nine draws in ten fall.
+  tradeoff_metrics: 3
+  tradeoff_reason: >-
+    For the recommendation and backups, the report names the three key metrics (R4 percentiles) where
+    the player's percentile differs most from Kante's: enough to state the trade-off without listing
+    all ten.
+
+report:
+  forbidden_phrases: ["would succeed", "proven", "guarantee", "best player"]
+  forbidden_reason: >-
+    Wording rule (CLAUDE.md, PROJECT_PLAN.md): similarity and value results are analysis under stated
+    assumptions, not proof that a player would do well. Tested on docs/REPORT.md and docs/R5_sensitivity.md.
+  number_exempt_phrases: ["per 90", "0-100"]
+  number_exempt_reason: >-
+    Unit names, not figures: "per 90" names the rate, "0-100" the score scale. Every other number in
+    the report must appear in results/ (tested).
