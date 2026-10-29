@@ -1,0 +1,94 @@
+# Which StatsBomb JSON fields are kept when flattening to parquet, and why.
+# path: dot-separated path into one JSON record (integers index into lists). A list of paths means
+#       "first one that is present" (StatsBomb stores e.g. the outcome under the event type's own key).
+# type: string | int32 | int64 | float64 | bool.   default: value used when the field is absent.
+# Everything not listed is dropped (freeze frames, related_events, tactics lineups, ...), which keeps
+# the parquet small. R2 may add a field here; re-run the flatten step afterwards.
+events:
+  - {name: event_id, path: id, type: string, reason: "unique event key; shot.key_pass_id points to it"}
+  - {name: index, path: index, type: int32, reason: "event order within the match"}
+  - {name: period, path: period, type: int32, reason: "half; needed with minute/second"}
+  - {name: timestamp, path: timestamp, type: string, reason: "time within the period, for sequences (pressure regains)"}
+  - {name: minute, path: minute, type: int32, reason: "match clock"}
+  - {name: second, path: second, type: int32, reason: "match clock"}
+  - {name: type_id, path: type.id, type: int32, reason: "event type"}
+  - {name: type_name, path: type.name, type: string, reason: "event type (Pass, Pressure, ...)"}
+  - {name: possession, path: possession, type: int32, reason: "possession sequence number; possession share and regains"}
+  - {name: possession_team_id, path: possession_team.id, type: int64, reason: "team in possession; possession adjustment"}
+  - {name: play_pattern, path: play_pattern.name, type: string, reason: "set piece vs open play"}
+  - {name: team_id, path: team.id, type: int64, reason: "acting team"}
+  - {name: team_name, path: team.name, type: string, reason: "acting team, readable"}
+  - {name: player_id, path: player.id, type: int64, reason: "acting player"}
+  - {name: player_name, path: player.name, type: string, reason: "acting player, readable"}
+  - {name: position_id, path: position.id, type: int32, reason: "position at the time of the event"}
+  - {name: position_name, path: position.name, type: string, reason: "position, readable"}
+  - {name: location_x, path: location.0, type: float64, reason: "start x (0-120 pitch units); progressive actions, zones"}
+  - {name: location_y, path: location.1, type: float64, reason: "start y (0-80)"}
+  - {name: duration, path: duration, type: float64, reason: "event duration in seconds"}
+  - {name: under_pressure, path: under_pressure, type: bool, default: false, reason: "action under pressure"}
+  - {name: counterpress, path: counterpress, type: bool, default: false, reason: "pressure/defensive action within 5 s of losing the ball"}
+  - {name: off_camera, path: off_camera, type: bool, default: false, reason: "event not seen on video; data-quality flag"}
+  - {name: out, path: out, type: bool, default: false, reason: "ball went out of play with this event"}
+  - name: outcome_name
+    path: [pass.outcome.name, shot.outcome.name, dribble.outcome.name, duel.outcome.name,
+           interception.outcome.name, ball_receipt.outcome.name, goalkeeper.outcome.name,
+           50_50.outcome.name, substitution.outcome.name]
+    type: string
+    reason: "success/failure of the action (a pass with no outcome is complete, per StatsBomb spec)"
+  - name: subtype_name
+    path: [pass.type.name, duel.type.name, shot.type.name, goalkeeper.type.name, foul_committed.type.name]
+    type: string
+    reason: "e.g. Tackle vs Aerial Lost duels, set-piece passes, penalty shots"
+  - {name: end_x, path: [pass.end_location.0, carry.end_location.0, shot.end_location.0], type: float64, reason: "end x of pass/carry/shot; progressive passes and carries"}
+  - {name: end_y, path: [pass.end_location.1, carry.end_location.1, shot.end_location.1], type: float64, reason: "end y"}
+  - {name: pass_length, path: pass.length, type: float64, reason: "pass distance"}
+  - {name: pass_recipient_id, path: pass.recipient.id, type: int64, reason: "receiver"}
+  - {name: pass_height, path: pass.height.name, type: string, reason: "ground/low/high"}
+  - {name: pass_cross, path: pass.cross, type: bool, default: false, reason: "cross flag"}
+  - {name: pass_switch, path: pass.switch, type: bool, default: false, reason: "switch of play"}
+  - {name: pass_through_ball, path: pass.through_ball, type: bool, default: false, reason: "through ball"}
+  - {name: pass_shot_assist, path: pass.shot_assist, type: bool, default: false, reason: "key pass (assisted a shot)"}
+  - {name: pass_goal_assist, path: pass.goal_assist, type: bool, default: false, reason: "assist"}
+  - {name: shot_xg, path: shot.statsbomb_xg, type: float64, reason: "StatsBomb xG of the shot"}
+  - {name: shot_key_pass_id, path: shot.key_pass_id, type: string, reason: "links the shot to its key pass"}
+  - {name: ball_recovery_failure, path: ball_recovery.recovery_failure, type: bool, default: false, reason: "recovery attempt that failed"}
+  - name: aerial_won
+    path: [pass.aerial_won, shot.aerial_won, clearance.aerial_won, miscontrol.aerial_won]
+    type: bool
+    default: false
+    reason: "aerial duels won (stored on the action that followed)"
+  - {name: card_name, path: [foul_committed.card.name, bad_behaviour.card.name], type: string, reason: "cards"}
+  - {name: substitution_replacement_id, path: substitution.replacement.id, type: int64, reason: "who came on; cross-check of lineup minutes"}
+
+lineup_players:
+  - {name: team_id, path: team_id, type: int64, reason: "team"}
+  - {name: team_name, path: team_name, type: string, reason: "team, readable"}
+  - {name: player_id, path: player_id, type: int64, reason: "player key"}
+  - {name: player_name, path: player_name, type: string, reason: "full name; R3 name matching"}
+  - {name: player_nickname, path: player_nickname, type: string, reason: "common name; R3 name matching"}
+  - {name: jersey_number, path: jersey_number, type: int32, reason: "squad number"}
+  - {name: country_name, path: country.name, type: string, reason: "nationality; R3 name matching tie-break"}
+
+lineup_positions:
+  - {name: position_id, path: position_id, type: int32, reason: "StatsBomb position; role assignment in R2"}
+  - {name: position_name, path: position, type: string, reason: "position, readable"}
+  - {name: from_time, path: from, type: string, reason: "start of the stint, match clock MM:SS; minutes played"}
+  - {name: to_time, path: to, type: string, reason: "end of the stint; empty = until the final whistle"}
+  - {name: from_period, path: from_period, type: int32, reason: "period the stint starts in"}
+  - {name: to_period, path: to_period, type: int32, reason: "period the stint ends in"}
+  - {name: start_reason, path: start_reason, type: string, reason: "Starting XI / substitution / tactical shift"}
+  - {name: end_reason, path: end_reason, type: string, reason: "substitution / red card / final whistle"}
+
+matches:
+  - {name: match_id, path: match_id, type: int64, reason: "match key"}
+  - {name: competition_id, path: competition.competition_id, type: int32, reason: "league"}
+  - {name: season_id, path: season.season_id, type: int32, reason: "season"}
+  - {name: match_date, path: match_date, type: string, duckdb_type: DATE, reason: "date (cast to DATE in DuckDB); split-half check"}
+  - {name: match_week, path: match_week, type: int32, reason: "round"}
+  - {name: home_team_id, path: home_team.home_team_id, type: int64, reason: "home team"}
+  - {name: home_team_name, path: home_team.home_team_name, type: string, reason: "home team, readable"}
+  - {name: away_team_id, path: away_team.away_team_id, type: int64, reason: "away team"}
+  - {name: away_team_name, path: away_team.away_team_name, type: string, reason: "away team, readable"}
+  - {name: home_score, path: home_score, type: int32, reason: "result"}
+  - {name: away_score, path: away_score, type: int32, reason: "result"}
+  - {name: data_version, path: metadata.data_version, type: string, reason: "StatsBomb data spec version"}

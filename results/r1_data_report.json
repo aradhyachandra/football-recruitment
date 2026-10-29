@@ -1,0 +1,576 @@
+{
+  "season_id": 27,
+  "valuation_date": "2016-07-01",
+  "leagues": [
+    {
+      "competition_id": 2,
+      "league": "Premier League",
+      "matches": 380,
+      "events": 1313773,
+      "teams": 20,
+      "squad_players": 644,
+      "players_who_played": 550
+    },
+    {
+      "competition_id": 7,
+      "league": "Ligue 1",
+      "matches": 377,
+      "events": 1358593,
+      "teams": 20,
+      "squad_players": 649,
+      "players_who_played": 574
+    },
+    {
+      "competition_id": 11,
+      "league": "La Liga",
+      "matches": 380,
+      "events": 1295354,
+      "teams": 20,
+      "squad_players": 601,
+      "players_who_played": 539
+    },
+    {
+      "competition_id": 12,
+      "league": "Serie A",
+      "matches": 380,
+      "events": 1353739,
+      "teams": 20,
+      "squad_players": 699,
+      "players_who_played": 551
+    }
+  ],
+  "event_types": [
+    {
+      "type_name": "Pass",
+      "Premier League": 368619,
+      "La Liga": 365288,
+      "Serie A": 373667,
+      "Ligue 1": 374239,
+      "total": 1481813
+    },
+    {
+      "type_name": "Ball Receipt*",
+      "Premier League": 340314,
+      "La Liga": 328953,
+      "Serie A": 357920,
+      "Ligue 1": 357682,
+      "total": 1384869
+    },
+    {
+      "type_name": "Carry",
+      "Premier League": 276949,
+      "La Liga": 276171,
+      "Serie A": 280820,
+      "Ligue 1": 283256,
+      "total": 1117196
+    },
+    {
+      "type_name": "Pressure",
+      "Premier League": 115402,
+      "La Liga": 114081,
+      "Serie A": 130888,
+      "Ligue 1": 130733,
+      "total": 491104
+    },
+    {
+      "type_name": "Ball Recovery",
+      "Premier League": 40943,
+      "La Liga": 38514,
+      "Serie A": 41332,
+      "Ligue 1": 41893,
+      "total": 162682
+    },
+    {
+      "type_name": "Duel",
+      "Premier League": 32290,
+      "La Liga": 31578,
+      "Serie A": 28834,
+      "Ligue 1": 32421,
+      "total": 125123
+    },
+    {
+      "type_name": "Clearance",
+      "Premier League": 21645,
+      "La Liga": 16217,
+      "Serie A": 17775,
+      "Ligue 1": 17369,
+      "total": 73006
+    },
+    {
+      "type_name": "Block",
+      "Premier League": 14839,
+      "La Liga": 13916,
+      "Serie A": 15727,
+      "Ligue 1": 14687,
+      "total": 59169
+    },
+    {
+      "type_name": "Dribble",
+      "Premier League": 13721,
+      "La Liga": 14550,
+      "Serie A": 11695,
+      "Ligue 1": 12355,
+      "total": 52321
+    },
+    {
+      "type_name": "Goal Keeper",
+      "Premier League": 11777,
+      "La Liga": 11507,
+      "Serie A": 11944,
+      "Ligue 1": 11137,
+      "total": 46365
+    },
+    {
+      "type_name": "Foul Committed",
+      "Premier League": 9512,
+      "La Liga": 12136,
+      "Serie A": 12662,
+      "Ligue 1": 11207,
+      "total": 45517
+    },
+    {
+      "type_name": "Miscontrol",
+      "Premier League": 10786,
+      "La Liga": 10422,
+      "Serie A": 11200,
+      "Ligue 1": 12198,
+      "total": 44606
+    },
+    {
+      "type_name": "Foul Won",
+      "Premier League": 9112,
+      "La Liga": 11574,
+      "Serie A": 12061,
+      "Ligue 1": 10526,
+      "total": 43273
+    },
+    {
+      "type_name": "Dispossessed",
+      "Premier League": 10520,
+      "La Liga": 9379,
+      "Serie A": 9262,
+      "Ligue 1": 10783,
+      "total": 39944
+    },
+    {
+      "type_name": "Shot",
+      "Premier League": 9908,
+      "La Liga": 9168,
+      "Serie A": 9998,
+      "Ligue 1": 8814,
+      "total": 37888
+    },
+    {
+      "type_name": "Interception",
+      "Premier League": 8920,
+      "La Liga": 12374,
+      "Serie A": 7751,
+      "Ligue 1": 8535,
+      "total": 37580
+    },
+    {
+      "type_name": "Dribbled Past",
+      "Premier League": 8771,
+      "La Liga": 8846,
+      "Serie A": 6977,
+      "Ligue 1": 7356,
+      "total": 31950
+    },
+    {
+      "type_name": "Substitution",
+      "Premier League": 2109,
+      "La Liga": 2190,
+      "Serie A": 2238,
+      "Ligue 1": 2185,
+      "total": 8722
+    },
+    {
+      "type_name": "Half End",
+      "Premier League": 1520,
+      "La Liga": 1520,
+      "Serie A": 1520,
+      "Ligue 1": 1508,
+      "total": 6068
+    },
+    {
+      "type_name": "Half Start",
+      "Premier League": 1520,
+      "La Liga": 1520,
+      "Serie A": 1520,
+      "Ligue 1": 1508,
+      "total": 6068
+    },
+    {
+      "type_name": "Injury Stoppage",
+      "Premier League": 1032,
+      "La Liga": 1232,
+      "Serie A": 1541,
+      "Ligue 1": 1604,
+      "total": 5409
+    },
+    {
+      "type_name": "50/50",
+      "Premier League": 559,
+      "La Liga": 403,
+      "Serie A": 1881,
+      "Ligue 1": 2021,
+      "total": 4864
+    },
+    {
+      "type_name": "Tactical Shift",
+      "Premier League": 625,
+      "La Liga": 811,
+      "Serie A": 1147,
+      "Ligue 1": 1304,
+      "total": 3887
+    },
+    {
+      "type_name": "Starting XI",
+      "Premier League": 760,
+      "La Liga": 760,
+      "Serie A": 760,
+      "Ligue 1": 754,
+      "total": 3034
+    },
+    {
+      "type_name": "Shield",
+      "Premier League": 503,
+      "La Liga": 512,
+      "Serie A": 614,
+      "Ligue 1": 560,
+      "total": 2189
+    },
+    {
+      "type_name": "Player Off",
+      "Premier League": 145,
+      "La Liga": 337,
+      "Serie A": 511,
+      "Ligue 1": 512,
+      "total": 1505
+    },
+    {
+      "type_name": "Player On",
+      "Premier League": 144,
+      "La Liga": 332,
+      "Serie A": 508,
+      "Ligue 1": 505,
+      "total": 1489
+    },
+    {
+      "type_name": "Bad Behaviour",
+      "Premier League": 193,
+      "La Liga": 471,
+      "Serie A": 334,
+      "Ligue 1": 239,
+      "total": 1237
+    },
+    {
+      "type_name": "Referee Ball-Drop",
+      "Premier League": 272,
+      "La Liga": 218,
+      "Serie A": 333,
+      "Ligue 1": 387,
+      "total": 1210
+    },
+    {
+      "type_name": "Error",
+      "Premier League": 178,
+      "La Liga": 171,
+      "Serie A": 121,
+      "Ligue 1": 127,
+      "total": 597
+    },
+    {
+      "type_name": "Offside",
+      "Premier League": 109,
+      "La Liga": 145,
+      "Serie A": 142,
+      "Ligue 1": 122,
+      "total": 518
+    },
+    {
+      "type_name": "Own Goal Against",
+      "Premier League": 38,
+      "La Liga": 29,
+      "Serie A": 28,
+      "Ligue 1": 33,
+      "total": 128
+    },
+    {
+      "type_name": "Own Goal For",
+      "Premier League": 38,
+      "La Liga": 29,
+      "Serie A": 28,
+      "Ligue 1": 33,
+      "total": 128
+    }
+  ],
+  "row_counts": {
+    "sb_matches": 1517,
+    "sb_events": 5321459,
+    "sb_lineup_players": 57665,
+    "sb_lineup_positions": 56884,
+    "tm_players": 50149,
+    "tm_player_valuations": 656301,
+    "tm_clubs": 796,
+    "tm_appearances": 1894350
+  },
+  "departing_player_statsbomb": [
+    {
+      "player_id": 3961,
+      "player_name": "N''Golo Kanté",
+      "team_name": "Leicester City",
+      "matches_listed": 36,
+      "matches_played": 36
+    },
+    {
+      "player_id": 3961,
+      "player_name": "N'Golo Kanté",
+      "team_name": "Leicester City",
+      "matches_listed": 1,
+      "matches_played": 1
+    }
+  ],
+  "raw_files": {
+    "statsbomb": {
+      "competitions": {
+        "files": 1,
+        "bytes": 34887,
+        "records": 80
+      },
+      "events_11": {
+        "files": 380,
+        "bytes": 1121596909,
+        "records": 1295354
+      },
+      "events_12": {
+        "files": 380,
+        "bytes": 1156330650,
+        "records": 1353739
+      },
+      "events_2": {
+        "files": 380,
+        "bytes": 1129261832,
+        "records": 1313773
+      },
+      "events_7": {
+        "files": 377,
+        "bytes": 1161485667,
+        "records": 1358593
+      },
+      "lineups_11": {
+        "files": 380,
+        "bytes": 7116081,
+        "records": 760
+      },
+      "lineups_12": {
+        "files": 380,
+        "bytes": 8128689,
+        "records": 760
+      },
+      "lineups_2": {
+        "files": 380,
+        "bytes": 6632113,
+        "records": 760
+      },
+      "lineups_7": {
+        "files": 377,
+        "bytes": 7257080,
+        "records": 754
+      },
+      "matches_11": {
+        "files": 1,
+        "bytes": 702673,
+        "records": 380
+      },
+      "matches_12": {
+        "files": 1,
+        "bytes": 686900,
+        "records": 380
+      },
+      "matches_2": {
+        "files": 1,
+        "bytes": 698179,
+        "records": 380
+      },
+      "matches_7": {
+        "files": 1,
+        "bytes": 667360,
+        "records": 377
+      }
+    },
+    "transfermarkt": {
+      "appearances": {
+        "bytes": 45253638,
+        "data_rows": 1894350
+      },
+      "clubs": {
+        "bytes": 51281,
+        "data_rows": 796
+      },
+      "player_valuations": {
+        "bytes": 7197935,
+        "data_rows": 656301
+      },
+      "players": {
+        "bytes": 4389958,
+        "data_rows": 50149
+      }
+    }
+  },
+  "gates": {
+    "valuation": {
+      "players": 2175,
+      "with_valuation_before": 2072,
+      "with_valuation_either_side": 2150,
+      "share_before": 0.9526436781609195,
+      "share_either_side": 0.9885057471264368,
+      "by_league": [
+        {
+          "league": "ES1",
+          "players": 538,
+          "with_valuation_before": 505,
+          "with_valuation_either_side": 532,
+          "share_before": 0.9386617100371747,
+          "share_either_side": 0.9888475836431226
+        },
+        {
+          "league": "FR1",
+          "players": 575,
+          "with_valuation_before": 558,
+          "with_valuation_either_side": 571,
+          "share_before": 0.9704347826086956,
+          "share_either_side": 0.9930434782608696
+        },
+        {
+          "league": "GB1",
+          "players": 549,
+          "with_valuation_before": 512,
+          "with_valuation_either_side": 534,
+          "share_before": 0.9326047358834244,
+          "share_either_side": 0.9726775956284153
+        },
+        {
+          "league": "IT1",
+          "players": 551,
+          "with_valuation_before": 534,
+          "with_valuation_either_side": 551,
+          "share_before": 0.969147005444646,
+          "share_either_side": 1.0
+        }
+      ],
+      "window_months": 6,
+      "min_share_before": 0.8,
+      "departing_player": {
+        "transfermarkt_player_id": 225083,
+        "latest_before": {
+          "date": "2016-06-01",
+          "market_value_eur": 20000000,
+          "days_before": 30
+        },
+        "history": [
+          {
+            "date": "2015-10-14",
+            "market_value_eur": 7000000,
+            "club": "Leicester City",
+            "days_before": 261
+          },
+          {
+            "date": "2016-02-09",
+            "market_value_eur": 10000000,
+            "club": "Leicester City",
+            "days_before": 143
+          },
+          {
+            "date": "2016-06-01",
+            "market_value_eur": 20000000,
+            "club": "Leicester City",
+            "days_before": 30
+          },
+          {
+            "date": "2016-08-01",
+            "market_value_eur": 30000000,
+            "club": "Chelsea FC",
+            "days_before": -31
+          },
+          {
+            "date": "2017-02-20",
+            "market_value_eur": 40000000,
+            "club": "Chelsea FC",
+            "days_before": -234
+          },
+          {
+            "date": "2017-06-28",
+            "market_value_eur": 50000000,
+            "club": "Chelsea FC",
+            "days_before": -362
+          }
+        ]
+      },
+      "passed": true
+    },
+    "pressure": {
+      "by_league": [
+        {
+          "league": "Premier League",
+          "pressure_events": 115402,
+          "matches": 380,
+          "matches_with_pressure": 380
+        },
+        {
+          "league": "Ligue 1",
+          "pressure_events": 130733,
+          "matches": 377,
+          "matches_with_pressure": 377
+        },
+        {
+          "league": "La Liga",
+          "pressure_events": 114081,
+          "matches": 380,
+          "matches_with_pressure": 380
+        },
+        {
+          "league": "Serie A",
+          "pressure_events": 130888,
+          "matches": 380,
+          "matches_with_pressure": 380
+        }
+      ],
+      "passed": true
+    },
+    "lineup": {
+      "position_rows": 56884,
+      "with_from_time": 56884,
+      "with_to_time": 23493,
+      "with_from_period": 56884,
+      "matches": 1517,
+      "matches_with_both_teams": 1517,
+      "min_players_per_team_match": 11,
+      "max_players_per_team_match": 14,
+      "share_from_time": 1.0,
+      "open_ended_by_end_reason": [
+        {
+          "end_reason": "Final Whistle",
+          "rows": 33391
+        }
+      ],
+      "min_share_from_time": 0.99,
+      "passed": true
+    },
+    "resource": {
+      "statsbomb_raw_bytes": 4600599020,
+      "statsbomb_raw_files": 3039,
+      "transfermarkt_raw_bytes": 56892812,
+      "transfermarkt_raw_files": 4,
+      "parquet_bytes": 407985860,
+      "duckdb_bytes": 374353920,
+      "flatten_peak_rss_bytes": 379863040,
+      "peak_rss_gb": 0.3537750244140625,
+      "flatten_seconds": 155.4,
+      "max_peak_rss_gb": 2.0,
+      "passed": true,
+      "run_peak_rss_bytes": 1251409920
+    }
+  },
+  "all_gates_passed": true
+}

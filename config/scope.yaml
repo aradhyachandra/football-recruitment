@@ -1,0 +1,46 @@
+# What the project analyses. Every choice has a reason; later milestones read these values.
+season:
+  season_id: 27
+  season_name: "2015/2016"
+  reason: >-
+    The departing-player case is Leicester City losing N'Golo Kante in summer 2016, so the profiles
+    must come from the season just before (2015/16). StatsBomb Open Data covers whole leagues for it.
+competitions:
+  - {competition_id: 2, name: Premier League, transfermarkt_id: GB1}
+  - {competition_id: 11, name: La Liga, transfermarkt_id: ES1}
+  - {competition_id: 12, name: Serie A, transfermarkt_id: IT1}
+  - {competition_id: 7, name: Ligue 1, transfermarkt_id: FR1}
+competitions_reason: >-
+  The four leagues with (near-)complete 2015/16 coverage in StatsBomb Open Data (380, 380, 380 and 377
+  matches counted on 2026-10-29). transfermarkt_id is the same league's code in transfermarkt-datasets,
+  used only for the R1 valuation gate and the R3 join.
+excluded_competitions:
+  - competition_id: 9
+    name: 1. Bundesliga
+    reason: >-
+      Only 34 matches, all Bayer Leverkusen games; players at other clubs would have 1-2 matches each,
+      too few for a per-90 profile.
+departing_player:
+  statsbomb_name: "N'Golo Kanté"
+  transfermarkt_name: "N'Golo Kanté"
+  club: Leicester City
+  reason: >-
+    The case study: Leicester won the 2015/16 Premier League and lost Kante to Chelsea in July 2016.
+    His contribution (ball-winning and progression, not goals) is what the shortlist must replace.
+    Names are as spelled in each source. The R1 audit found StatsBomb id 3961 under this name and
+    under "N''Golo Kanté" (doubled apostrophe); later steps should use the id (see NOTES.md).
+valuation_date: "2016-07-01"
+valuation_date_reason: >-
+  Opening of the 2016 summer transfer window, when the club would be shopping. Only valuations on or
+  before this date are used for prices (no hindsight).
+departing_player_ids:
+  transfermarkt_player_id: 225083
+  reason: >-
+    The only "N'Golo Kanté" in transfermarkt-datasets players (born 1991-03-29), checked on 2026-10-29.
+    The StatsBomb player_id is looked up by name in the R1 audit and fixed here in R2.
+season_window:
+  start: "2015-07-01"
+  end: "2016-06-30"
+  reason: >-
+    Dates that count as the 2015/16 season when reading transfermarkt-datasets appearances (it has no
+    season column we rely on). The four leagues' 2015/16 games fall between 7 Aug 2015 and 17 May 2016.

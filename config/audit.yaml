@@ -1,0 +1,30 @@
+# R1 data audit: what each gate checks and the line it must clear. Each number has a reason.
+# A failed gate stops the pipeline (run_r1 exits non-zero); nothing works around it.
+valuation_gate:
+  window_months: 6
+  window_reason: "Prompt for R1: valuation records within 6 months of the valuation date."
+  min_share_before: 0.80
+  min_share_before_reason: >-
+    Prices may only use valuations on or before the valuation date (no hindsight), so the gate is
+    judged on the share of league players with a valuation in the 6 months before it. Below 80%, more
+    than one in five players in the pool could not be priced, which would make the value-for-money
+    shortlist depend on gaps in the data. TO VERIFY (NOTES.md): the 80% line is my proposal.
+  departing_player_required: true
+  departing_player_reason: "The case cannot be priced without the departing player's own valuation."
+  history_months: 12
+  history_reason: >-
+    The audit lists the departing player's valuations within 12 months either side of the date, for
+    context only (later valuations are shown, never used for prices).
+pressure_gate:
+  event_type: Pressure
+  reason: "Pressures are a core ball-winning metric for the Kante profile; must exist in every league."
+lineup_gate:
+  min_share_from_time: 0.99
+  reason: >-
+    Minutes played (R2) come from lineup position stints, so nearly every stint needs a start time;
+    1% slack allows a few data-entry gaps, which the audit lists.
+resource_gate:
+  max_peak_rss_gb: 2.0
+  reason: >-
+    8 GB laptop: the flatten step should stay well under a quarter of RAM, leaving room for DuckDB
+    (capped at 2 GB in data.yaml), the OS and a browser.

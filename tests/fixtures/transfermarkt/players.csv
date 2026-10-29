@@ -1,0 +1,6 @@
+"player_id","first_name","last_name","name","player_code","country_of_birth","country_of_citizenship","date_of_birth","sub_position","position","foot","height_in_cm","image_url","market_value_in_eur"
+"225083","N'Golo","Kanté","N'Golo Kanté","ngolo-kante","France","France","1991-03-29 00:00:00","Defensive Midfield","Midfield","right","168","x.jpg","3000000"
+"1001","Ann","Alpha","Ann Alpha","ann-alpha","England","England","1995-01-02 00:00:00","Centre-Back","Defender","left","185",,
+"1002","Bo","Beta","Bo Beta","bo-beta","France","Mali","1990-05-06 00:00:00","Central Midfield","Midfield",,,,
+"1003","Cy","Gamma","Cy Gamma","cy-gamma","Germany","Germany","1992-07-08 00:00:00","Goalkeeper","Goalkeeper","right","190",,
+"1004","Di","Delta","Di Delta","di-delta","Spain","Spain","1993-09-10 00:00:00","Centre-Forward","Attack","right","180",,

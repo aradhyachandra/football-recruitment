@@ -1,0 +1,33 @@
+# Where the data comes from and where it goes. Paths are relative to the project root.
+statsbomb:
+  base_url: https://raw.githubusercontent.com/hudl/open-data/master/data
+  base_url_reason: >-
+    StatsBomb Open Data moved to github.com/hudl/open-data after Hudl acquired StatsBomb; files are
+    fetched as published, never scraped from a website.
+  raw_dir: data/raw/statsbomb
+transfermarkt:
+  base_url: https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data
+  base_url_reason: >-
+    The download host linked from the transfermarkt-datasets README (read 2026-10-29), which serves
+    one gzipped CSV per table. The README says the snapshot runs to 6 July 2026 and is not refreshed.
+  raw_dir: data/raw/transfermarkt
+  tables: [players, player_valuations, clubs, appearances]
+  tables_reason: >-
+    players, player_valuations and clubs are the tables the plan names. appearances is added because
+    the R1 valuation gate needs an independent list of who played in the four leagues in 2015/16:
+    the club fields on player_valuations rows are not reliable for that (for example, Miroslav Klose's
+    Bayern-era rows carry Lazio's club id), and using the valuations themselves to define the
+    population would make the gate circular.
+download:
+  delay_seconds: 0.2
+  delay_reason: "Polite pacing: about five requests a second at most to a free public host."
+  retries: 4
+  backoff_seconds: 2.0
+  backoff_reason: "Wait 2, 4, 8, 16 s between retries; enough to ride out a transient 5xx or reset."
+  timeout_seconds: 60
+processed_dir: data/processed
+duckdb:
+  path: data/processed/recruit.duckdb
+  memory_limit: 2GB
+  threads: 2
+  reason: "8 GB laptop: cap DuckDB well below total RAM so the OS and browser keep room."

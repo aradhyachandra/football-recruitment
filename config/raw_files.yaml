@@ -1,0 +1,89 @@
+# Fingerprints of the raw files as downloaded in R1 (python -m recruit.run_r1 --record).
+# Every run stops if a file no longer matches. Do not edit by hand.
+statsbomb:
+  competitions:
+    bytes: 34887
+    files: 1
+    records: 80
+    sha256: 99b69959e651ab276eed730fdad52eb7078fca445c375c6000fc83e87b049b9c
+  events_11:
+    bytes: 1121596909
+    files: 380
+    records: 1295354
+    sha256: 0ad09ffacf2ae1d31af296e773409ac4d107f41ee653dfcce2197130f4865b32
+  events_12:
+    bytes: 1156330650
+    files: 380
+    records: 1353739
+    sha256: ac7d3e61c6d94a62fcae23fa42f7c06e86b5822b4b9088c020ff377c3954a4cf
+  events_2:
+    bytes: 1129261832
+    files: 380
+    records: 1313773
+    sha256: 8edbba95b8d4bb7094c13ed719b1bdd61da7b5957968aa4088f358ebfd79ac48
+  events_7:
+    bytes: 1161485667
+    files: 377
+    records: 1358593
+    sha256: 060ff60a8ffb73ef4b70c439cedf33efe51d52fae50ecd1805256f20dab8acf9
+  lineups_11:
+    bytes: 7116081
+    files: 380
+    records: 760
+    sha256: a963e3199efe45375de5cf8a685d0d2a7b2feffc19688e21ca42125c42bea28e
+  lineups_12:
+    bytes: 8128689
+    files: 380
+    records: 760
+    sha256: f4a01a3cae09e4fb3183ad30e386e78f169e7cbff313ff49c98bd9211344c2fc
+  lineups_2:
+    bytes: 6632113
+    files: 380
+    records: 760
+    sha256: 3c96d10f854f15c5d92b2371e068d307cc32915dbb8ae9edc3f6b1729755e46a
+  lineups_7:
+    bytes: 7257080
+    files: 377
+    records: 754
+    sha256: f73fcb3f0f2115f764071ef2909adbe96d2555d551e7b3c6483a6629d9fb48d7
+  matches_11:
+    bytes: 702673
+    files: 1
+    records: 380
+    sha256: a6c74fdb6bbd4ca9d230d28267520f4513779d0f349ec89e780694fa22b0b244
+  matches_12:
+    bytes: 686900
+    files: 1
+    records: 380
+    sha256: 3f66ebe2b43d04bce4225f2c2e36bd73768ccca33b36cda066c0f89ae45d1810
+  matches_2:
+    bytes: 698179
+    files: 1
+    records: 380
+    sha256: 2090ab17dfd0f16f65e1405389cccc6fec4cf7810588fd33b3489c2793c9a0a0
+  matches_7:
+    bytes: 667360
+    files: 1
+    records: 377
+    sha256: 4c280a6117563228207dc490a2656ee7fd0d7a653ac416c59e327285d172c48f
+transfermarkt:
+  appearances:
+    bytes: 45253638
+    data_rows: 1894350
+    file: appearances.csv.gz
+    sha256: e096c2b158fc3d52c4550526c4d4850dd62f31007652f4bcae112eadb1646802
+  clubs:
+    bytes: 51281
+    data_rows: 796
+    file: clubs.csv.gz
+    sha256: aa57ab56e87faffaea1e8697439a32caf10116d8f2f2dfb3a57193c0bb1d641b
+  player_valuations:
+    bytes: 7197935
+    data_rows: 656301
+    file: player_valuations.csv.gz
+    sha256: 608e32e5ad2231074f3505c469ad727be66d7e6efda6af918afd85379439631d
+  players:
+    bytes: 4389958
+    data_rows: 50149
+    file: players.csv.gz
+    sha256: d22e407981d5b51a79bf8ff59835729f3526f7dc3495a6d8ed2f852ed2e86403

@@ -12,3 +12,4 @@ __pycache__/
 results/*.tmp
 .tmp/
 .pytest_cache/
+*.part
