@@ -11,6 +11,10 @@ def test_values_tables_and_formats():
     assert out == "1,234,567 | 81.2% | 2.50 | True | first | {single}\n|x|"
 
 
+def test_pct2_keeps_small_gaps_visible():
+    assert report.render_template("{{x|pct2}}", {"x": 2175 / 2176}) == "99.95%"
+
+
 def test_unknown_placeholder_raises():
     with pytest.raises(KeyError):
         report.render_template("{{a.missing}}", {"a": {}})

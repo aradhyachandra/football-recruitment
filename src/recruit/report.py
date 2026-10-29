@@ -16,6 +16,8 @@ def fmt(value, style=None) -> str:
         return ""
     if style == "pct":
         return f"{value:.1%}"
+    if style == "pct2":   # for shares close to 0% or 100%, where one decimal would round away a gap
+        return f"{value:.2%}"
     if isinstance(value, bool):
         return str(value)
     if isinstance(value, int):

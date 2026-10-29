@@ -1,0 +1,705 @@
+{
+  "season_id": 27,
+  "valuation_date": "2016-07-01",
+  "settings": {
+    "min_score": 0.85,
+    "ambiguity_margin": 0.05,
+    "max_gap_days": 183,
+    "max_abs_gap_matches": 3,
+    "club_date_overlap_min": 0.95,
+    "sample_seed": 20160701,
+    "overrides": 8,
+    "overrides_outside_squad": 2
+  },
+  "club_map": {
+    "teams": 80,
+    "transfermarkt_clubs": 80,
+    "by_league": [
+      {
+        "league": "Premier League",
+        "teams": 20
+      },
+      {
+        "league": "La Liga",
+        "teams": 20
+      },
+      {
+        "league": "Serie A",
+        "teams": 20
+      },
+      {
+        "league": "Ligue 1",
+        "teams": 20
+      }
+    ],
+    "min_date_overlap": 1.0,
+    "teams_full_date_overlap": 80
+  },
+  "match_rates": [
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "All",
+      "players": 2176,
+      "matched": 2175,
+      "match_rate": 0.9995404411764706,
+      "priced": 2119,
+      "priced_rate": 0.9738051470588235
+    },
+    {
+      "threshold": 0,
+      "league": "Premier League",
+      "role": "All",
+      "players": 537,
+      "matched": 537,
+      "match_rate": 1.0,
+      "priced": 509,
+      "priced_rate": 0.9478584729981379
+    },
+    {
+      "threshold": 0,
+      "league": "La Liga",
+      "role": "All",
+      "players": 533,
+      "matched": 533,
+      "match_rate": 1.0,
+      "priced": 512,
+      "priced_rate": 0.9606003752345216
+    },
+    {
+      "threshold": 0,
+      "league": "Serie A",
+      "role": "All",
+      "players": 541,
+      "matched": 540,
+      "match_rate": 0.9981515711645101,
+      "priced": 540,
+      "priced_rate": 0.9981515711645101
+    },
+    {
+      "threshold": 0,
+      "league": "Ligue 1",
+      "role": "All",
+      "players": 565,
+      "matched": 565,
+      "match_rate": 1.0,
+      "priced": 558,
+      "priced_rate": 0.9876106194690265
+    },
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "Attacking midfielder",
+      "players": 85,
+      "matched": 85,
+      "match_rate": 1.0,
+      "priced": 82,
+      "priced_rate": 0.9647058823529412
+    },
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "Central midfielder",
+      "players": 470,
+      "matched": 469,
+      "match_rate": 0.997872340425532,
+      "priced": 457,
+      "priced_rate": 0.9723404255319149
+    },
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "Centre back",
+      "players": 348,
+      "matched": 348,
+      "match_rate": 1.0,
+      "priced": 342,
+      "priced_rate": 0.9827586206896551
+    },
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "Forward",
+      "players": 292,
+      "matched": 292,
+      "match_rate": 1.0,
+      "priced": 287,
+      "priced_rate": 0.9828767123287672
+    },
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "Full back / wing back",
+      "players": 391,
+      "matched": 391,
+      "match_rate": 1.0,
+      "priced": 377,
+      "priced_rate": 0.9641943734015346
+    },
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "Goalkeeper",
+      "players": 182,
+      "matched": 182,
+      "match_rate": 1.0,
+      "priced": 182,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 0,
+      "league": "All",
+      "role": "Wide midfielder / winger",
+      "players": 408,
+      "matched": 408,
+      "match_rate": 1.0,
+      "priced": 392,
+      "priced_rate": 0.9607843137254902
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "All",
+      "players": 1368,
+      "matched": 1368,
+      "match_rate": 1.0,
+      "priced": 1368,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "Premier League",
+      "role": "All",
+      "players": 332,
+      "matched": 332,
+      "match_rate": 1.0,
+      "priced": 332,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "La Liga",
+      "role": "All",
+      "players": 345,
+      "matched": 345,
+      "match_rate": 1.0,
+      "priced": 345,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "Serie A",
+      "role": "All",
+      "players": 347,
+      "matched": 347,
+      "match_rate": 1.0,
+      "priced": 347,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "Ligue 1",
+      "role": "All",
+      "players": 344,
+      "matched": 344,
+      "match_rate": 1.0,
+      "priced": 344,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "Attacking midfielder",
+      "players": 37,
+      "matched": 37,
+      "match_rate": 1.0,
+      "priced": 37,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "Central midfielder",
+      "players": 307,
+      "matched": 307,
+      "match_rate": 1.0,
+      "priced": 307,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "Centre back",
+      "players": 261,
+      "matched": 261,
+      "match_rate": 1.0,
+      "priced": 261,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "Forward",
+      "players": 166,
+      "matched": 166,
+      "match_rate": 1.0,
+      "priced": 166,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "Full back / wing back",
+      "players": 253,
+      "matched": 253,
+      "match_rate": 1.0,
+      "priced": 253,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "Goalkeeper",
+      "players": 101,
+      "matched": 101,
+      "match_rate": 1.0,
+      "priced": 101,
+      "priced_rate": 1.0
+    },
+    {
+      "threshold": 900,
+      "league": "All",
+      "role": "Wide midfielder / winger",
+      "players": 243,
+      "matched": 243,
+      "match_rate": 1.0,
+      "priced": 243,
+      "priced_rate": 1.0
+    }
+  ],
+  "focus_pool": {
+    "role": "Central midfielder",
+    "threshold": 900,
+    "players": 307,
+    "matched": 307,
+    "match_rate": 1.0,
+    "priced": 307,
+    "priced_rate": 1.0,
+    "stale": 1,
+    "unmatched": []
+  },
+  "methods": [
+    {
+      "threshold": 0,
+      "method": "exact_name",
+      "players": 1274
+    },
+    {
+      "threshold": 0,
+      "method": "exact_nickname",
+      "players": 783
+    },
+    {
+      "threshold": 0,
+      "method": "fuzzy",
+      "players": 13
+    },
+    {
+      "threshold": 0,
+      "method": "fuzzy+country",
+      "players": 1
+    },
+    {
+      "threshold": 0,
+      "method": "override",
+      "players": 8
+    },
+    {
+      "threshold": 0,
+      "method": "token_prefix",
+      "players": 9
+    },
+    {
+      "threshold": 0,
+      "method": "token_subset",
+      "players": 87
+    },
+    {
+      "threshold": 900,
+      "method": "exact_name",
+      "players": 792
+    },
+    {
+      "threshold": 900,
+      "method": "exact_nickname",
+      "players": 521
+    },
+    {
+      "threshold": 900,
+      "method": "fuzzy",
+      "players": 5
+    },
+    {
+      "threshold": 900,
+      "method": "override",
+      "players": 2
+    },
+    {
+      "threshold": 900,
+      "method": "token_prefix",
+      "players": 4
+    },
+    {
+      "threshold": 900,
+      "method": "token_subset",
+      "players": 44
+    }
+  ],
+  "statuses": [
+    {
+      "status": "low_score",
+      "players": 1
+    },
+    {
+      "status": "matched",
+      "players": 2175
+    }
+  ],
+  "valuation_gaps": {
+    "0": {
+      "matched": 2175,
+      "with_valuation": 2119,
+      "no_valuation_before_date": 56,
+      "stale": 47,
+      "quantiles_days": {
+        "p10": 30,
+        "p25": 130,
+        "median": 143,
+        "p75": 148,
+        "p90": 179,
+        "max": 1418
+      },
+      "buckets": [
+        {
+          "bucket": "0-30 days",
+          "players": 267
+        },
+        {
+          "bucket": "31-90 days",
+          "players": 82
+        },
+        {
+          "bucket": "91-183 days",
+          "players": 1723
+        },
+        {
+          "bucket": "184-365 days",
+          "players": 28
+        },
+        {
+          "bucket": "over 365 days",
+          "players": 19
+        }
+      ]
+    },
+    "900": {
+      "matched": 1368,
+      "with_valuation": 1368,
+      "no_valuation_before_date": 0,
+      "stale": 6,
+      "quantiles_days": {
+        "p10": 30,
+        "p25": 130,
+        "median": 143,
+        "p75": 148,
+        "p90": 179,
+        "max": 391
+      },
+      "buckets": [
+        {
+          "bucket": "0-30 days",
+          "players": 196
+        },
+        {
+          "bucket": "31-90 days",
+          "players": 43
+        },
+        {
+          "bucket": "91-183 days",
+          "players": 1123
+        },
+        {
+          "bucket": "184-365 days",
+          "players": 4
+        },
+        {
+          "bucket": "over 365 days",
+          "players": 2
+        }
+      ]
+    }
+  },
+  "plausibility": {
+    "player_clubs": 2278,
+    "equal": 2183,
+    "within_1": 2277,
+    "flagged": 1,
+    "flagged_rows": [
+      {
+        "statsbomb_name": "Markel Susaeta",
+        "transfermarkt_name": "Markel Susaeta",
+        "team": "Athletic Club",
+        "sb_matches": 28,
+        "tm_league_apps": 0,
+        "method": "override"
+      }
+    ]
+  },
+  "departing_player": {
+    "statsbomb_name": "N'Golo Kanté",
+    "transfermarkt_player_id": 225083,
+    "transfermarkt_name": "N'Golo Kanté",
+    "method": "exact_name",
+    "score": 1.0,
+    "market_value_eur": 20000000,
+    "valuation_gap_days": 30,
+    "valuation_stale": false,
+    "age": 25,
+    "age_years": 25.259411362080765,
+    "plausibility_flag": false,
+    "role": "Central midfielder",
+    "statsbomb_player_id": 3961,
+    "valuation_date": "2016-06-01",
+    "date_of_birth": "1991-03-29",
+    "matches_expected_id": true,
+    "team": "Leicester City"
+  },
+  "sample": [
+    {
+      "statsbomb_name": "Abdou Traoré",
+      "statsbomb_team": "Bordeaux",
+      "transfermarkt_name": "Abdou Traoré",
+      "transfermarkt_club": "FC Girondins Bordeaux",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Aleksandar Kolarov",
+      "statsbomb_team": "Manchester City",
+      "transfermarkt_name": "Aleksandar Kolarov",
+      "transfermarkt_club": "Manchester City",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Almen Abdi",
+      "statsbomb_team": "Watford",
+      "transfermarkt_name": "Almen Abdi",
+      "transfermarkt_club": "Watford FC",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Asier Riesgo",
+      "statsbomb_team": "Eibar",
+      "transfermarkt_name": "Asier Riesgo",
+      "transfermarkt_club": "SD Eibar",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Benjamin Angoua",
+      "statsbomb_team": "Guingamp",
+      "transfermarkt_name": "Benjamin Angoua",
+      "transfermarkt_club": "EA Guingamp",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Borja Viguera",
+      "statsbomb_team": "Athletic Club",
+      "transfermarkt_name": "Borja Viguera",
+      "transfermarkt_club": "Athletic Bilbao",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Christian Eriksen",
+      "statsbomb_team": "Tottenham Hotspur",
+      "transfermarkt_name": "Christian Eriksen",
+      "transfermarkt_club": "Tottenham Hotspur",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Dorian Lévêque",
+      "statsbomb_team": "Guingamp",
+      "transfermarkt_name": "Dorian Lévêque",
+      "transfermarkt_club": "EA Guingamp",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Giancarlo González",
+      "statsbomb_team": "Palermo",
+      "transfermarkt_name": "Giancarlo González",
+      "transfermarkt_club": "Palermo FC",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Goran Pandev",
+      "statsbomb_team": "Genoa",
+      "transfermarkt_name": "Goran Pandev",
+      "transfermarkt_club": "Genoa CFC",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Guy Ngosso",
+      "statsbomb_team": "Angers",
+      "transfermarkt_name": "Guy N'Gosso",
+      "transfermarkt_club": "Angers SCO",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Henok Goitom",
+      "statsbomb_team": "Getafe",
+      "transfermarkt_name": "Henok Goitom",
+      "transfermarkt_club": "Getafe CF",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Heurelho Gomes",
+      "statsbomb_team": "Watford",
+      "transfermarkt_name": "Heurelho Gomes",
+      "transfermarkt_club": "Watford FC",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "James McClean",
+      "statsbomb_team": "West Bromwich Albion",
+      "transfermarkt_name": "James McClean",
+      "transfermarkt_club": "West Bromwich Albion",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Joaquín Correa",
+      "statsbomb_team": "Sampdoria",
+      "transfermarkt_name": "Joaquín Correa",
+      "transfermarkt_club": "UC Sampdoria",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Jonathan Bamba",
+      "statsbomb_team": "Saint-Étienne",
+      "transfermarkt_name": "Jonathan Bamba",
+      "transfermarkt_club": "AS Saint-Étienne",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "José Antonio Reyes",
+      "statsbomb_team": "Sevilla",
+      "transfermarkt_name": "José Antonio Reyes",
+      "transfermarkt_club": "Sevilla FC",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Lucas Tousart",
+      "statsbomb_team": "Lyon",
+      "transfermarkt_name": "Lucas Tousart",
+      "transfermarkt_club": "Olympique Lyon",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Mamadou Samassa",
+      "statsbomb_team": "Guingamp",
+      "transfermarkt_name": "Mamadou Samassa",
+      "transfermarkt_club": "EA Guingamp",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Massimo Maccarone",
+      "statsbomb_team": "Empoli",
+      "transfermarkt_name": "Massimo Maccarone",
+      "transfermarkt_club": "FC Empoli",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Mauro Goicoechea",
+      "statsbomb_team": "Toulouse",
+      "transfermarkt_name": "Mauro Goicoechea",
+      "transfermarkt_club": "FC Toulouse",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Pape Diop",
+      "statsbomb_team": "Espanyol",
+      "transfermarkt_name": "Pape Diop",
+      "transfermarkt_club": "RCD Espanyol Barcelona",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Rubén Rochina",
+      "statsbomb_team": "Granada",
+      "transfermarkt_name": "Rubén Rochina",
+      "transfermarkt_club": "Granada CF",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Rudy Gestede",
+      "statsbomb_team": "Aston Villa",
+      "transfermarkt_name": "Rudy Gestede",
+      "transfermarkt_club": "Aston Villa",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Ryan Bertrand",
+      "statsbomb_team": "Southampton",
+      "transfermarkt_name": "Ryan Bertrand",
+      "transfermarkt_club": "Southampton FC",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Rúben Vezo",
+      "statsbomb_team": "Valencia",
+      "transfermarkt_name": "Rúben Vezo",
+      "transfermarkt_club": "Valencia CF",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Sebastian De Maio",
+      "statsbomb_team": "Genoa",
+      "transfermarkt_name": "Sebastien De Maio",
+      "transfermarkt_club": "Genoa CFC",
+      "method": "fuzzy"
+    },
+    {
+      "statsbomb_name": "Suso",
+      "statsbomb_team": "Genoa / AC Milan",
+      "transfermarkt_name": "Suso",
+      "transfermarkt_club": "Genoa CFC / AC Milan",
+      "method": "exact_nickname"
+    },
+    {
+      "statsbomb_name": "Yann Bodiger",
+      "statsbomb_team": "Toulouse",
+      "transfermarkt_name": "Yann Bodiger",
+      "transfermarkt_club": "FC Toulouse",
+      "method": "exact_name"
+    },
+    {
+      "statsbomb_name": "Ángel Lafita",
+      "statsbomb_team": "Getafe",
+      "transfermarkt_name": "Ángel Lafita",
+      "transfermarkt_club": "Getafe CF",
+      "method": "exact_nickname"
+    }
+  ],
+  "unmatched": [
+    {
+      "name": "Assane Gnoukouri",
+      "team": "Inter Milan",
+      "role": "Central midfielder"
+    }
+  ],
+  "run": {
+    "seconds": 16.9,
+    "peak_rss_bytes": 185008128,
+    "table_rows": {
+      "r3_player_values": 2176,
+      "r3_plausibility": 2278,
+      "r3_matches": 2176
+    }
+  }
+}

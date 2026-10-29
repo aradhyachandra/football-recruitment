@@ -1,0 +1,78 @@
+# Manual StatsBomb -> Transfermarkt player matches, applied before the automatic name matching.
+# Each entry: statsbomb_player_id, transfermarkt_player_id (null = leave unmatched on purpose), the
+# names for readability, a reason and the evidence used. The Transfermarkt player must have an
+# appearance for one of the player's mapped clubs in the season window (typo guard), unless
+# outside_squad: true, which is allowed only when the evidence says why he is missing from the squad;
+# run_r3 then still checks that the Transfermarkt id exists in tm_players.
+# Priority (R3 prompt): unmatched players in the Central midfielder pool at 900 minutes. After the
+# automatic rules none is left there; these entries are the rest of the unmatched list, added
+# 2026-10-29 from a look at each player's club squad in transfermarkt-datasets.
+overrides:
+  - statsbomb_player_id: 6390
+    statsbomb_name: "Markel Susaeta Laskurain (Markel Susaeta), Athletic Club"
+    transfermarkt_player_id: 54245
+    transfermarkt_name: "Markel Susaeta"
+    outside_squad: true
+    reason: >-
+      Same full name; Transfermarkt's appearances table has no Susaeta games between May 2015 and
+      August 2016, so he is missing from the Athletic Bilbao squad built from appearances.
+    evidence: >-
+      tm_players 54245 "Markel Susaeta", born 1987-12-14, Spain, right winger, the only Susaeta in
+      tm_players; Athletic Bilbao (club 621) appearances in 2012-2015 and 2016-2019; valuation rows
+      dated 2015-07-01 and 2016-02-22 carry club Athletic Bilbao. StatsBomb: Athletic Club, Spain.
+  - statsbomb_player_id: 6559
+    statsbomb_name: "Juan Carlos Pérez López (Juan Carlos), Málaga"
+    transfermarkt_player_id: 126625
+    transfermarkt_name: "Juankar"
+    reason: "\"Juankar\" is the usual contraction of Juan Carlos; no other Juan or Carlos in the Málaga squad fits."
+    evidence: >-
+      Málaga squad (club 1084): Juankar, born 1990-03-30, Spain, 19 league appearances; StatsBomb has 19
+      Málaga matches. The best automatic candidates (Carlos Kameni, Juanpi) scored below 0.85.
+  - statsbomb_player_id: 42946
+    statsbomb_name: "Guangtai Jiang (Jiang Guangtai), Everton"
+    transfermarkt_player_id: 156934
+    transfermarkt_name: "Tyias Browning"
+    reason: >-
+      StatsBomb shows the Chinese name he took later on naturalisation; Transfermarkt keeps his birth
+      name. TO VERIFY (NOTES.md): the name link is outside knowledge, not in either dataset.
+    evidence: >-
+      Everton squad (club 29): Tyias Browning, born 1994-05-27, citizenship China, born in England,
+      5 league appearances; StatsBomb has 5 Everton matches and nationality China. No other Everton
+      player has Chinese citizenship.
+  - statsbomb_player_id: 3058
+    statsbomb_name: "Javier Hernández Balcázar, Manchester United"
+    transfermarkt_player_id: 50935
+    transfermarkt_name: "Chicharito"
+    reason: "Transfermarkt lists Javier Hernández under his playing name Chicharito."
+    evidence: >-
+      Manchester United squad (club 985): Chicharito, born 1988-06-01, Mexico, 1 league appearance;
+      StatsBomb has 1 match and nationality Mexico.
+  - statsbomb_player_id: 26764
+    statsbomb_name: "Jon Ansotegi Gorostola, Eibar"
+    transfermarkt_player_id: 37892
+    transfermarkt_name: "Ion Ansotegi"
+    reason: "Jon and Ion are the Spanish and Basque spellings of the same first name; same surname."
+    evidence: "Eibar squad (club 1533): Ion Ansotegi, born 1982-07-13, Spain, 8 league appearances; StatsBomb has 8."
+  - statsbomb_player_id: 45389
+    statsbomb_name: "Thomas Robson, Sunderland"
+    transfermarkt_player_id: 257968
+    transfermarkt_name: "Tommy Robson"
+    reason: "Tommy is a short form of Thomas; same surname; the only Robson in the squad."
+    evidence: "Sunderland squad (club 289): Tommy Robson, born 1995-09-11, England, 1 league appearance; StatsBomb has 1."
+  - statsbomb_player_id: 13731
+    statsbomb_name: "Eddy Maanane, Stade de Reims"
+    transfermarkt_player_id: 241325
+    transfermarkt_name: "Edwin Maanane"
+    reason: "Eddy is a short form of Edwin; same rare surname; the only Maanane in tm_players."
+    evidence: "Reims squad (club 1421): Edwin Maanane, born 1995-02-03, France, 1 league appearance; StatsBomb has 1, nationality France."
+  - statsbomb_player_id: 9636
+    statsbomb_name: "Rushian Hepburn-Murphy, Aston Villa"
+    transfermarkt_player_id: 314237
+    transfermarkt_name: "Rushian Hepburn-Murphy"
+    outside_squad: true
+    reason: >-
+      Exact same (rare) name; Transfermarkt's appearances table has no game for him before November
+      2019, so he is missing from the Aston Villa squad built from appearances.
+    evidence: >-
+      tm_players 314237 "Rushian Hepburn-Murphy", born 1998-08-28, England, the only player of that name.
+      StatsBomb: 1 Aston Villa match (about 6 minutes), nationality England.

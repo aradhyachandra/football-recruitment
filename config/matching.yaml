@@ -1,0 +1,124 @@
+# R3: joining StatsBomb players to transfermarkt-datasets players and their market values.
+# There is no shared player id, so players are matched by name inside club squads. Every rule and
+# number here has a reason; src/recruit/matching.py and sql/r3_*.sql read them.
+
+club_date_overlap_min: 0.95
+club_date_overlap_reason: >-
+  Check on config/club_map.yaml: the share of a StatsBomb team's league match dates on which the
+  mapped Transfermarkt club has a league appearance. The real data gives 100% for all 80 teams; 95%
+  leaves room for one or two postponed or re-dated matches without accepting a wrong club (another
+  club in the same league shares at most about 80% of dates by chance, from the R3 build).
+
+candidates:
+  rule: any appearance for a mapped club inside scope.yaml season_window, any competition
+  reason: >-
+    A StatsBomb player is compared only with Transfermarkt players who played for the club(s) he
+    played for, in the same season. This keeps the comparison to about 25-35 names per club, so
+    short or common names cannot match someone at another club. Cup and European games count too, so
+    a squad member is not missed when Transfermarkt's league appearances are incomplete.
+
+normalise:
+  apostrophes: ["'", "’", "‘", "`", "´", "\""]
+  apostrophes_reason: >-
+    Removed, not replaced by a space, so "N'Golo", "N''Golo" (StatsBomb's doubled apostrophe, seen for
+    Kanté, O'Shea, M'Vila and others) and "Ngolo" all become "ngolo". One StatsBomb row writes "N\"Gog" with a
+    double quote instead of an apostrophe, so the double quote is treated the same way.
+  separators: ["-", ".", ",", "_", "(", ")"]
+  separators_reason: "Hyphens and dots become spaces: \"Jean-Michaël\" = \"Jean Michael\", \"J. Smith\" = \"J Smith\"."
+  transliterate: {"ø": "o", "ł": "l", "ß": "ss", "æ": "ae", "œ": "oe", "đ": "dj", "ð": "d", "þ": "th", "ı": "i"}
+  transliterate_reason: >-
+    Letters that Unicode does not split into a base letter plus an accent (so accent stripping alone
+    would drop them). Applied after lower-casing; accents are then stripped (é -> e, č -> c). The
+    Serbo-Croatian đ is written "dj" in Latin transliteration, which is what Transfermarkt uses
+    ("Đorđević" = "Djordjevic"; four such players were only fuzzy matches before this rule).
+
+scores:
+  exact: 1.0
+  exact_reason: "Same normalised name (any StatsBomb full name or nickname = Transfermarkt name or first + last name)."
+  token_subset_multi: 0.95
+  token_subset_single: 0.88
+  token_subset_reason: >-
+    StatsBomb often stores the full legal name ("José Ignacio Fernández Iglesias", nickname "Nacho")
+    while Transfermarkt uses the short name ("Nacho Fernández"). If every word of the Transfermarkt
+    name appears among the StatsBomb name words (full names and nicknames together), it is the same
+    person in nearly all cases inside one squad. A one-word Transfermarkt name ("Marcelo", "Isco")
+    is weaker evidence, so it scores lower: 0.88 is more than the ambiguity margin below 0.95, so a
+    two-word subset beats a one-word one ("Samu García" over "Samu Castillejo" for StatsBomb
+    "Samuel García Sánchez", nickname "Samu").
+  token_prefix: 0.87
+  token_prefix_min_letters: 3
+  token_prefix_reason: >-
+    Short first names: Transfermarkt "Robbie Brady", "Tim Krul", "Alex Song", "Maxi Moralez" against
+    StatsBomb "Robert Brady", "Timothy Michael Krul", "Alexandre Dimitri Song-Billong", "Maximiliano
+    Nicol Moralez". Every Transfermarkt word after the first must appear among the StatsBomb words, and
+    the first must share at least its first three letters with a StatsBomb word. Three letters
+    rejects pairs like "Tommy"/"Thomas" (left to overrides) and keeps the rule narrow; inside one
+    squad two players with the same surname and similar first names are still caught by the
+    ambiguity margin.
+  fuzzy: difflib ratio
+  fuzzy_reason: >-
+    For spelling variants ("Aleksandar"/"Aleksander", transliterations). The score is the best of
+    (a) Python difflib's similarity ratio between whole names and (b) for Transfermarkt names of two
+    or more words, the average over its words of the best ratio against any StatsBomb name word.
+    difflib is in the Python standard library, so no extra dependency is needed.
+min_score: 0.85
+min_score_reason: >-
+  Below 0.85 the best candidate is left unmatched rather than guessed (it is kept, with its score, in
+  the processed table for review). 0.85 accepts all exact and word-subset matches and close spellings.
+ambiguity_margin: 0.05
+ambiguity_margin_reason: >-
+  If the second-best candidate at the club scores within 0.05 of the best, the match is not taken on
+  name alone. Country (StatsBomb nationality vs Transfermarkt citizenship or birth country) is then
+  the tie-breaker; if that does not single out one candidate, the player is left unmatched.
+
+country_aliases:
+  "korea republic": "south korea"
+  "ivory coast": "cote divoire"
+  "republic of ireland": "ireland"
+  "congo dr": "dr congo"
+  "democratic republic of the congo": "dr congo"
+  "cape verde islands": "cape verde"
+  "cabo verde": "cape verde"
+  "united states of america": "united states"
+  "usa": "united states"
+  "bosnia and herzegovina": "bosnia herzegovina"
+  "czechia": "czech republic"
+  "turkiye": "turkey"
+  "north macedonia": "macedonia"
+  "fyr macedonia": "macedonia"
+country_aliases_reason: >-
+  Country names are compared after the same normalisation as player names (so keys and values are
+  written normalised: no accents or apostrophes, hyphens as spaces); these aliases cover
+  spellings that differ between the two sources. Only used as a tie-breaker, never to make a match.
+
+plausibility:
+  max_abs_gap_matches: 3
+  reason: >-
+    For every matched player and club: StatsBomb matches played (R2, matches with minutes) against
+    Transfermarkt league appearances for the mapped club in the season window. Both count matches in
+    which the player was on the pitch, so they should agree to within a match or two (a late
+    substitute entry may be missing from one source). A gap above 3 is flagged for a look, not
+    unmatched automatically: the name evidence is still shown next to it.
+
+valuation:
+  max_gap_days: 183
+  max_gap_reason: >-
+    A valuation more than about 6 months older than the valuation date is flagged as stale (kept,
+    not dropped). Six months matches the R1 valuation gate window (config/audit.yaml) and
+    Transfermarkt's usual update rhythm of roughly two to three valuations a season.
+  rule: latest valuation on or before scope.yaml valuation_date; never one after it (no hindsight)
+  age_reason: >-
+    Age is measured at the valuation date from the Transfermarkt date of birth (StatsBomb Open Data
+    has no birth dates): completed years and decimal years (days / 365.25).
+
+summary:
+  minutes_thresholds: [0, 900]
+  minutes_reason: "Match rates at every player (0) and at the R2 profile threshold (900, config/profiles.yaml)."
+  focus_role: Central midfielder
+  focus_role_reason: "The case player's role (R2): this pool must be (nearly) fully priced for R4."
+  sample_size: 30
+  sample_seed: 20160701
+  sample_reason: >-
+    A fixed-seed random sample of matched pairs (names, clubs and method only) for a human
+    spot-check. The seed is the valuation date written as a number, so it was not picked to make the
+    sample look good.

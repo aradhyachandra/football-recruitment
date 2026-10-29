@@ -20,7 +20,7 @@ roles:
       the same pair in a 4-2-3-1 are "Right/Left Defensive Midfield". The R2 check of the case player's
       own lineup spells shows him under both labels (9, 11, 13 and 15) for the same club, so a split
       would separate players doing the same job by formation name. Differences in style inside the
-      pool are left to the similarity step (R4). TO VERIFY (NOTES.md).
+      pool are left to the similarity step (R4). Pooling confirmed by Aradhya after R2.
   - name: Wide midfielder / winger
     positions: [12, 16, 17, 21]
     reason: "Right/left midfield and wingers: wide attacking players in a 4-4-2 or 4-3-3."

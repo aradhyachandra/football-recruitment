@@ -50,3 +50,37 @@ Reproduce (after R1):
 
 Next: R3, join to market values (name matching via StatsBomb player_id -> transfermarkt player_id,
 valuation as of 2016-07-01). Apostrophes in names need normalising (see NOTES.md).
+
+## R3: join to market values (2026-10-29): done, nothing committed
+
+Built:
+- Club map first: `config/club_map.yaml`, 80 StatsBomb teams -> 80 Transfermarkt clubs, reasons for the
+  non-obvious names. Checked on every run against fixture dates (`sql/r3_club_dates.sql`): every
+  StatsBomb league match date has a league appearance for the mapped club; all 80 teams at 100%.
+- Name matching inside club squads (`src/recruit/matching.py`, stdlib difflib, no new dependency):
+  normalisation (accents, apostrophes incl. the doubled one and a double quote, hyphens, đ -> dj),
+  methods exact_name / exact_nickname / token_subset / token_prefix / fuzzy, score per match,
+  ambiguity margin with country as tie-breaker, one Transfermarkt player per StatsBomb player.
+  Manual fixes: `config/player_overrides.yaml` (8, each with reason and evidence; 2 marked
+  outside_squad because Transfermarkt's appearances table misses them for 2015/16).
+- SQL (`sql/r3_*.sql`, run by `src/recruit/market_values.py`): squads from appearances in the season
+  window, StatsBomb name spellings, plausibility (StatsBomb matches vs Transfermarkt league apps per
+  club), joined table with latest valuation on or before 2016-07-01, gap in days, stale flag (183 days),
+  age at the date.
+- Config: `config/matching.yaml` (every threshold with a reason), `club_map.yaml`, `player_overrides.yaml`.
+- `src/recruit/run_r3.py`: writes `data/processed/r3/*.parquet` (gitignored),
+  `results/r3_join_summary.json` (summaries, Kanté's record, 30-pair seeded sample, unmatched list
+  with name/team/role) and `docs/R3_market_values.md` (from the template). `report.py` gained a
+  two-decimal percentage format so 2,175/2,176 does not print as 100.0%.
+- Tests: 47 new (105 in all), on hand-made data in `tests/r3_data.py` (doubled apostrophe, accents,
+  hyphen, full legal vs short name, similar names at one club, ambiguous pair, mid-season mover at both
+  clubs, valuation after the date ignored, stale valuation kept, override typo guard, club map checks).
+
+Key numbers are in docs/R3_market_values.md. Kanté -> Transfermarkt 225083 (checked against
+config/scope.yaml on every run).
+
+Reproduce (after R1 and R2):
+    .venv/bin/python -m recruit.run_r3      # about 17 s
+
+Next: R4, similarity, split-half stability, value-for-money frontier and score, shortlist. R4 must
+decide how to treat stale valuations (6 players at 900 minutes, 1 in the Central midfielder pool).

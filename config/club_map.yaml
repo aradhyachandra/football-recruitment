@@ -1,0 +1,109 @@
+# StatsBomb team -> transfermarkt-datasets club, for the 80 teams in the four leagues (2015/16).
+# Built in R3 (2026-10-29) from two independent pieces of evidence, both re-checked by run_r3:
+#  1. name: the Transfermarkt club name in tm_clubs is the same club (reason given where not obvious);
+#  2. dates: for every one of these teams, each StatsBomb league match date has a Transfermarkt league
+#     appearance for the mapped club on the same date (37 or 38 of 37 or 38 matches).
+# run_r3 stops if a StatsBomb team in the data is missing here or listed twice, if a Transfermarkt
+# club is used twice, or if the date check falls below club_date_overlap_min in config/matching.yaml.
+# Team ids and club ids are separate id spaces; equal numbers mean nothing.
+clubs:
+  # Premier League
+  - {competition_id: 2, statsbomb_team_id: 28, statsbomb_name: "AFC Bournemouth", transfermarkt_club_id: 989, transfermarkt_name: "AFC Bournemouth"}
+  - {competition_id: 2, statsbomb_team_id: 1, statsbomb_name: "Arsenal", transfermarkt_club_id: 11, transfermarkt_name: "Arsenal FC"}
+  - {competition_id: 2, statsbomb_team_id: 59, statsbomb_name: "Aston Villa", transfermarkt_club_id: 405, transfermarkt_name: "Aston Villa"}
+  - {competition_id: 2, statsbomb_team_id: 33, statsbomb_name: "Chelsea", transfermarkt_club_id: 631, transfermarkt_name: "Chelsea FC"}
+  - {competition_id: 2, statsbomb_team_id: 31, statsbomb_name: "Crystal Palace", transfermarkt_club_id: 873, transfermarkt_name: "Crystal Palace"}
+  - {competition_id: 2, statsbomb_team_id: 29, statsbomb_name: "Everton", transfermarkt_club_id: 29, transfermarkt_name: "Everton FC"}
+  - {competition_id: 2, statsbomb_team_id: 22, statsbomb_name: "Leicester City", transfermarkt_club_id: 1003, transfermarkt_name: "Leicester City"}
+  - {competition_id: 2, statsbomb_team_id: 24, statsbomb_name: "Liverpool", transfermarkt_club_id: 31, transfermarkt_name: "Liverpool FC"}
+  - {competition_id: 2, statsbomb_team_id: 36, statsbomb_name: "Manchester City", transfermarkt_club_id: 281, transfermarkt_name: "Manchester City"}
+  - {competition_id: 2, statsbomb_team_id: 39, statsbomb_name: "Manchester United", transfermarkt_club_id: 985, transfermarkt_name: "Manchester United"}
+  - {competition_id: 2, statsbomb_team_id: 37, statsbomb_name: "Newcastle United", transfermarkt_club_id: 762, transfermarkt_name: "Newcastle United"}
+  - {competition_id: 2, statsbomb_team_id: 56, statsbomb_name: "Norwich City", transfermarkt_club_id: 1123, transfermarkt_name: "Norwich City"}
+  - {competition_id: 2, statsbomb_team_id: 25, statsbomb_name: "Southampton", transfermarkt_club_id: 180, transfermarkt_name: "Southampton FC"}
+  - {competition_id: 2, statsbomb_team_id: 30, statsbomb_name: "Stoke City", transfermarkt_club_id: 512, transfermarkt_name: "Stoke City"}
+  - {competition_id: 2, statsbomb_team_id: 41, statsbomb_name: "Sunderland", transfermarkt_club_id: 289, transfermarkt_name: "Sunderland AFC"}
+  - {competition_id: 2, statsbomb_team_id: 26, statsbomb_name: "Swansea City", transfermarkt_club_id: 2288, transfermarkt_name: "Swansea City"}
+  - {competition_id: 2, statsbomb_team_id: 38, statsbomb_name: "Tottenham Hotspur", transfermarkt_club_id: 148, transfermarkt_name: "Tottenham Hotspur"}
+  - {competition_id: 2, statsbomb_team_id: 23, statsbomb_name: "Watford", transfermarkt_club_id: 1010, transfermarkt_name: "Watford FC"}
+  - {competition_id: 2, statsbomb_team_id: 27, statsbomb_name: "West Bromwich Albion", transfermarkt_club_id: 984, transfermarkt_name: "West Bromwich Albion"}
+  - {competition_id: 2, statsbomb_team_id: 40, statsbomb_name: "West Ham United", transfermarkt_club_id: 379, transfermarkt_name: "West Ham United"}
+  # Ligue 1
+  - {competition_id: 7, statsbomb_team_id: 129, statsbomb_name: "AS Monaco", transfermarkt_club_id: 162, transfermarkt_name: "AS Monaco"}
+  - {competition_id: 7, statsbomb_team_id: 145, statsbomb_name: "Angers", transfermarkt_club_id: 1420, transfermarkt_name: "Angers SCO"}
+  - {competition_id: 7, statsbomb_team_id: 2736, statsbomb_name: "Bastia", transfermarkt_club_id: 595, transfermarkt_name: "SC Bastia"}
+  - {competition_id: 7, statsbomb_team_id: 146, statsbomb_name: "Bordeaux", transfermarkt_club_id: 40, transfermarkt_name: "FC Girondins Bordeaux"}
+  - {competition_id: 7, statsbomb_team_id: 160, statsbomb_name: "Gazélec Ajaccio", transfermarkt_club_id: 3558, transfermarkt_name: "GFC Ajaccio",
+     reason: "Gazélec Football Club Ajaccio (GFC), not AC Ajaccio (club 1147), which played in Ligue 2 in 2015/16."}
+  - {competition_id: 7, statsbomb_team_id: 142, statsbomb_name: "Guingamp", transfermarkt_club_id: 855, transfermarkt_name: "EA Guingamp"}
+  - {competition_id: 7, statsbomb_team_id: 143, statsbomb_name: "Lille", transfermarkt_club_id: 1082, transfermarkt_name: "LOSC Lille",
+     reason: "LOSC is Lille (Lille Olympique Sporting Club)."}
+  - {competition_id: 7, statsbomb_team_id: 165, statsbomb_name: "Lorient", transfermarkt_club_id: 1158, transfermarkt_name: "FC Lorient"}
+  - {competition_id: 7, statsbomb_team_id: 137, statsbomb_name: "Lyon", transfermarkt_club_id: 1041, transfermarkt_name: "Olympique Lyon",
+     reason: "Olympique Lyonnais."}
+  - {competition_id: 7, statsbomb_team_id: 139, statsbomb_name: "Montpellier", transfermarkt_club_id: 969, transfermarkt_name: "Montpellier HSC"}
+  - {competition_id: 7, statsbomb_team_id: 144, statsbomb_name: "Nantes", transfermarkt_club_id: 995, transfermarkt_name: "FC Nantes"}
+  - {competition_id: 7, statsbomb_team_id: 136, statsbomb_name: "OGC Nice", transfermarkt_club_id: 417, transfermarkt_name: "OGC Nice"}
+  - {competition_id: 7, statsbomb_team_id: 147, statsbomb_name: "Olympique de Marseille", transfermarkt_club_id: 244, transfermarkt_name: "Olympique Marseille"}
+  - {competition_id: 7, statsbomb_team_id: 131, statsbomb_name: "Paris Saint-Germain", transfermarkt_club_id: 583, transfermarkt_name: "Paris Saint-Germain"}
+  - {competition_id: 7, statsbomb_team_id: 134, statsbomb_name: "Rennes", transfermarkt_club_id: 273, transfermarkt_name: "Stade Rennais FC",
+     reason: "Stade Rennais FC is Rennes."}
+  - {competition_id: 7, statsbomb_team_id: 135, statsbomb_name: "Saint-Étienne", transfermarkt_club_id: 618, transfermarkt_name: "AS Saint-Étienne"}
+  - {competition_id: 7, statsbomb_team_id: 140, statsbomb_name: "Stade Malherbe Caen", transfermarkt_club_id: 1162, transfermarkt_name: "SM Caen",
+     reason: "Stade Malherbe Caen is SM Caen."}
+  - {competition_id: 7, statsbomb_team_id: 156, statsbomb_name: "Stade de Reims", transfermarkt_club_id: 1421, transfermarkt_name: "Stade Reims"}
+  - {competition_id: 7, statsbomb_team_id: 130, statsbomb_name: "Toulouse", transfermarkt_club_id: 415, transfermarkt_name: "FC Toulouse"}
+  - {competition_id: 7, statsbomb_team_id: 133, statsbomb_name: "Troyes", transfermarkt_club_id: 1095, transfermarkt_name: "ESTAC Troyes",
+     reason: "ESTAC is Troyes (Espérance Sportive Troyes Aube Champagne)."}
+  # La Liga
+  - {competition_id: 11, statsbomb_team_id: 215, statsbomb_name: "Athletic Club", transfermarkt_club_id: 621, transfermarkt_name: "Athletic Bilbao",
+     reason: "Athletic Club (Bilbao); Transfermarkt uses the city name."}
+  - {competition_id: 11, statsbomb_team_id: 212, statsbomb_name: "Atlético Madrid", transfermarkt_club_id: 13, transfermarkt_name: "Atlético de Madrid"}
+  - {competition_id: 11, statsbomb_team_id: 217, statsbomb_name: "Barcelona", transfermarkt_club_id: 131, transfermarkt_name: "FC Barcelona"}
+  - {competition_id: 11, statsbomb_team_id: 209, statsbomb_name: "Celta Vigo", transfermarkt_club_id: 940, transfermarkt_name: "Celta de Vigo"}
+  - {competition_id: 11, statsbomb_team_id: 322, statsbomb_name: "Eibar", transfermarkt_club_id: 1533, transfermarkt_name: "SD Eibar"}
+  - {competition_id: 11, statsbomb_team_id: 214, statsbomb_name: "Espanyol", transfermarkt_club_id: 714, transfermarkt_name: "RCD Espanyol Barcelona",
+     reason: "RCD Espanyol de Barcelona; StatsBomb uses the short name."}
+  - {competition_id: 11, statsbomb_team_id: 216, statsbomb_name: "Getafe", transfermarkt_club_id: 3709, transfermarkt_name: "Getafe CF"}
+  - {competition_id: 11, statsbomb_team_id: 1049, statsbomb_name: "Granada", transfermarkt_club_id: 16795, transfermarkt_name: "Granada CF",
+     reason: "Granada CF. StatsBomb team id 1049 is unrelated to Transfermarkt club 1049 (Valencia CF)."}
+  - {competition_id: 11, statsbomb_team_id: 208, statsbomb_name: "Las Palmas", transfermarkt_club_id: 472, transfermarkt_name: "UD Las Palmas"}
+  - {competition_id: 11, statsbomb_team_id: 221, statsbomb_name: "Levante UD", transfermarkt_club_id: 3368, transfermarkt_name: "Levante UD"}
+  - {competition_id: 11, statsbomb_team_id: 223, statsbomb_name: "Málaga", transfermarkt_club_id: 1084, transfermarkt_name: "Málaga CF"}
+  - {competition_id: 11, statsbomb_team_id: 219, statsbomb_name: "RC Deportivo La Coruña", transfermarkt_club_id: 897, transfermarkt_name: "Deportivo de La Coruña",
+     reason: "Deportivo de La Coruña; StatsBomb prefixes RC (Real Club)."}
+  - {competition_id: 11, statsbomb_team_id: 360, statsbomb_name: "Rayo Vallecano", transfermarkt_club_id: 367, transfermarkt_name: "Rayo Vallecano"}
+  - {competition_id: 11, statsbomb_team_id: 218, statsbomb_name: "Real Betis", transfermarkt_club_id: 150, transfermarkt_name: "Real Betis Balompié"}
+  - {competition_id: 11, statsbomb_team_id: 220, statsbomb_name: "Real Madrid", transfermarkt_club_id: 418, transfermarkt_name: "Real Madrid"}
+  - {competition_id: 11, statsbomb_team_id: 210, statsbomb_name: "Real Sociedad", transfermarkt_club_id: 681, transfermarkt_name: "Real Sociedad"}
+  - {competition_id: 11, statsbomb_team_id: 213, statsbomb_name: "Sevilla", transfermarkt_club_id: 368, transfermarkt_name: "Sevilla FC"}
+  - {competition_id: 11, statsbomb_team_id: 1041, statsbomb_name: "Sporting Gijón", transfermarkt_club_id: 2448, transfermarkt_name: "Sporting Gijón",
+     reason: "Sporting de Gijón. StatsBomb team id 1041 is unrelated to Transfermarkt club 1041 (Olympique Lyon)."}
+  - {competition_id: 11, statsbomb_team_id: 207, statsbomb_name: "Valencia", transfermarkt_club_id: 1049, transfermarkt_name: "Valencia CF"}
+  - {competition_id: 11, statsbomb_team_id: 222, statsbomb_name: "Villarreal", transfermarkt_club_id: 1050, transfermarkt_name: "Villarreal CF"}
+  # Serie A
+  - {competition_id: 12, statsbomb_team_id: 243, statsbomb_name: "AC Milan", transfermarkt_club_id: 5, transfermarkt_name: "AC Milan"}
+  - {competition_id: 12, statsbomb_team_id: 229, statsbomb_name: "AS Roma", transfermarkt_club_id: 12, transfermarkt_name: "Associazione Sportiva Roma",
+     reason: "A.S. Roma; Transfermarkt spells out Associazione Sportiva."}
+  - {competition_id: 12, statsbomb_team_id: 228, statsbomb_name: "Atalanta", transfermarkt_club_id: 800, transfermarkt_name: "Atalanta BC"}
+  - {competition_id: 12, statsbomb_team_id: 240, statsbomb_name: "Bologna", transfermarkt_club_id: 1025, transfermarkt_name: "Bologna Football Club 1909",
+     reason: "Bologna F.C. 1909; Transfermarkt uses the full name."}
+  - {competition_id: 12, statsbomb_team_id: 1683, statsbomb_name: "Carpi", transfermarkt_club_id: 4102, transfermarkt_name: "AC Carpi"}
+  - {competition_id: 12, statsbomb_team_id: 231, statsbomb_name: "Chievo", transfermarkt_club_id: 862, transfermarkt_name: "Chievo Verona",
+     reason: "AC ChievoVerona."}
+  - {competition_id: 12, statsbomb_team_id: 290, statsbomb_name: "Empoli", transfermarkt_club_id: 749, transfermarkt_name: "FC Empoli"}
+  - {competition_id: 12, statsbomb_team_id: 239, statsbomb_name: "Fiorentina", transfermarkt_club_id: 430, transfermarkt_name: "ACF Fiorentina"}
+  - {competition_id: 12, statsbomb_team_id: 291, statsbomb_name: "Frosinone", transfermarkt_club_id: 8970, transfermarkt_name: "Frosinone Calcio"}
+  - {competition_id: 12, statsbomb_team_id: 233, statsbomb_name: "Genoa", transfermarkt_club_id: 252, transfermarkt_name: "Genoa CFC"}
+  - {competition_id: 12, statsbomb_team_id: 226, statsbomb_name: "Hellas Verona", transfermarkt_club_id: 276, transfermarkt_name: "Hellas Verona"}
+  - {competition_id: 12, statsbomb_team_id: 238, statsbomb_name: "Inter Milan", transfermarkt_club_id: 46, transfermarkt_name: "Inter Milan"}
+  - {competition_id: 12, statsbomb_team_id: 224, statsbomb_name: "Juventus", transfermarkt_club_id: 506, transfermarkt_name: "Juventus FC"}
+  - {competition_id: 12, statsbomb_team_id: 236, statsbomb_name: "Lazio", transfermarkt_club_id: 398, transfermarkt_name: "Società Sportiva Lazio S.p.A.",
+     reason: "S.S. Lazio; Transfermarkt uses the company name."}
+  - {competition_id: 12, statsbomb_team_id: 227, statsbomb_name: "Napoli", transfermarkt_club_id: 6195, transfermarkt_name: "SSC Napoli",
+     reason: "SSC Napoli."}
+  - {competition_id: 12, statsbomb_team_id: 2256, statsbomb_name: "Palermo", transfermarkt_club_id: 458, transfermarkt_name: "Palermo FC"}
+  - {competition_id: 12, statsbomb_team_id: 234, statsbomb_name: "Sampdoria", transfermarkt_club_id: 1038, transfermarkt_name: "UC Sampdoria"}
+  - {competition_id: 12, statsbomb_team_id: 232, statsbomb_name: "Sassuolo", transfermarkt_club_id: 6574, transfermarkt_name: "US Sassuolo"}
+  - {competition_id: 12, statsbomb_team_id: 241, statsbomb_name: "Torino", transfermarkt_club_id: 416, transfermarkt_name: "Torino FC"}
+  - {competition_id: 12, statsbomb_team_id: 230, statsbomb_name: "Udinese", transfermarkt_club_id: 410, transfermarkt_name: "Udinese Calcio"}

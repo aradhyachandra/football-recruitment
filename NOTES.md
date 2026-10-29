@@ -8,13 +8,26 @@ date and how they were settled.
 - **StatsBomb logo.** The terms require the StatsBomb logo on every published analysis. The R1 and R2
   pages carry a text credit only; Aradhya will fetch the logo from the Media Pack
   (https://statsbomb.com/media-pack/) before anything goes public on GitHub (not before R6).
-- **R3 name matching.** StatsBomb names can carry a doubled apostrophe ("N''Golo Kanté" for id 3961);
-  R3 matching must normalise apostrophes, and other names may have the same quirk. R2 uses ids only.
-- **Role pooling (R2).** `config/roles.yaml` pools defensive midfield (StatsBomb 9-11) and centre
-  midfield (13-15) into one "Central midfielder" role, because the label follows the team's formation:
-  Kanté has 1,407 minutes as Left/Right Defensive Midfield and 1,723 as Right/Left Center Midfield for
-  the same club. The pool has 307 players at 900 minutes. Please confirm, or ask for a split (R4 could
-  also weight style differences within the pool).
+- **R3 override that rests on outside knowledge.** StatsBomb id 42946 "Jiang Guangtai" (Everton, 5
+  matches) is matched to Transfermarkt 156934 "Tyias Browning": same squad, Chinese citizenship, born in
+  England, 5 v 5 appearances. That he later took the Chinese name is general knowledge, not in either
+  dataset. Low stakes (328 minutes, full back), but worth a glance.
+- **Transfermarkt appearances have holes (R3 finding).** Markel Susaeta (Athletic, 1,985 minutes) has
+  no Transfermarkt appearances from May 2015 to August 2016, and Rushian Hepburn-Murphy (Aston Villa, 6
+  minutes) none before November 2019, so neither is in the squads built from appearances; both are
+  matched by override (`outside_squad`). Susaeta is the only plausibility flag (28 StatsBomb matches v 0
+  Transfermarkt league appearances). Other players with such a hole would show up the same way; none
+  else did.
+- **One-word Transfermarkt names (R3).** 16 matches rest on a one-word Transfermarkt name contained in
+  the StatsBomb legal name (e.g. "Miranda", "Hernanes", "Jordan" for StatsBomb "Jordan Siebatcheu";
+  Transfermarkt's "Jordan" is born 1996-04-26 and plays for Reims); 8 of them reach 900 minutes. All have plausible appearance counts. Worth a skim in
+  `data/processed/r3/r3_player_values.parquet` (method token_subset, score 0.88).
+- **Stale and missing valuations (R3).** At 900 minutes every matched player has a valuation on or
+  before 2016-07-01; 6 are older than 183 days (oldest 391 days; 1 in the Central midfielder pool,
+  Zdravko Kuzmanović, 196 days). Below 900 minutes, 56 matched players have no valuation before the date.
+  R4 should decide whether stale prices enter the value score or only carry a flag.
+- **Unmatched (R3).** Assane Gnoukouri (Inter, 62 minutes) is not in transfermarkt-datasets under any
+  spelling found; left unmatched.
 - **Glitched timestamps (R2 finding).** 252 events (almost all Premier League and La Liga; mostly the
   last Ball Receipt before Half End) have a timestamp of about 0:00 although they sit at the end of the
   half in StatsBomb's event order. Before the fix, possession-method agreement was correlation 0.74,
@@ -53,3 +66,9 @@ date and how they were settled.
 
 - 2026-10-29: Kanté's transfermarkt-datasets player_id is 225083 (the only "N'Golo Kanté" in players,
   born 1991-03-29); recorded in config/scope.yaml.
+- 2026-10-29 (after R2): Defensive and centre midfield stay pooled as one "Central midfielder" role
+  (Aradhya). Reason: StatsBomb labels follow the formation (Kanté has 1,407 minutes under Defensive
+  Midfield labels and 1,723 under Center Midfield labels at the same club); style differences inside
+  the pool are left to R4. Reason in config/roles.yaml.
+- 2026-10-29 (R3): Apostrophes in names (doubled "N''Golo", typographic, and one double quote) are
+  removed before matching (config/matching.yaml normalise); Kanté matches 225083 exactly.
