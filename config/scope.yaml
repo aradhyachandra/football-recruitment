@@ -35,9 +35,12 @@ valuation_date_reason: >-
   before this date are used for prices (no hindsight).
 departing_player_ids:
   transfermarkt_player_id: 225083
+  statsbomb_player_id: 3961
   reason: >-
-    The only "N'Golo Kanté" in transfermarkt-datasets players (born 1991-03-29), checked on 2026-10-29.
-    The StatsBomb player_id is looked up by name in the R1 audit and fixed here in R2.
+    transfermarkt: the only "N'Golo Kanté" in transfermarkt-datasets players (born 1991-03-29), checked
+    on 2026-10-29. StatsBomb: the R1 audit found one id, 3961 (Leicester City, 37 matches), under two
+    spellings ("N'Golo Kanté" and "N''Golo Kanté"), so from R2 on every step identifies players by
+    StatsBomb player_id, never by name (decided by Aradhya after R1).
 season_window:
   start: "2015-07-01"
   end: "2016-06-30"

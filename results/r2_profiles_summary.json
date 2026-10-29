@@ -1,0 +1,2872 @@
+{
+  "season_id": 27,
+  "minutes_threshold": 900,
+  "sensitivity_thresholds": [
+    600,
+    900,
+    1200
+  ],
+  "possession_method": "in_play_duration",
+  "adjustment_formula": "adjusted = raw * reference_opponent_share / opponent_share  (opponent_share = 1 - team share)",
+  "checks": {
+    "players": 2176,
+    "movers": 103,
+    "movers_between_leagues": 38,
+    "movers_over_threshold": 77,
+    "stints_without_role": 0,
+    "periods_without_half_end": 0,
+    "max_period": 2,
+    "events_without_stint": 10,
+    "player_events": 5301066,
+    "bad_timestamp_events": 252,
+    "min_opponent_share": 0.20110634397314897,
+    "max_opponent_share": 0.798893656026851
+  },
+  "team_minutes": {
+    "team_matches": 3034,
+    "within_tolerance": 3008,
+    "below": 1,
+    "below_with_red_card": 0,
+    "below_with_player_off_only": 1,
+    "below_unexplained": 0,
+    "above": 25,
+    "above_excess_minutes": 1226.8950000000007,
+    "all_minutes": 3176030.546133335,
+    "min_ratio": 0.9796710425733802,
+    "median_ratio": 0.9999999999999999,
+    "max_ratio": 1.0770832837961068,
+    "median_match_minutes": 95.06841666666666,
+    "min_match_minutes": 89.99306666666666,
+    "max_match_minutes": 105.55081666666666,
+    "tolerance_share": 0.02
+  },
+  "possession_check": {
+    "team_matches": 3034,
+    "mean_abs_diff": 0.016917278411844636,
+    "median_abs_diff": 0.014243987214641207,
+    "p95_abs_diff": 0.04197164296320396,
+    "max_abs_diff": 0.18212633326704863,
+    "correlation": 0.9791166203455348,
+    "min_in_play_share": 0.201106343973149,
+    "max_in_play_share": 0.798893656026851,
+    "missing_share": 0,
+    "adjustment_factor_min": 0.6258655281938987,
+    "adjustment_factor_max": 2.4862467792998033
+  },
+  "pool_sizes": [
+    {
+      "threshold": 600,
+      "role": "Attacking midfielder",
+      "league": "Premier League",
+      "players": 15
+    },
+    {
+      "threshold": 600,
+      "role": "Attacking midfielder",
+      "league": "Ligue 1",
+      "players": 13
+    },
+    {
+      "threshold": 600,
+      "role": "Attacking midfielder",
+      "league": "La Liga",
+      "players": 11
+    },
+    {
+      "threshold": 600,
+      "role": "Attacking midfielder",
+      "league": "Serie A",
+      "players": 10
+    },
+    {
+      "threshold": 600,
+      "role": "Central midfielder",
+      "league": "Premier League",
+      "players": 80
+    },
+    {
+      "threshold": 600,
+      "role": "Central midfielder",
+      "league": "Ligue 1",
+      "players": 87
+    },
+    {
+      "threshold": 600,
+      "role": "Central midfielder",
+      "league": "La Liga",
+      "players": 79
+    },
+    {
+      "threshold": 600,
+      "role": "Central midfielder",
+      "league": "Serie A",
+      "players": 99
+    },
+    {
+      "threshold": 600,
+      "role": "Centre back",
+      "league": "Premier League",
+      "players": 64
+    },
+    {
+      "threshold": 600,
+      "role": "Centre back",
+      "league": "Ligue 1",
+      "players": 70
+    },
+    {
+      "threshold": 600,
+      "role": "Centre back",
+      "league": "La Liga",
+      "players": 68
+    },
+    {
+      "threshold": 600,
+      "role": "Centre back",
+      "league": "Serie A",
+      "players": 79
+    },
+    {
+      "threshold": 600,
+      "role": "Forward",
+      "league": "Premier League",
+      "players": 46
+    },
+    {
+      "threshold": 600,
+      "role": "Forward",
+      "league": "Ligue 1",
+      "players": 46
+    },
+    {
+      "threshold": 600,
+      "role": "Forward",
+      "league": "La Liga",
+      "players": 48
+    },
+    {
+      "threshold": 600,
+      "role": "Forward",
+      "league": "Serie A",
+      "players": 54
+    },
+    {
+      "threshold": 600,
+      "role": "Full back / wing back",
+      "league": "Premier League",
+      "players": 68
+    },
+    {
+      "threshold": 600,
+      "role": "Full back / wing back",
+      "league": "Ligue 1",
+      "players": 78
+    },
+    {
+      "threshold": 600,
+      "role": "Full back / wing back",
+      "league": "La Liga",
+      "players": 74
+    },
+    {
+      "threshold": 600,
+      "role": "Full back / wing back",
+      "league": "Serie A",
+      "players": 76
+    },
+    {
+      "threshold": 600,
+      "role": "Goalkeeper",
+      "league": "Premier League",
+      "players": 30
+    },
+    {
+      "threshold": 600,
+      "role": "Goalkeeper",
+      "league": "Ligue 1",
+      "players": 31
+    },
+    {
+      "threshold": 600,
+      "role": "Goalkeeper",
+      "league": "La Liga",
+      "players": 29
+    },
+    {
+      "threshold": 600,
+      "role": "Goalkeeper",
+      "league": "Serie A",
+      "players": 24
+    },
+    {
+      "threshold": 600,
+      "role": "Wide midfielder / winger",
+      "league": "Premier League",
+      "players": 70
+    },
+    {
+      "threshold": 600,
+      "role": "Wide midfielder / winger",
+      "league": "Ligue 1",
+      "players": 70
+    },
+    {
+      "threshold": 600,
+      "role": "Wide midfielder / winger",
+      "league": "La Liga",
+      "players": 87
+    },
+    {
+      "threshold": 600,
+      "role": "Wide midfielder / winger",
+      "league": "Serie A",
+      "players": 49
+    },
+    {
+      "threshold": 900,
+      "role": "Attacking midfielder",
+      "league": "Premier League",
+      "players": 13
+    },
+    {
+      "threshold": 900,
+      "role": "Attacking midfielder",
+      "league": "Ligue 1",
+      "players": 9
+    },
+    {
+      "threshold": 900,
+      "role": "Attacking midfielder",
+      "league": "La Liga",
+      "players": 8
+    },
+    {
+      "threshold": 900,
+      "role": "Attacking midfielder",
+      "league": "Serie A",
+      "players": 7
+    },
+    {
+      "threshold": 900,
+      "role": "Central midfielder",
+      "league": "Premier League",
+      "players": 69
+    },
+    {
+      "threshold": 900,
+      "role": "Central midfielder",
+      "league": "Ligue 1",
+      "players": 77
+    },
+    {
+      "threshold": 900,
+      "role": "Central midfielder",
+      "league": "La Liga",
+      "players": 70
+    },
+    {
+      "threshold": 900,
+      "role": "Central midfielder",
+      "league": "Serie A",
+      "players": 91
+    },
+    {
+      "threshold": 900,
+      "role": "Centre back",
+      "league": "Premier League",
+      "players": 61
+    },
+    {
+      "threshold": 900,
+      "role": "Centre back",
+      "league": "Ligue 1",
+      "players": 68
+    },
+    {
+      "threshold": 900,
+      "role": "Centre back",
+      "league": "La Liga",
+      "players": 62
+    },
+    {
+      "threshold": 900,
+      "role": "Centre back",
+      "league": "Serie A",
+      "players": 70
+    },
+    {
+      "threshold": 900,
+      "role": "Forward",
+      "league": "Premier League",
+      "players": 37
+    },
+    {
+      "threshold": 900,
+      "role": "Forward",
+      "league": "Ligue 1",
+      "players": 39
+    },
+    {
+      "threshold": 900,
+      "role": "Forward",
+      "league": "La Liga",
+      "players": 42
+    },
+    {
+      "threshold": 900,
+      "role": "Forward",
+      "league": "Serie A",
+      "players": 48
+    },
+    {
+      "threshold": 900,
+      "role": "Full back / wing back",
+      "league": "Premier League",
+      "players": 59
+    },
+    {
+      "threshold": 900,
+      "role": "Full back / wing back",
+      "league": "Ligue 1",
+      "players": 65
+    },
+    {
+      "threshold": 900,
+      "role": "Full back / wing back",
+      "league": "La Liga",
+      "players": 66
+    },
+    {
+      "threshold": 900,
+      "role": "Full back / wing back",
+      "league": "Serie A",
+      "players": 63
+    },
+    {
+      "threshold": 900,
+      "role": "Goalkeeper",
+      "league": "Premier League",
+      "players": 27
+    },
+    {
+      "threshold": 900,
+      "role": "Goalkeeper",
+      "league": "Ligue 1",
+      "players": 27
+    },
+    {
+      "threshold": 900,
+      "role": "Goalkeeper",
+      "league": "La Liga",
+      "players": 24
+    },
+    {
+      "threshold": 900,
+      "role": "Goalkeeper",
+      "league": "Serie A",
+      "players": 23
+    },
+    {
+      "threshold": 900,
+      "role": "Wide midfielder / winger",
+      "league": "Premier League",
+      "players": 66
+    },
+    {
+      "threshold": 900,
+      "role": "Wide midfielder / winger",
+      "league": "Ligue 1",
+      "players": 59
+    },
+    {
+      "threshold": 900,
+      "role": "Wide midfielder / winger",
+      "league": "La Liga",
+      "players": 73
+    },
+    {
+      "threshold": 900,
+      "role": "Wide midfielder / winger",
+      "league": "Serie A",
+      "players": 45
+    },
+    {
+      "threshold": 1200,
+      "role": "Attacking midfielder",
+      "league": "Premier League",
+      "players": 12
+    },
+    {
+      "threshold": 1200,
+      "role": "Attacking midfielder",
+      "league": "Ligue 1",
+      "players": 9
+    },
+    {
+      "threshold": 1200,
+      "role": "Attacking midfielder",
+      "league": "La Liga",
+      "players": 7
+    },
+    {
+      "threshold": 1200,
+      "role": "Attacking midfielder",
+      "league": "Serie A",
+      "players": 5
+    },
+    {
+      "threshold": 1200,
+      "role": "Central midfielder",
+      "league": "Premier League",
+      "players": 64
+    },
+    {
+      "threshold": 1200,
+      "role": "Central midfielder",
+      "league": "Ligue 1",
+      "players": 68
+    },
+    {
+      "threshold": 1200,
+      "role": "Central midfielder",
+      "league": "La Liga",
+      "players": 63
+    },
+    {
+      "threshold": 1200,
+      "role": "Central midfielder",
+      "league": "Serie A",
+      "players": 76
+    },
+    {
+      "threshold": 1200,
+      "role": "Centre back",
+      "league": "Premier League",
+      "players": 54
+    },
+    {
+      "threshold": 1200,
+      "role": "Centre back",
+      "league": "Ligue 1",
+      "players": 59
+    },
+    {
+      "threshold": 1200,
+      "role": "Centre back",
+      "league": "La Liga",
+      "players": 54
+    },
+    {
+      "threshold": 1200,
+      "role": "Centre back",
+      "league": "Serie A",
+      "players": 64
+    },
+    {
+      "threshold": 1200,
+      "role": "Forward",
+      "league": "Premier League",
+      "players": 29
+    },
+    {
+      "threshold": 1200,
+      "role": "Forward",
+      "league": "Ligue 1",
+      "players": 33
+    },
+    {
+      "threshold": 1200,
+      "role": "Forward",
+      "league": "La Liga",
+      "players": 35
+    },
+    {
+      "threshold": 1200,
+      "role": "Forward",
+      "league": "Serie A",
+      "players": 39
+    },
+    {
+      "threshold": 1200,
+      "role": "Full back / wing back",
+      "league": "Premier League",
+      "players": 48
+    },
+    {
+      "threshold": 1200,
+      "role": "Full back / wing back",
+      "league": "Ligue 1",
+      "players": 60
+    },
+    {
+      "threshold": 1200,
+      "role": "Full back / wing back",
+      "league": "La Liga",
+      "players": 58
+    },
+    {
+      "threshold": 1200,
+      "role": "Full back / wing back",
+      "league": "Serie A",
+      "players": 53
+    },
+    {
+      "threshold": 1200,
+      "role": "Goalkeeper",
+      "league": "Premier League",
+      "players": 25
+    },
+    {
+      "threshold": 1200,
+      "role": "Goalkeeper",
+      "league": "Ligue 1",
+      "players": 23
+    },
+    {
+      "threshold": 1200,
+      "role": "Goalkeeper",
+      "league": "La Liga",
+      "players": 22
+    },
+    {
+      "threshold": 1200,
+      "role": "Goalkeeper",
+      "league": "Serie A",
+      "players": 21
+    },
+    {
+      "threshold": 1200,
+      "role": "Wide midfielder / winger",
+      "league": "Premier League",
+      "players": 56
+    },
+    {
+      "threshold": 1200,
+      "role": "Wide midfielder / winger",
+      "league": "Ligue 1",
+      "players": 47
+    },
+    {
+      "threshold": 1200,
+      "role": "Wide midfielder / winger",
+      "league": "La Liga",
+      "players": 57
+    },
+    {
+      "threshold": 1200,
+      "role": "Wide midfielder / winger",
+      "league": "Serie A",
+      "players": 37
+    }
+  ],
+  "pool_totals": [
+    {
+      "threshold": 600,
+      "players": 1555
+    },
+    {
+      "threshold": 900,
+      "players": 1368
+    },
+    {
+      "threshold": 1200,
+      "players": 1178
+    }
+  ],
+  "distributions": [
+    {
+      "role": "Attacking midfielder",
+      "metric": "ball_recoveries",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 3.7533361970892525,
+        "p25": 4.12404048717922,
+        "p50": 4.712211149027928,
+        "p75": 5.683635828030516,
+        "p90": 6.246661949009535
+      },
+      "value_padj": {
+        "p10": 3.968453078766447,
+        "p25": 4.394569543929481,
+        "p50": 5.485189449161805,
+        "p75": 6.071800859749842,
+        "p90": 6.60623522540308
+      },
+      "label": "Ball recoveries"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "blocks",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 1.0511677332964104,
+        "p25": 1.220101198530435,
+        "p50": 1.6090165682330786,
+        "p75": 1.889363403432636,
+        "p90": 2.086050780242216
+      },
+      "value_padj": {
+        "p10": 1.070413931539295,
+        "p25": 1.3025712325114154,
+        "p50": 1.6626878753950356,
+        "p75": 1.9750804832527096,
+        "p90": 2.2701408759571122
+      },
+      "label": "Blocks"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "fouls_committed",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 0.7640550434413188,
+        "p25": 0.9454513864256704,
+        "p50": 1.3701365435421107,
+        "p75": 1.8371632456426172,
+        "p90": 2.361651936315731
+      },
+      "value_padj": {
+        "p10": 0.8281544658224194,
+        "p25": 0.996124548629627,
+        "p50": 1.6343604184046039,
+        "p75": 2.0001405633905915,
+        "p90": 2.363849550726378
+      },
+      "label": "Fouls committed"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "interceptions",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 0.30183572467594844,
+        "p25": 0.534470068863499,
+        "p50": 0.6840798529669889,
+        "p75": 0.8925002870324997,
+        "p90": 1.0793951928628671
+      },
+      "value_padj": {
+        "p10": 0.3036751778732162,
+        "p25": 0.5856229286342106,
+        "p50": 0.6631942486774368,
+        "p75": 1.0144381522538313,
+        "p90": 1.2175230623628033
+      },
+      "label": "Interceptions"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "key_passes",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 0.8324822287348951,
+        "p25": 1.2140189512854667,
+        "p50": 1.5636110924959747,
+        "p75": 2.0831826868678567,
+        "p90": 2.556018967042473
+      },
+      "value_padj": null,
+      "label": "Key passes"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "np_xg",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 0.08009920316471421,
+        "p25": 0.11496582846686186,
+        "p50": 0.13901401839067667,
+        "p75": 0.18862137570417628,
+        "p90": 0.2361989015695833
+      },
+      "value_padj": null,
+      "label": "Non-penalty xG"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "pass_completion",
+      "kind": "ratio",
+      "players": 37,
+      "value": {
+        "p10": 0.6843640420011156,
+        "p25": 0.7220566318926974,
+        "p50": 0.7778819119025304,
+        "p75": 0.8186900958466453,
+        "p90": 0.8323169047451031
+      },
+      "value_padj": null,
+      "label": "Pass completion"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "passes_completed",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 27.541417397549942,
+        "p25": 28.6128403363914,
+        "p50": 36.572299402949895,
+        "p75": 42.48797787371805,
+        "p90": 48.263110329979895
+      },
+      "value_padj": null,
+      "label": "Passes completed"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "passes_into_final_third",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 2.1042163151709197,
+        "p25": 3.0466786125325713,
+        "p50": 3.3048212358370264,
+        "p75": 4.324146701460922,
+        "p90": 5.170316979612403
+      },
+      "value_padj": null,
+      "label": "Passes into the final third"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "pressure_regains",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 1.2862385529301679,
+        "p25": 1.680808926864522,
+        "p50": 2.1350844009042764,
+        "p75": 2.5340563354093653,
+        "p90": 2.8865085886130615
+      },
+      "value_padj": {
+        "p10": 1.459028742791999,
+        "p25": 1.7649049354446973,
+        "p50": 2.2248634417112267,
+        "p75": 2.791291039085317,
+        "p90": 3.3366370803862164
+      },
+      "label": "Pressure regains"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "pressures",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 13.510191861677566,
+        "p25": 15.812661495598753,
+        "p50": 18.830454837699584,
+        "p75": 22.477936793742412,
+        "p90": 23.958499782465967
+      },
+      "value_padj": {
+        "p10": 13.895564949900246,
+        "p25": 16.125682600884502,
+        "p50": 20.61140231727654,
+        "p75": 23.522167113399,
+        "p90": 25.486766981174505
+      },
+      "label": "Pressures"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "progressive_carries",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 0.9922624492242291,
+        "p25": 1.6896414402283848,
+        "p50": 3.094262631217459,
+        "p75": 4.043032163414481,
+        "p90": 4.7352387159141
+      },
+      "value_padj": null,
+      "label": "Progressive carries"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "progressive_passes",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 2.0953864201804566,
+        "p25": 2.6148036151677574,
+        "p50": 3.2260780176843418,
+        "p75": 4.694725640128664,
+        "p90": 5.378520789225448
+      },
+      "value_padj": null,
+      "label": "Progressive passes"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "shots",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 1.338606861585157,
+        "p25": 1.573696593992362,
+        "p50": 1.8838225106153792,
+        "p75": 2.3279472728564725,
+        "p90": 2.651032426960721
+      },
+      "value_padj": null,
+      "label": "Shots (excl. penalties)"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "successful_dribbles",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 0.5945724981079,
+        "p25": 0.9628426165367493,
+        "p50": 1.4806110140247561,
+        "p75": 1.8565283715107763,
+        "p90": 2.3331628685552928
+      },
+      "value_padj": null,
+      "label": "Successful dribbles"
+    },
+    {
+      "role": "Attacking midfielder",
+      "metric": "tackles_won",
+      "kind": "per90",
+      "players": 37,
+      "value": {
+        "p10": 0.6165373637433121,
+        "p25": 0.8097589188638754,
+        "p50": 0.9204760709416111,
+        "p75": 1.278961887569883,
+        "p90": 1.845449807153135
+      },
+      "value_padj": {
+        "p10": 0.6152527631507734,
+        "p25": 0.8041495405284338,
+        "p50": 0.9401408934765284,
+        "p75": 1.5712821190997137,
+        "p90": 1.8585492859325456
+      },
+      "label": "Tackles won"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "ball_recoveries",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 4.0060207919709425,
+        "p25": 4.582762989195997,
+        "p50": 5.224063145967939,
+        "p75": 5.880669944593594,
+        "p90": 6.5509902782453215
+      },
+      "value_padj": {
+        "p10": 4.0149787156365875,
+        "p25": 4.646672820015424,
+        "p50": 5.540575457133534,
+        "p75": 6.368909331597514,
+        "p90": 7.100685784995443
+      },
+      "label": "Ball recoveries"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "blocks",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 1.2984449267206348,
+        "p25": 1.610907771530534,
+        "p50": 1.9242069378136342,
+        "p75": 2.305186090894523,
+        "p90": 2.6865498574260025
+      },
+      "value_padj": {
+        "p10": 1.3333894104535462,
+        "p25": 1.671706370626999,
+        "p50": 1.9719575283709299,
+        "p75": 2.3490200318443115,
+        "p90": 2.696434413662935
+      },
+      "label": "Blocks"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "fouls_committed",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.9974199090418052,
+        "p25": 1.3821380300764567,
+        "p50": 1.7686924277422367,
+        "p75": 2.1863312104781243,
+        "p90": 2.5379863866537336
+      },
+      "value_padj": {
+        "p10": 1.070670208300995,
+        "p25": 1.4209622449807062,
+        "p50": 1.8241481095063834,
+        "p75": 2.2401096852144824,
+        "p90": 2.626950858026841
+      },
+      "label": "Fouls committed"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "interceptions",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.7067108294185791,
+        "p25": 0.9584052913021901,
+        "p50": 1.2973273104768113,
+        "p75": 1.63881464538265,
+        "p90": 2.122302741875636
+      },
+      "value_padj": {
+        "p10": 0.7086852106276474,
+        "p25": 0.9865319222562488,
+        "p50": 1.3061062322919026,
+        "p75": 1.6753139194501485,
+        "p90": 2.217050655122791
+      },
+      "label": "Interceptions"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "key_passes",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.3100874524137887,
+        "p25": 0.460709839246835,
+        "p50": 0.7429891293505093,
+        "p75": 1.1782177409849957,
+        "p90": 1.6647502182136784
+      },
+      "value_padj": null,
+      "label": "Key passes"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "np_xg",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.015437111097931208,
+        "p25": 0.0300845692268039,
+        "p50": 0.0533098512196651,
+        "p75": 0.08467006380177473,
+        "p90": 0.13483440789610426
+      },
+      "value_padj": null,
+      "label": "Non-penalty xG"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "pass_completion",
+      "kind": "ratio",
+      "players": 307,
+      "value": {
+        "p10": 0.7350888742593812,
+        "p25": 0.7713605729399018,
+        "p50": 0.8130165289256198,
+        "p75": 0.8516746961390619,
+        "p90": 0.8784137417377261
+      },
+      "value_padj": null,
+      "label": "Pass completion"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "passes_completed",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 27.581660027503368,
+        "p25": 32.24543763884526,
+        "p50": 39.44426250499867,
+        "p75": 48.51515560104188,
+        "p90": 56.01717010605311
+      },
+      "value_padj": null,
+      "label": "Passes completed"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "passes_into_final_third",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 2.435459235277241,
+        "p25": 3.028474038794599,
+        "p50": 3.959699356489534,
+        "p75": 5.115604408543224,
+        "p90": 6.491594140343284
+      },
+      "value_padj": null,
+      "label": "Passes into the final third"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "pressure_regains",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 1.6941742610597499,
+        "p25": 2.079119803612572,
+        "p50": 2.551773200181178,
+        "p75": 3.1040871220806334,
+        "p90": 3.4844352139006656
+      },
+      "value_padj": {
+        "p10": 1.7003798537620274,
+        "p25": 2.1563949499109833,
+        "p50": 2.660978138933333,
+        "p75": 3.211618571319966,
+        "p90": 3.8586738312756936
+      },
+      "label": "Pressure regains"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "pressures",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 15.221053788843394,
+        "p25": 17.23940437381357,
+        "p50": 19.943233847138455,
+        "p75": 22.897048868919658,
+        "p90": 26.083539144751917
+      },
+      "value_padj": {
+        "p10": 14.7921708637641,
+        "p25": 17.578984634312945,
+        "p50": 20.301256582345484,
+        "p75": 23.887507048821668,
+        "p90": 26.46530322899931
+      },
+      "label": "Pressures"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "progressive_carries",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.41087444262808287,
+        "p25": 0.664707853525554,
+        "p50": 1.0839512245624994,
+        "p75": 1.7594818013332456,
+        "p90": 2.490574765558232
+      },
+      "value_padj": null,
+      "label": "Progressive carries"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "progressive_passes",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 2.062340140010048,
+        "p25": 2.5826324353723003,
+        "p50": 3.384370537236032,
+        "p75": 4.3689118775936,
+        "p90": 5.7534312786329815
+      },
+      "value_padj": null,
+      "label": "Progressive passes"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "shots",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.37984326103658156,
+        "p25": 0.5910633026849086,
+        "p50": 0.8859522294331593,
+        "p75": 1.338282934540624,
+        "p90": 1.8474069451389945
+      },
+      "value_padj": null,
+      "label": "Shots (excl. penalties)"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "successful_dribbles",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.32888605132131,
+        "p25": 0.48043773242007626,
+        "p50": 0.7287614430648761,
+        "p75": 1.0310235324156993,
+        "p90": 1.4301400612327475
+      },
+      "value_padj": null,
+      "label": "Successful dribbles"
+    },
+    {
+      "role": "Central midfielder",
+      "metric": "tackles_won",
+      "kind": "per90",
+      "players": 307,
+      "value": {
+        "p10": 0.9214144917795258,
+        "p25": 1.18391319267645,
+        "p50": 1.471023315519097,
+        "p75": 1.8832516541427424,
+        "p90": 2.3030458946068615
+      },
+      "value_padj": {
+        "p10": 0.9537901573336378,
+        "p25": 1.2230100824040986,
+        "p50": 1.5667565299320214,
+        "p75": 1.9630026737437518,
+        "p90": 2.4461353346125
+      },
+      "label": "Tackles won"
+    },
+    {
+      "role": "Centre back",
+      "metric": "ball_recoveries",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 2.2648600556698026,
+        "p25": 2.849241385883482,
+        "p50": 3.376776342213434,
+        "p75": 4.012369831155488,
+        "p90": 4.704156082468313
+      },
+      "value_padj": {
+        "p10": 2.254536456542466,
+        "p25": 2.9342180357284904,
+        "p50": 3.530209468235229,
+        "p75": 4.521704856215201,
+        "p90": 5.497453143970471
+      },
+      "label": "Ball recoveries"
+    },
+    {
+      "role": "Centre back",
+      "metric": "blocks",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 1.297544092298911,
+        "p25": 1.5589090401576438,
+        "p50": 1.7932400826351593,
+        "p75": 2.063414694538967,
+        "p90": 2.3573824226030298
+      },
+      "value_padj": {
+        "p10": 1.280304284153762,
+        "p25": 1.5108626790495598,
+        "p50": 1.8147862879878611,
+        "p75": 2.1361411183867607,
+        "p90": 2.4127915813471206
+      },
+      "label": "Blocks"
+    },
+    {
+      "role": "Centre back",
+      "metric": "fouls_committed",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.5776083354349878,
+        "p25": 0.7913423676747486,
+        "p50": 1.011130712691378,
+        "p75": 1.3363170519912533,
+        "p90": 1.5828701093270794
+      },
+      "value_padj": {
+        "p10": 0.5985277975397586,
+        "p25": 0.7889360010977722,
+        "p50": 1.0985588085718327,
+        "p75": 1.3666875887864938,
+        "p90": 1.6135393640182882
+      },
+      "label": "Fouls committed"
+    },
+    {
+      "role": "Centre back",
+      "metric": "interceptions",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.8998159166069553,
+        "p25": 1.1009725650322901,
+        "p50": 1.4245830983943715,
+        "p75": 1.8337532745498442,
+        "p90": 2.3477979425464026
+      },
+      "value_padj": {
+        "p10": 0.9103422239668877,
+        "p25": 1.094681050339041,
+        "p50": 1.4524335689975487,
+        "p75": 1.8507609875919984,
+        "p90": 2.346970824366623
+      },
+      "label": "Interceptions"
+    },
+    {
+      "role": "Centre back",
+      "metric": "key_passes",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.03888964279582223,
+        "p25": 0.0764491428766313,
+        "p50": 0.1469090339261929,
+        "p75": 0.22328379977953122,
+        "p90": 0.30868108267534616
+      },
+      "value_padj": null,
+      "label": "Key passes"
+    },
+    {
+      "role": "Centre back",
+      "metric": "np_xg",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.010744314081541605,
+        "p25": 0.021007588781324665,
+        "p50": 0.03488721000009419,
+        "p75": 0.0545973186731614,
+        "p90": 0.07146551693086409
+      },
+      "value_padj": null,
+      "label": "Non-penalty xG"
+    },
+    {
+      "role": "Centre back",
+      "metric": "pass_completion",
+      "kind": "ratio",
+      "players": 261,
+      "value": {
+        "p10": 0.7377819548872181,
+        "p25": 0.7777777777777778,
+        "p50": 0.8195718654434251,
+        "p75": 0.8553519768563163,
+        "p90": 0.8839190628328009
+      },
+      "value_padj": null,
+      "label": "Pass completion"
+    },
+    {
+      "role": "Centre back",
+      "metric": "passes_completed",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 22.05193648414626,
+        "p25": 26.15957426072097,
+        "p50": 31.815180548423378,
+        "p75": 39.99207597045871,
+        "p90": 48.75311818633755
+      },
+      "value_padj": null,
+      "label": "Passes completed"
+    },
+    {
+      "role": "Centre back",
+      "metric": "passes_into_final_third",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.8943992162081534,
+        "p25": 1.2149175102982022,
+        "p50": 1.7494439225950644,
+        "p75": 2.509645780658031,
+        "p90": 3.1060229366333245
+      },
+      "value_padj": null,
+      "label": "Passes into the final third"
+    },
+    {
+      "role": "Centre back",
+      "metric": "pressure_regains",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 1.0009218085443838,
+        "p25": 1.2835740787444174,
+        "p50": 1.5612438735010827,
+        "p75": 1.9101700998670945,
+        "p90": 2.2616208843728987
+      },
+      "value_padj": {
+        "p10": 0.9758895050035984,
+        "p25": 1.2749090244257952,
+        "p50": 1.633903039194866,
+        "p75": 1.9864870178447314,
+        "p90": 2.4904661645812856
+      },
+      "label": "Pressure regains"
+    },
+    {
+      "role": "Centre back",
+      "metric": "pressures",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 6.205862992086074,
+        "p25": 7.643402901611659,
+        "p50": 8.911831727991336,
+        "p75": 10.70765384337421,
+        "p90": 12.465193893216433
+      },
+      "value_padj": {
+        "p10": 6.196349702731111,
+        "p25": 7.5937137772009144,
+        "p50": 9.312315797059727,
+        "p75": 10.784078738731434,
+        "p90": 13.278369152909162
+      },
+      "label": "Pressures"
+    },
+    {
+      "role": "Centre back",
+      "metric": "progressive_carries",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.12107514368854258,
+        "p25": 0.23833848241311,
+        "p50": 0.4277860707540445,
+        "p75": 0.7946731320773235,
+        "p90": 1.1613383484055029
+      },
+      "value_padj": null,
+      "label": "Progressive carries"
+    },
+    {
+      "role": "Centre back",
+      "metric": "progressive_passes",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 1.5956695581101097,
+        "p25": 2.196227932770718,
+        "p50": 2.852611753970899,
+        "p75": 3.531468325672009,
+        "p90": 4.61895934024916
+      },
+      "value_padj": null,
+      "label": "Progressive passes"
+    },
+    {
+      "role": "Centre back",
+      "metric": "shots",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.16084200431833973,
+        "p25": 0.25258124585652747,
+        "p50": 0.3851999887008003,
+        "p75": 0.5282501064692983,
+        "p90": 0.6907274967121372
+      },
+      "value_padj": null,
+      "label": "Shots (excl. penalties)"
+    },
+    {
+      "role": "Centre back",
+      "metric": "successful_dribbles",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.05907528666118755,
+        "p25": 0.10643894724075659,
+        "p50": 0.22036355088928936,
+        "p75": 0.32089351968610436,
+        "p90": 0.4475012722295428
+      },
+      "value_padj": null,
+      "label": "Successful dribbles"
+    },
+    {
+      "role": "Centre back",
+      "metric": "tackles_won",
+      "kind": "per90",
+      "players": 261,
+      "value": {
+        "p10": 0.5589111747901843,
+        "p25": 0.7122915491971857,
+        "p50": 0.9562053609403212,
+        "p75": 1.2112731849463867,
+        "p90": 1.4382302736286365
+      },
+      "value_padj": {
+        "p10": 0.5572574701318361,
+        "p25": 0.7295664132591002,
+        "p50": 1.0064485178106195,
+        "p75": 1.2428864593136937,
+        "p90": 1.5061062930523959
+      },
+      "label": "Tackles won"
+    },
+    {
+      "role": "Forward",
+      "metric": "ball_recoveries",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 1.8863120385649808,
+        "p25": 2.2167014350132144,
+        "p50": 2.8421913957968954,
+        "p75": 3.419404882025966,
+        "p90": 3.997104283787493
+      },
+      "value_padj": {
+        "p10": 1.8039600201576178,
+        "p25": 2.279568265695329,
+        "p50": 2.8088396552774313,
+        "p75": 3.573526973086401,
+        "p90": 4.236434299741175
+      },
+      "label": "Ball recoveries"
+    },
+    {
+      "role": "Forward",
+      "metric": "blocks",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.7480104714865277,
+        "p25": 0.9587588590467974,
+        "p50": 1.2190629956235288,
+        "p75": 1.450093460434458,
+        "p90": 1.7654906022333838
+      },
+      "value_padj": {
+        "p10": 0.7918685715116623,
+        "p25": 1.0010357377867967,
+        "p50": 1.2347420634679411,
+        "p75": 1.4984532399725445,
+        "p90": 1.805719221491055
+      },
+      "label": "Blocks"
+    },
+    {
+      "role": "Forward",
+      "metric": "fouls_committed",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.8642549506850199,
+        "p25": 1.1972185488849576,
+        "p50": 1.672534396382752,
+        "p75": 2.114574656361081,
+        "p90": 2.5639597053964116
+      },
+      "value_padj": {
+        "p10": 0.8758288001479617,
+        "p25": 1.2117192213040895,
+        "p50": 1.7266264369228415,
+        "p75": 2.122958712985758,
+        "p90": 2.628306310319028
+      },
+      "label": "Fouls committed"
+    },
+    {
+      "role": "Forward",
+      "metric": "interceptions",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.11534963905165303,
+        "p25": 0.17442469671071298,
+        "p50": 0.2920054848725191,
+        "p75": 0.41855314034216756,
+        "p90": 0.5888755146044992
+      },
+      "value_padj": {
+        "p10": 0.10859239066903723,
+        "p25": 0.1806325012928867,
+        "p50": 0.2991082583545235,
+        "p75": 0.4277134102745759,
+        "p90": 0.59790284574157
+      },
+      "label": "Interceptions"
+    },
+    {
+      "role": "Forward",
+      "metric": "key_passes",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.546547118355021,
+        "p25": 0.7507179021000696,
+        "p50": 0.9271167798631653,
+        "p75": 1.1519824633626872,
+        "p90": 1.4228958068875859
+      },
+      "value_padj": null,
+      "label": "Key passes"
+    },
+    {
+      "role": "Forward",
+      "metric": "np_xg",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.1727378138988771,
+        "p25": 0.21973448978769056,
+        "p50": 0.29556031246204273,
+        "p75": 0.4013947785274845,
+        "p90": 0.4581319186028934
+      },
+      "value_padj": null,
+      "label": "Non-penalty xG"
+    },
+    {
+      "role": "Forward",
+      "metric": "pass_completion",
+      "kind": "ratio",
+      "players": 166,
+      "value": {
+        "p10": 0.6330574090394058,
+        "p25": 0.6619313073188275,
+        "p50": 0.7136618310098285,
+        "p75": 0.746640250092285,
+        "p90": 0.7849299268202075
+      },
+      "value_padj": null,
+      "label": "Pass completion"
+    },
+    {
+      "role": "Forward",
+      "metric": "passes_completed",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 12.558490613789942,
+        "p25": 14.216923984342603,
+        "p50": 17.048459265998545,
+        "p75": 20.529891498408958,
+        "p90": 23.350282530325405
+      },
+      "value_padj": null,
+      "label": "Passes completed"
+    },
+    {
+      "role": "Forward",
+      "metric": "passes_into_final_third",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.6033538717709896,
+        "p25": 0.7610347963505086,
+        "p50": 0.9952999971461687,
+        "p75": 1.4232339487957333,
+        "p90": 1.7486872299988816
+      },
+      "value_padj": null,
+      "label": "Passes into the final third"
+    },
+    {
+      "role": "Forward",
+      "metric": "pressure_regains",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.7015103033845667,
+        "p25": 0.9105044447575092,
+        "p50": 1.2107744377770333,
+        "p75": 1.577058717958488,
+        "p90": 1.9647390720199593
+      },
+      "value_padj": {
+        "p10": 0.7001438788045691,
+        "p25": 0.9459738978109946,
+        "p50": 1.237506930603641,
+        "p75": 1.619695007078298,
+        "p90": 2.10218637339968
+      },
+      "label": "Pressure regains"
+    },
+    {
+      "role": "Forward",
+      "metric": "pressures",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 9.827440802828228,
+        "p25": 12.458948241690589,
+        "p50": 15.015329731171628,
+        "p75": 17.80836461470027,
+        "p90": 21.06888158594053
+      },
+      "value_padj": {
+        "p10": 10.00800858785356,
+        "p25": 12.55640813218615,
+        "p50": 14.954439436222929,
+        "p75": 17.91121223097829,
+        "p90": 20.79485380612862
+      },
+      "label": "Pressures"
+    },
+    {
+      "role": "Forward",
+      "metric": "progressive_carries",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.7304685215031073,
+        "p25": 1.0654014736156217,
+        "p50": 1.7013635887234972,
+        "p75": 2.3532571885496596,
+        "p90": 3.554558848316357
+      },
+      "value_padj": null,
+      "label": "Progressive carries"
+    },
+    {
+      "role": "Forward",
+      "metric": "progressive_passes",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.7112431622815245,
+        "p25": 0.8894464294430259,
+        "p50": 1.1921489037517727,
+        "p75": 1.6411341575545784,
+        "p90": 2.1196231284482003
+      },
+      "value_padj": null,
+      "label": "Progressive passes"
+    },
+    {
+      "role": "Forward",
+      "metric": "shots",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 1.6272080726678344,
+        "p25": 1.9283970011169882,
+        "p50": 2.3632403232382364,
+        "p75": 2.853232720090059,
+        "p90": 3.3848676891593907
+      },
+      "value_padj": null,
+      "label": "Shots (excl. penalties)"
+    },
+    {
+      "role": "Forward",
+      "metric": "successful_dribbles",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.46323491948110573,
+        "p25": 0.6147279092033905,
+        "p50": 0.8665946193912849,
+        "p75": 1.3063289139176293,
+        "p90": 1.6464616061385628
+      },
+      "value_padj": null,
+      "label": "Successful dribbles"
+    },
+    {
+      "role": "Forward",
+      "metric": "tackles_won",
+      "kind": "per90",
+      "players": 166,
+      "value": {
+        "p10": 0.22227964009273976,
+        "p25": 0.35649883254578063,
+        "p50": 0.5068175979102331,
+        "p75": 0.7191416522055525,
+        "p90": 0.9051359773470249
+      },
+      "value_padj": {
+        "p10": 0.2110435423279765,
+        "p25": 0.34833295017755395,
+        "p50": 0.5257271093139432,
+        "p75": 0.7173175656217492,
+        "p90": 0.9773622247944533
+      },
+      "label": "Tackles won"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "ball_recoveries",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 2.9064202005413833,
+        "p25": 3.4037338960840047,
+        "p50": 4.108330012912485,
+        "p75": 4.763609418497143,
+        "p90": 5.386009367629447
+      },
+      "value_padj": {
+        "p10": 2.93880647402556,
+        "p25": 3.516728797845016,
+        "p50": 4.3012972224546555,
+        "p75": 5.093675186066117,
+        "p90": 6.074449154218925
+      },
+      "label": "Ball recoveries"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "blocks",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 1.6141874680752173,
+        "p25": 1.8754540008336988,
+        "p50": 2.173290496119653,
+        "p75": 2.5454782772443583,
+        "p90": 2.8215607311052837
+      },
+      "value_padj": {
+        "p10": 1.6332914369415177,
+        "p25": 1.8989519836845716,
+        "p50": 2.2225627229858693,
+        "p75": 2.5763700658846362,
+        "p90": 2.9916261252588137
+      },
+      "label": "Blocks"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "fouls_committed",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.711367553434827,
+        "p25": 0.9873377206292572,
+        "p50": 1.2560175597767544,
+        "p75": 1.5812651379578244,
+        "p90": 1.823449462496177
+      },
+      "value_padj": {
+        "p10": 0.7862599940232502,
+        "p25": 0.98249938965956,
+        "p50": 1.294500843828336,
+        "p75": 1.6465905640371599,
+        "p90": 2.001614404691891
+      },
+      "label": "Fouls committed"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "interceptions",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.8063750458323594,
+        "p25": 1.0629541677638255,
+        "p50": 1.4213298809509982,
+        "p75": 1.91371891934419,
+        "p90": 2.292763006889865
+      },
+      "value_padj": {
+        "p10": 0.8366349588154763,
+        "p25": 1.0296620775662866,
+        "p50": 1.4444125959845808,
+        "p75": 1.9934066860605728,
+        "p90": 2.4005499626282143
+      },
+      "label": "Interceptions"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "key_passes",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.2771466597510166,
+        "p25": 0.4294428908950233,
+        "p50": 0.6301654814554302,
+        "p75": 0.8666855882320278,
+        "p90": 1.0732872597851417
+      },
+      "value_padj": null,
+      "label": "Key passes"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "np_xg",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.003362110494899881,
+        "p25": 0.010645384061998624,
+        "p50": 0.02144107953776458,
+        "p75": 0.04264870259065871,
+        "p90": 0.06825634478834766
+      },
+      "value_padj": null,
+      "label": "Non-penalty xG"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "pass_completion",
+      "kind": "ratio",
+      "players": 253,
+      "value": {
+        "p10": 0.6931855797692444,
+        "p25": 0.7282850779510023,
+        "p50": 0.7599318955732123,
+        "p75": 0.7967667436489607,
+        "p90": 0.8232349761682473
+      },
+      "value_padj": null,
+      "label": "Pass completion"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "passes_completed",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 27.835961856448872,
+        "p25": 31.609771441745092,
+        "p50": 36.75848206794555,
+        "p75": 43.431724085515306,
+        "p90": 48.756231497144626
+      },
+      "value_padj": null,
+      "label": "Passes completed"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "passes_into_final_third",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 1.6558723659339176,
+        "p25": 2.1160028519995855,
+        "p50": 2.6624263765150604,
+        "p75": 3.270474161756606,
+        "p90": 3.952732140105738
+      },
+      "value_padj": null,
+      "label": "Passes into the final third"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "pressure_regains",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 1.1339497383897001,
+        "p25": 1.4544876450552147,
+        "p50": 1.7969585251762394,
+        "p75": 2.1840409398474168,
+        "p90": 2.528075976921116
+      },
+      "value_padj": {
+        "p10": 1.1514589357751013,
+        "p25": 1.490796591815144,
+        "p50": 1.8269286537971414,
+        "p75": 2.3302082343261485,
+        "p90": 2.7515294319278625
+      },
+      "label": "Pressure regains"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "pressures",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 9.761571819876144,
+        "p25": 11.254316591548024,
+        "p50": 13.446924002218825,
+        "p75": 15.526297338068808,
+        "p90": 17.844527238164233
+      },
+      "value_padj": {
+        "p10": 9.666824811793386,
+        "p25": 11.336549428373836,
+        "p50": 13.591322797588987,
+        "p75": 16.392034215722916,
+        "p90": 19.258642699503035
+      },
+      "label": "Pressures"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "progressive_carries",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.5618492057619728,
+        "p25": 0.9816670600093774,
+        "p50": 1.5600350453206073,
+        "p75": 2.297672211467826,
+        "p90": 3.073766568237204
+      },
+      "value_padj": null,
+      "label": "Progressive carries"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "progressive_passes",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 2.5903806588020846,
+        "p25": 3.0354088627540627,
+        "p50": 3.8208245551658084,
+        "p75": 4.744874508776126,
+        "p90": 5.679718087674817
+      },
+      "value_padj": null,
+      "label": "Progressive passes"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "shots",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.13892908329301853,
+        "p25": 0.26320116587501785,
+        "p50": 0.46388527498635895,
+        "p75": 0.6741934667526378,
+        "p90": 0.9462858592016231
+      },
+      "value_padj": null,
+      "label": "Shots (excl. penalties)"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "successful_dribbles",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.2575481444867069,
+        "p25": 0.37709269423756614,
+        "p50": 0.6694741365669854,
+        "p75": 1.0304640334930253,
+        "p90": 1.4177506575998389
+      },
+      "value_padj": null,
+      "label": "Successful dribbles"
+    },
+    {
+      "role": "Full back / wing back",
+      "metric": "tackles_won",
+      "kind": "per90",
+      "players": 253,
+      "value": {
+        "p10": 0.7128195747102956,
+        "p25": 0.9388173829191344,
+        "p50": 1.2291752703914454,
+        "p75": 1.6467026176408528,
+        "p90": 1.9758488312956834
+      },
+      "value_padj": {
+        "p10": 0.7108659956620087,
+        "p25": 0.9394313975559844,
+        "p50": 1.330321392150813,
+        "p75": 1.650690645186607,
+        "p90": 2.090187789170582
+      },
+      "label": "Tackles won"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "ball_recoveries",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 3.8283209337852973,
+        "p25": 4.192787925301248,
+        "p50": 4.607615772627245,
+        "p75": 4.992195841993921,
+        "p90": 5.426927583518347
+      },
+      "value_padj": {
+        "p10": 3.9152217007366223,
+        "p25": 4.32484410055586,
+        "p50": 4.7243589192257085,
+        "p75": 5.31340644312712,
+        "p90": 5.600367815495578
+      },
+      "label": "Ball recoveries"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "blocks",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.025199961343259306,
+        "p75": 0.04455230649518341,
+        "p90": 0.0807967646262268
+      },
+      "value_padj": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.020470980864763035,
+        "p75": 0.04683775302197266,
+        "p90": 0.08110382406094539
+      },
+      "label": "Blocks"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "fouls_committed",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.029907441618915523,
+        "p90": 0.0745839283761144
+      },
+      "value_padj": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.030919743507434757,
+        "p90": 0.07695511806670788
+      },
+      "label": "Fouls committed"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "interceptions",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p90": 0.0
+      },
+      "value_padj": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p90": 0.0
+      },
+      "label": "Interceptions"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "key_passes",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.050399426656122355,
+        "p90": 0.07271955612952533
+      },
+      "value_padj": null,
+      "label": "Key passes"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "np_xg",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p90": 0.0
+      },
+      "value_padj": null,
+      "label": "Non-penalty xG"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "pass_completion",
+      "kind": "ratio",
+      "players": 101,
+      "value": {
+        "p10": 0.5024875621890548,
+        "p25": 0.5625920471281296,
+        "p50": 0.6015779092702169,
+        "p75": 0.6674259681093394,
+        "p90": 0.7253218884120172
+      },
+      "value_padj": null,
+      "label": "Pass completion"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "passes_completed",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 13.277694387064392,
+        "p25": 14.905441796287125,
+        "p50": 16.784467775259973,
+        "p75": 19.35727815385113,
+        "p90": 21.66138150870323
+      },
+      "value_padj": null,
+      "label": "Passes completed"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "passes_into_final_third",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0785942084859254,
+        "p25": 0.19647860033052902,
+        "p50": 0.40936938709611254,
+        "p75": 0.5972835260813095,
+        "p90": 0.9306729255656935
+      },
+      "value_padj": null,
+      "label": "Passes into the final third"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "pressure_regains",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.025699267674144266,
+        "p90": 0.04455230649518341
+      },
+      "value_padj": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.025213406332733234,
+        "p90": 0.04993310243153249
+      },
+      "label": "Pressure regains"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "pressures",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.025349645905583636,
+        "p25": 0.05800509770281982,
+        "p50": 0.11227348590315944,
+        "p75": 0.17989487371900986,
+        "p90": 0.2395073670544133
+      },
+      "value_padj": {
+        "p10": 0.02105286407545608,
+        "p25": 0.05904162590454598,
+        "p50": 0.12743473900821486,
+        "p75": 0.1779675946921706,
+        "p90": 0.24084088552065833
+      },
+      "label": "Pressures"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "progressive_carries",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p90": 0.029795209907971094
+      },
+      "value_padj": null,
+      "label": "Progressive carries"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "progressive_passes",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 1.8449434477927906,
+        "p25": 2.340864458950744,
+        "p50": 3.1150997707784644,
+        "p75": 3.7739423312338025,
+        "p90": 4.530664520227334
+      },
+      "value_padj": null,
+      "label": "Progressive passes"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "shots",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p90": 0.0
+      },
+      "value_padj": null,
+      "label": "Shots (excl. penalties)"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "successful_dribbles",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.029795209907971094,
+        "p90": 0.053673087689137575
+      },
+      "value_padj": null,
+      "label": "Successful dribbles"
+    },
+    {
+      "role": "Goalkeeper",
+      "metric": "tackles_won",
+      "kind": "per90",
+      "players": 101,
+      "value": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p90": 0.0
+      },
+      "value_padj": {
+        "p10": 0.0,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0,
+        "p90": 0.0
+      },
+      "label": "Tackles won"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "ball_recoveries",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 3.2955242548107226,
+        "p25": 3.9445512307181048,
+        "p50": 4.485030835832838,
+        "p75": 5.184316450512276,
+        "p90": 5.99406603183373
+      },
+      "value_padj": {
+        "p10": 3.278865474264091,
+        "p25": 3.9855360152569963,
+        "p50": 4.679197415204195,
+        "p75": 5.463784127511007,
+        "p90": 6.345448050179224
+      },
+      "label": "Ball recoveries"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "blocks",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 1.0733639714212087,
+        "p25": 1.326870077496796,
+        "p50": 1.6601515556044337,
+        "p75": 2.095057067885504,
+        "p90": 2.4974922768807875
+      },
+      "value_padj": {
+        "p10": 1.0729237182284153,
+        "p25": 1.3660917145053246,
+        "p50": 1.6947110943485386,
+        "p75": 2.101121320992882,
+        "p90": 2.5663658924592214
+      },
+      "label": "Blocks"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "fouls_committed",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.6198586416548073,
+        "p25": 0.8827471881333014,
+        "p50": 1.2905354477964706,
+        "p75": 1.6996861225085969,
+        "p90": 2.074127178493877
+      },
+      "value_padj": {
+        "p10": 0.5955488000254703,
+        "p25": 0.9417548896047283,
+        "p50": 1.3193763588743803,
+        "p75": 1.6887798754461185,
+        "p90": 2.1419726768864087
+      },
+      "label": "Fouls committed"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "interceptions",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.3728384162787171,
+        "p25": 0.546119979619083,
+        "p50": 0.7620936013643412,
+        "p75": 1.1043760167845544,
+        "p90": 1.4224071826151827
+      },
+      "value_padj": {
+        "p10": 0.36881317943822056,
+        "p25": 0.5681067124226618,
+        "p50": 0.7904583765648524,
+        "p75": 1.102376122851549,
+        "p90": 1.3799972409264614
+      },
+      "label": "Interceptions"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "key_passes",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.7959817169263718,
+        "p25": 1.0568002048422063,
+        "p50": 1.4131489221967146,
+        "p75": 1.7928628789718075,
+        "p90": 2.311002711135415
+      },
+      "value_padj": null,
+      "label": "Key passes"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "np_xg",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.0695079573953547,
+        "p25": 0.10189629259010788,
+        "p50": 0.1515529672443005,
+        "p75": 0.22091863095761916,
+        "p90": 0.2694133388640381
+      },
+      "value_padj": null,
+      "label": "Non-penalty xG"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "pass_completion",
+      "kind": "ratio",
+      "players": 243,
+      "value": {
+        "p10": 0.6298870463830809,
+        "p25": 0.6708276627602214,
+        "p50": 0.7158351409978309,
+        "p75": 0.765428632922527,
+        "p90": 0.80687746294949
+      },
+      "value_padj": null,
+      "label": "Pass completion"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "passes_completed",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 17.592715275621654,
+        "p25": 21.542785962507196,
+        "p50": 25.663023817282976,
+        "p75": 32.244834148901376,
+        "p90": 38.78466976506521
+      },
+      "value_padj": null,
+      "label": "Passes completed"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "passes_into_final_third",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.9874408669286021,
+        "p25": 1.378357277957301,
+        "p50": 1.886557095419203,
+        "p75": 2.711961443508736,
+        "p90": 3.515686571220085
+      },
+      "value_padj": null,
+      "label": "Passes into the final third"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "pressure_regains",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.9788713613984474,
+        "p25": 1.2728940703023974,
+        "p50": 1.6423371556417927,
+        "p75": 2.055685183227003,
+        "p90": 2.585712510188528
+      },
+      "value_padj": {
+        "p10": 0.9980340313285232,
+        "p25": 1.3098882245584753,
+        "p50": 1.6698503003997223,
+        "p75": 2.1906852416349976,
+        "p90": 2.717337821657006
+      },
+      "label": "Pressure regains"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "pressures",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 11.132225455994266,
+        "p25": 13.723817033031999,
+        "p50": 16.605082387294328,
+        "p75": 19.787752913288784,
+        "p90": 22.733864326491663
+      },
+      "value_padj": {
+        "p10": 11.638648307445235,
+        "p25": 14.074162419994028,
+        "p50": 17.00317950541493,
+        "p75": 19.854292739955568,
+        "p90": 23.62072205829337
+      },
+      "label": "Pressures"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "progressive_carries",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 1.8475149211594368,
+        "p25": 2.8601226312289274,
+        "p50": 3.817026332009017,
+        "p75": 5.1520587914454286,
+        "p90": 6.5103188229980455
+      },
+      "value_padj": null,
+      "label": "Progressive carries"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "progressive_passes",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 1.744071200131259,
+        "p25": 2.2332116362080887,
+        "p50": 2.959502376523034,
+        "p75": 3.7349007065267745,
+        "p90": 4.7338147671144934
+      },
+      "value_padj": null,
+      "label": "Progressive passes"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "shots",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 1.032630645648529,
+        "p25": 1.3720972163689436,
+        "p50": 1.8590182375773743,
+        "p75": 2.359537333535166,
+        "p90": 2.9629286273840063
+      },
+      "value_padj": null,
+      "label": "Shots (excl. penalties)"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "successful_dribbles",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.8017087902579917,
+        "p25": 1.193127642572738,
+        "p50": 1.7102999877580523,
+        "p75": 2.183523487008662,
+        "p90": 2.7017827366064964
+      },
+      "value_padj": null,
+      "label": "Successful dribbles"
+    },
+    {
+      "role": "Wide midfielder / winger",
+      "metric": "tackles_won",
+      "kind": "per90",
+      "players": 243,
+      "value": {
+        "p10": 0.4234630103449967,
+        "p25": 0.6816491109087108,
+        "p50": 0.9126738110747558,
+        "p75": 1.2478454746696337,
+        "p90": 1.5320658345807894
+      },
+      "value_padj": {
+        "p10": 0.48571206689584967,
+        "p25": 0.6650998013920173,
+        "p50": 0.9316943893429653,
+        "p75": 1.282015460791078,
+        "p90": 1.524175569487336
+      },
+      "label": "Tackles won"
+    }
+  ],
+  "departing_player": {
+    "statsbomb_player_id": 3961,
+    "name": "N'Golo Kanté",
+    "minutes": 3240.335116666667,
+    "matches": 37,
+    "role": "Central midfielder",
+    "role_share": 0.9659090919027218,
+    "avg_team_share": 0.41846439583744666,
+    "over_threshold": true,
+    "moved_mid_season": false,
+    "teams": [
+      {
+        "team": "Leicester City",
+        "league": "Premier League",
+        "minutes": 3240.335116666667,
+        "matches": 37
+      }
+    ],
+    "minutes_by_role": [
+      {
+        "role": "Central midfielder",
+        "minutes": 3129.8691500000004
+      },
+      {
+        "role": "Wide midfielder / winger",
+        "minutes": 63.23485
+      },
+      {
+        "role": "Attacking midfielder",
+        "minutes": 29.16911666666665
+      },
+      {
+        "role": "Forward",
+        "minutes": 18.061999999999998
+      }
+    ],
+    "minutes_by_position": [
+      {
+        "position": "Left Defensive Midfield",
+        "minutes": 1074.7295833333335
+      },
+      {
+        "position": "Right Center Midfield",
+        "minutes": 894.8700666666666
+      },
+      {
+        "position": "Left Center Midfield",
+        "minutes": 828.3230000000001
+      },
+      {
+        "position": "Right Defensive Midfield",
+        "minutes": 331.9465
+      },
+      {
+        "position": "Left Midfield",
+        "minutes": 63.23485
+      },
+      {
+        "position": "Center Attacking Midfield",
+        "minutes": 29.16911666666665
+      },
+      {
+        "position": "Left Center Forward",
+        "minutes": 18.061999999999998
+      }
+    ],
+    "profile": [
+      {
+        "metric": "tackles_won",
+        "label": "Tackles won",
+        "kind": "per90",
+        "possession_adjusted": true,
+        "total_raw": 102.0,
+        "total_adjusted": 90.37798173892195,
+        "value": 2.8330403089429423,
+        "value_padj": 2.5102398559536767,
+        "pct_rank": 0.9771241830065359,
+        "pct_rank_padj": 0.9248366013071896,
+        "pool_size": 307,
+        "role_median": 1.471023315519097,
+        "role_median_padj": 1.5667565299320214
+      },
+      {
+        "metric": "interceptions",
+        "label": "Interceptions",
+        "kind": "per90",
+        "possession_adjusted": true,
+        "total_raw": 110.0,
+        "total_adjusted": 95.40043338496663,
+        "value": 3.055239548860036,
+        "value_padj": 2.6497379732376123,
+        "pct_rank": 0.9934640522875817,
+        "pct_rank_padj": 0.9640522875816994,
+        "pool_size": 307,
+        "role_median": 1.2973273104768113,
+        "role_median_padj": 1.3061062322919026
+      },
+      {
+        "metric": "ball_recoveries",
+        "label": "Ball recoveries",
+        "kind": "per90",
+        "possession_adjusted": true,
+        "total_raw": 270.0,
+        "total_adjusted": 238.49259259825433,
+        "value": 7.499224347201906,
+        "value_padj": 6.624109100148645,
+        "pct_rank": 0.9771241830065359,
+        "pct_rank_padj": 0.8137254901960784,
+        "pool_size": 307,
+        "role_median": 5.224063145967939,
+        "role_median_padj": 5.540575457133534
+      },
+      {
+        "metric": "pressures",
+        "label": "Pressures",
+        "kind": "per90",
+        "possession_adjusted": true,
+        "total_raw": 906.0,
+        "total_adjusted": 788.6793146133709,
+        "value": 25.164063920610843,
+        "value_padj": 21.905493030678162,
+        "pct_rank": 0.8790849673202614,
+        "pct_rank_padj": 0.630718954248366,
+        "pool_size": 307,
+        "role_median": 19.943233847138455,
+        "role_median_padj": 20.301256582345484
+      },
+      {
+        "metric": "pressure_regains",
+        "label": "Pressure regains",
+        "kind": "per90",
+        "possession_adjusted": true,
+        "total_raw": 127.0,
+        "total_adjusted": 111.17269520571192,
+        "value": 3.5274129336838596,
+        "value_padj": 3.087811046780487,
+        "pct_rank": 0.9019607843137255,
+        "pct_rank_padj": 0.6928104575163399,
+        "pool_size": 307,
+        "role_median": 2.551773200181178,
+        "role_median_padj": 2.660978138933333
+      },
+      {
+        "metric": "blocks",
+        "label": "Blocks",
+        "kind": "per90",
+        "possession_adjusted": true,
+        "total_raw": 114.0,
+        "total_adjusted": 100.59820199317505,
+        "value": 3.166339168818583,
+        "value_padj": 2.794105502488718,
+        "pct_rank": 0.9738562091503268,
+        "pct_rank_padj": 0.9281045751633987,
+        "pool_size": 307,
+        "role_median": 1.9242069378136342,
+        "role_median_padj": 1.9719575283709299
+      },
+      {
+        "metric": "fouls_committed",
+        "label": "Fouls committed",
+        "kind": "per90",
+        "possession_adjusted": true,
+        "total_raw": 54.0,
+        "total_adjusted": 47.3751737867052,
+        "value": 1.4998448694403812,
+        "value_padj": 1.3158409507932636,
+        "pct_rank": 0.30392156862745096,
+        "pct_rank_padj": 0.19607843137254902,
+        "pool_size": 307,
+        "role_median": 1.7686924277422367,
+        "role_median_padj": 1.8241481095063834
+      },
+      {
+        "metric": "passes_completed",
+        "label": "Passes completed",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 1202.0,
+        "total_adjusted": null,
+        "value": 33.3854357975433,
+        "value_padj": null,
+        "pct_rank": 0.27450980392156865,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 39.44426250499867,
+        "role_median_padj": null
+      },
+      {
+        "metric": "progressive_passes",
+        "label": "Progressive passes",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 124.0,
+        "total_adjusted": null,
+        "value": 3.4440882187149495,
+        "value_padj": null,
+        "pct_rank": 0.5294117647058824,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 3.384370537236032,
+        "role_median_padj": null
+      },
+      {
+        "metric": "passes_into_final_third",
+        "label": "Passes into the final third",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 121.0,
+        "total_adjusted": null,
+        "value": 3.3607635037460395,
+        "value_padj": null,
+        "pct_rank": 0.3562091503267974,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 3.959699356489534,
+        "role_median_padj": null
+      },
+      {
+        "metric": "progressive_carries",
+        "label": "Progressive carries",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 79.0,
+        "total_adjusted": null,
+        "value": 2.1942174941812986,
+        "value_padj": null,
+        "pct_rank": 0.8366013071895425,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 1.0839512245624994,
+        "role_median_padj": null
+      },
+      {
+        "metric": "successful_dribbles",
+        "label": "Successful dribbles",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 48.0,
+        "total_adjusted": null,
+        "value": 1.3331954395025611,
+        "value_padj": null,
+        "pct_rank": 0.8758169934640523,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 0.7287614430648761,
+        "role_median_padj": null
+      },
+      {
+        "metric": "shots",
+        "label": "Shots (excl. penalties)",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 21.0,
+        "total_adjusted": null,
+        "value": 0.5832730047823705,
+        "value_padj": null,
+        "pct_rank": 0.238562091503268,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 0.8859522294331593,
+        "role_median_padj": null
+      },
+      {
+        "metric": "np_xg",
+        "label": "Non-penalty xG",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 0.7659033805,
+        "total_adjusted": null,
+        "value": 0.021272893624629058,
+        "value_padj": null,
+        "pct_rank": 0.15359477124183007,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 0.0533098512196651,
+        "role_median_padj": null
+      },
+      {
+        "metric": "key_passes",
+        "label": "Key passes",
+        "kind": "per90",
+        "possession_adjusted": false,
+        "total_raw": 27.0,
+        "total_adjusted": null,
+        "value": 0.7499224347201906,
+        "value_padj": null,
+        "pct_rank": 0.5098039215686274,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 0.7429891293505093,
+        "role_median_padj": null
+      },
+      {
+        "metric": "pass_completion",
+        "label": "Pass completion",
+        "kind": "ratio",
+        "possession_adjusted": false,
+        "total_raw": 1202.0,
+        "total_adjusted": null,
+        "value": 0.817687074829932,
+        "value_padj": null,
+        "pct_rank": 0.5392156862745098,
+        "pct_rank_padj": null,
+        "pool_size": 307,
+        "role_median": 0.8130165289256198,
+        "role_median_padj": null
+      }
+    ]
+  },
+  "run": {
+    "seconds": 10.3,
+    "peak_rss_bytes": 1984069632,
+    "table_rows": {
+      "r2_stints": 56884,
+      "r2_team_possession": 3034,
+      "r2_player_match": 673536,
+      "r2_players": 2176,
+      "r2_player_season": 34816
+    }
+  }
+}

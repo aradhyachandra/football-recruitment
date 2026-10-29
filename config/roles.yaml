@@ -1,0 +1,32 @@
+# StatsBomb position -> role bucket. A player's role is the bucket where he played most minutes over
+# the season (all clubs); his share of minutes in it is saved. Ties go to the bucket listed first.
+# Position ids/names are StatsBomb's (all 24 that occur in the 2015/16 lineups; 25 Secondary Striker
+# is listed for completeness).
+roles:
+  - name: Goalkeeper
+    positions: [1]
+    reason: "Only goalkeepers; their outfield metrics are not comparable."
+  - name: Centre back
+    positions: [3, 4, 5]
+    reason: "Right, centre and left centre backs: the same job in a back three or four."
+  - name: Full back / wing back
+    positions: [2, 6, 7, 8]
+    reason: "Right/left backs and wing backs: wide defenders who also carry the ball up the flank."
+  - name: Central midfielder
+    positions: [9, 10, 11, 13, 14, 15]
+    reason: >-
+      Defensive midfield (9-11) and centre midfield (13-15) are pooled. StatsBomb labels positions
+      from the team's formation: the two central players of a 4-4-2 are "Right/Left Center Midfield",
+      the same pair in a 4-2-3-1 are "Right/Left Defensive Midfield". The R2 check of the case player's
+      own lineup spells shows him under both labels (9, 11, 13 and 15) for the same club, so a split
+      would separate players doing the same job by formation name. Differences in style inside the
+      pool are left to the similarity step (R4). TO VERIFY (NOTES.md).
+  - name: Wide midfielder / winger
+    positions: [12, 16, 17, 21]
+    reason: "Right/left midfield and wingers: wide attacking players in a 4-4-2 or 4-3-3."
+  - name: Attacking midfielder
+    positions: [18, 19, 20]
+    reason: "The number-10 band behind the forwards."
+  - name: Forward
+    positions: [22, 23, 24, 25]
+    reason: "Centre forwards, strikers in a front two, and secondary strikers."

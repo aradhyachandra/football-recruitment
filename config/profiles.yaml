@@ -1,0 +1,104 @@
+# R2 player-season profiles: minutes, possession, unit of analysis, thresholds. Each value has a reason.
+# Metric definitions are in metrics.yaml; position-to-role mapping in roles.yaml.
+
+match_clock:
+  period_clock_start_seconds: [0, 2700, 5400, 6300]
+  reason: >-
+    StatsBomb lineup times ("from"/"to") are match-clock MM:SS, and the clock restarts at 45:00, 90:00
+    and 105:00 for periods 2, 3 and 4 whatever the added time was. A clock time is turned into elapsed
+    match time as: time before the period + (clock - this period's clock start), kept inside the
+    period's real length. Only periods 1-2 occur in these league matches (R2 count); 3-4 are listed so
+    the rule is complete.
+
+period_length:
+  source: half_end_event
+  reason: >-
+    A period's real length (including added time) is the timestamp of its "Half End" event, which
+    StatsBomb records for every period of every match here. If one were missing, the last event's
+    end (timestamp + duration) in that period is used instead. Open-ended lineup spells (no "to"
+    time, end reason "Final Whistle") end at the end of the last period, so added time counts.
+
+unit:
+  rule: one_row_per_player_season
+  reason: >-
+    Decided by Aradhya after R1. A player who moved mid-season (between clubs or leagues in scope) gets
+    one row for 2015/16, summing his matches for all clubs; the list of teams with minutes per team is
+    kept. Possession adjustment is applied per match before summing, so a move from a high- to a
+    low-possession team does not distort it. His league for pool counts is the one where he played
+    most minutes.
+
+event_timestamps:
+  max_backward_seconds: 60
+  reason: >-
+    Found in R2: in 252 events (almost all Premier League and La Liga), the last Ball Receipt before a
+    "Half End" carries a timestamp of about 0:00 while its place in StatsBomb's event order (index) is at
+    the end of the half. Left in, one such event stretches a possession sequence over the whole half
+    and skews that match's possession share by up to about 30 points. An event whose timestamp is more
+    than 60 s earlier than the latest earlier event of the same period (index order) is flagged and left
+    out of all timing (possession time, sequence starts for pressure regains); it still counts for its
+    metric. In the 2015/16 data no backward step falls between 5 s and 300 s, so any line in that range
+    gives the same result; 60 s sits well inside it.
+
+possession:
+  method: in_play_duration
+  reason: >-
+    Decided by Aradhya after R1. A team's possession share in a match is the share of in-play time in
+    its own possession sequences. For each StatsBomb possession sequence the in-play time is from its
+    first event's start to its last event's end (timestamp + duration), within one period; time between
+    sequences (mostly dead ball) is left out. This follows the ball rather than counting actions, so a
+    team that keeps the ball with few, slow passes is not under-counted.
+  excluded_event_types: [Starting XI, Half Start, Half End, Substitution, Tactical Shift, Player On,
+                         Player Off, Injury Stoppage, Referee Ball-Drop, Bad Behaviour]
+  excluded_event_types_reason: >-
+    Administrative or stoppage events carry the possession number of the sequence around them but are
+    not play; a "Half End" event would otherwise stretch the last sequence of a half to the whistle.
+  check_method: pass_share
+  check_reason: >-
+    Share of all pass attempts in the match made by the team: the simplest common proxy, used only to
+    report how closely the two methods agree.
+
+possession_adjustment:
+  method: linear_opponent_possession
+  reference_opponent_share: 0.5
+  formula: "adjusted = raw * reference_opponent_share / opponent_share  (opponent_share = 1 - team share)"
+  reason: >-
+    A team that rarely has the ball faces more opponent possession and so has more chances to make
+    defensive actions. Dividing by the opponent's share of possession in that match, and scaling to a
+    50/50 match, gives "defensive actions per 90 at equal possession". It is linear (each extra
+    point of opponent possession scales chances proportionally), the simplest form with a clear
+    meaning. StatsBomb's own PAdj uses a sigmoid that softens extreme cases; a different form is a
+    candidate for the R5 sensitivity check. Applied per match, then summed (see unit above). Raw
+    per-90 values are kept alongside.
+
+minutes:
+  threshold: 900
+  reason: >-
+    Plan default: ten full matches. Below this a per-90 rate rests on few events and swings a lot
+    from match to match; above it the pool of comparable players shrinks. Players under the threshold
+    stay in data/processed/ but are left out of role pools and percentiles.
+  sensitivity_thresholds: [600, 900, 1200]
+  sensitivity_reason: >-
+    About 6.7, 10 and 13.3 full matches; pool sizes at each are saved now so R5 can test how the
+    shortlist moves with the threshold.
+
+team_minutes_check:
+  tolerance_share: 0.02
+  reason: >-
+    Sanity check only (never used to filter): the minutes of a team's players in a match should add up
+    to about 11 x match length. Within 2% allows for seconds lost when the clock is rounded in lineup
+    times; red cards and temporary "Player Off" spells (injury treatment) explain larger gaps, so
+    team-matches outside the band are counted and broken down by whether they had a red card or
+    temporary player-off spell.
+
+distribution_percentiles: [0.10, 0.25, 0.50, 0.75, 0.90]
+distribution_percentiles_reason: >-
+  Role-level summaries in results/ give these percentiles per metric, never per-player rows (StatsBomb
+  terms: results/ keeps only what the docs need).
+
+percentile_rank:
+  method: percent_rank
+  reason: >-
+    The departing player's rank within his role pool is DuckDB percent_rank(): (number of pool players
+    with a lower value) / (pool size - 1), so 0 = lowest and 1 = highest in the pool. Ties share the
+    lower rank. A high value is not always "better" (for example fouls committed); it only says where he
+    sits.

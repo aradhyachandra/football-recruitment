@@ -1,0 +1,149 @@
+# R2 metric definitions. Each metric counts StatsBomb events that pass every filter given:
+#   event_type        StatsBomb type.name (required)
+#   subtypes          subtype_name must be one of these (pass/duel/shot type; see statsbomb_fields.yaml)
+#   exclude_subtypes  subtype_name must not be one of these (NULL subtype is never excluded)
+#   outcomes          outcome_name must be one of these
+#   exclude_outcomes  outcome_name must not be one of these (NULL outcome is never excluded)
+#   outcome_null      true: outcome_name must be empty (a StatsBomb pass with no outcome is complete)
+#   flags_true        derived per-event flags (computed in sql/r2_events.sql, parameters below)
+#   flags_false       derived or raw boolean flags that must be false
+#   value             "count" (default) or an event column to sum (shot_xg)
+#   possession_adjusted  true for defensive actions (formula in profiles.yaml)
+#   in_profile        false for helper totals that only feed a ratio
+# Outcome names were checked against the 2015/16 data in R2 (Duel/Interception/Pass/Dribble outcomes).
+# A metric from the plan's draft list is dropped only with a written reason (see `dropped`).
+
+flags:
+  progressive:
+    min_share_closer: 0.25
+    min_distance: 5.0
+    reason: >-
+      A pass or carry is progressive if it ends at least 25% closer to the centre of the opponent's
+      goal (120, 40) than it started, and at least 5 units (about 5 yards) closer. The 25% rule is
+      the widely used Wyscout definition; the 5-unit floor stops tiny touches near the box counting.
+      Measured to the goal centre so sideways moves into the box count only if they get closer.
+    pass_excluded_subtypes: [Throw-in, Corner, Kick Off, Goal Kick, Free Kick]
+    pass_excluded_reason: >-
+      Restarts are excluded from progressive passes and passes into the final third: they measure who
+      takes set pieces, not who moves the ball forward in play.
+  final_third_x: 80.0
+  final_third_reason: >-
+    StatsBomb's pitch is 120 units long, attacking left to right; the final third starts at x = 80.
+    A pass "into the final third" starts before x = 80 and ends at or beyond it.
+  pressure_regain_seconds: 5.0
+  pressure_regain_reason: >-
+    StatsBomb's definition of a pressure regain: the presser's team wins the ball back within 5 seconds
+    of the pressure starting. Implemented as: a new possession sequence of the pressing team starts in
+    the same period between the pressure's start and 5 seconds later.
+
+metrics:
+  - name: tackles_won
+    label: Tackles won
+    event_type: Duel
+    subtypes: [Tackle]
+    outcomes: [Won, Success In Play, Success Out]
+    possession_adjusted: true
+    reason: >-
+      Tackle duels whose outcome is a win for the tackler. Lost In Play / Lost Out are lost tackles.
+  - name: interceptions
+    label: Interceptions
+    event_type: Interception
+    possession_adjusted: true
+    reason: >-
+      Every interception, whatever happened next (Won, Success, Lost In Play, Lost Out): the action is
+      reading and cutting out an opponent's pass; whether his team then kept the ball is partly luck
+      and team-mates.
+  - name: ball_recoveries
+    label: Ball recoveries
+    event_type: Ball Recovery
+    flags_false: [ball_recovery_failure]
+    possession_adjusted: true
+    reason: "Recoveries of a loose ball; StatsBomb marks failed attempts with recovery_failure, excluded."
+  - name: pressures
+    label: Pressures
+    event_type: Pressure
+    possession_adjusted: true
+    reason: "Every pressure on the ball carrier (StatsBomb Pressure event)."
+  - name: pressure_regains
+    label: Pressure regains
+    event_type: Pressure
+    flags_true: [pressure_regain]
+    possession_adjusted: true
+    reason: "Pressures followed by his team winning the ball within the regain window (flags above)."
+  - name: blocks
+    label: Blocks
+    event_type: Block
+    possession_adjusted: true
+    reason: "Every block of a pass or shot (StatsBomb Block event)."
+  - name: fouls_committed
+    label: Fouls committed
+    event_type: Foul Committed
+    possession_adjusted: true
+    reason: >-
+      Kept from the plan as a defensive-style indicator (aggression, tactical fouls). Adjusted for
+      possession because chances to foul also depend on how long the opponent has the ball.
+  - name: passes_completed
+    label: Passes completed
+    event_type: Pass
+    outcome_null: true
+    reason: "All completed passes, including restarts (a pass with no outcome is complete)."
+  - name: passes_attempted
+    label: Passes attempted
+    event_type: Pass
+    exclude_outcomes: [Injury Clearance, Unknown]
+    in_profile: false
+    reason: >-
+      Denominator for pass completion. Injury Clearance (ball kicked out on purpose for an injury) and
+      Unknown (outcome not seen) are not real attempts and are left out.
+  - name: progressive_passes
+    label: Progressive passes
+    event_type: Pass
+    outcome_null: true
+    flags_true: [progressive]
+    reason: "Completed, non-restart passes that meet the progressive rule (flags above)."
+  - name: passes_into_final_third
+    label: Passes into the final third
+    event_type: Pass
+    outcome_null: true
+    flags_true: [into_final_third]
+    reason: "Completed, non-restart passes from before x = 80 to x >= 80 (flags above)."
+  - name: progressive_carries
+    label: Progressive carries
+    event_type: Carry
+    flags_true: [progressive]
+    reason: "Carries (moving with the ball) that meet the progressive rule (flags above)."
+  - name: successful_dribbles
+    label: Successful dribbles
+    event_type: Dribble
+    outcomes: [Complete]
+    reason: "Dribbles past an opponent with outcome Complete."
+  - name: shots
+    label: Shots (excl. penalties)
+    event_type: Shot
+    exclude_subtypes: [Penalty]
+    reason: >-
+      Non-penalty shots, to match non-penalty xG: who takes penalties is a club decision, not a
+      measure of the player's play.
+  - name: np_xg
+    label: Non-penalty xG
+    event_type: Shot
+    exclude_subtypes: [Penalty]
+    value: shot_xg
+    reason: "Sum of StatsBomb xG over non-penalty shots: the quality of chances he shot from."
+  - name: key_passes
+    label: Key passes
+    event_type: Pass
+    flags_true: [key_pass]
+    reason: >-
+      Passes that led directly to a shot: StatsBomb shot_assist or goal_assist (a pass that led to a
+      goal is flagged goal_assist, not shot_assist, so both are counted).
+
+ratios:
+  - name: pass_completion
+    label: Pass completion
+    numerator: passes_completed
+    denominator: passes_attempted
+    reason: "Completed / attempted passes over the season (a share, not a per-90 rate)."
+
+dropped: []
+dropped_reason: "No metric from the plan's draft list was dropped in R2."

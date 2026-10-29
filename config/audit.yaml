@@ -8,7 +8,8 @@ valuation_gate:
     Prices may only use valuations on or before the valuation date (no hindsight), so the gate is
     judged on the share of league players with a valuation in the 6 months before it. Below 80%, more
     than one in five players in the pool could not be priced, which would make the value-for-money
-    shortlist depend on gaps in the data. TO VERIFY (NOTES.md): the 80% line is my proposal.
+    shortlist depend on gaps in the data. Proposed in R1 and confirmed by Aradhya after R1 (the real
+    data cleared it at 95.3%).
   departing_player_required: true
   departing_player_reason: "The case cannot be priced without the departing player's own valuation."
   history_months: 12
