@@ -72,8 +72,25 @@ def percentile_chart(df: pd.DataFrame, title: str):
     return (bars + median).properties(title=title, height=30 * len(df))
 
 
-def money(df: pd.DataFrame) -> dict:
-    return {"Market value (EUR m)": st.column_config.NumberColumn(format="%.2f")}
+LABELS = dash.short_labels()
+ROW_PX = 35   # streamlit's dataframe row height: tables are sized to show every row without scrolling
+
+
+def show_table(df: pd.DataFrame, kind: str, formats: dict | None = None, labels: dict | None = None):
+    """A table with the configured columns (config/publication.yaml), short headers (full name on hover)
+    and number formats; every row visible."""
+    formats = {"Market value (EUR m)": "%.2f"} | (formats or {})
+    labels, cfg = LABELS | (labels or {}), {}
+    for c in dash.display_columns(kind, df):
+        label = labels.get(c, c)
+        if c in formats:
+            cfg[c] = st.column_config.NumberColumn(label, help=c, format=formats[c])
+        elif c == "Possession-adjusted" or c == "On frontier":
+            cfg[c] = st.column_config.CheckboxColumn(label, help=c)
+        else:
+            cfg[c] = st.column_config.Column(label, help=c)
+    st.dataframe(df, hide_index=True, width="stretch", column_order=dash.display_columns(kind, df),
+                 column_config=cfg, height=ROW_PX * (len(df) + 1) + 3)
 
 
 r = results()
@@ -106,10 +123,11 @@ with case_tab:
     prof = dash.case_profile(r["r2"])
     c1, c2 = st.columns([3, 2])
     c1.altair_chart(percentile_chart(prof, f"{target['name']}, {SEASON}"), width="stretch")
-    c2.dataframe(prof, hide_index=True, width="stretch",
-                 column_config={"Value": st.column_config.NumberColumn("Per 90 (or share)", format="%.2f"),
-                                "Pool median": st.column_config.NumberColumn(format="%.2f"),
-                                "Percentile": st.column_config.NumberColumn(format="%.0f")})
+    with c2:
+        show_table(prof, "case_profile", {"Value": "%.2f", "Pool median": "%.2f", "Percentile": "%.0f"},
+                   labels={"Value": "Per 90"})
+        st.caption("Per 90 minutes (pass completion: share). Adj.: adjusted for team possession. "
+                   "Pctl: percentile within the role pool.")
 
     st.subheader("Similar profile against price (R4)")
     st.markdown(
@@ -139,9 +157,10 @@ with case_tab:
         f"players in the value top {r5['settings']['top_n']} in at least "
         f"{r5['settings']['robust_core_min_share']:.0%} of the scenarios; the recommendation rule was fixed "
         "before any result was seen.")
-    st.dataframe(dash.robust_core_table(r5), hide_index=True, width="stretch",
-                 column_config=money(None) | {c: st.column_config.NumberColumn(format="%.2f")
-                                              for c in dash.robust_core_table(r5).columns if "share" in c})
+    core = dash.robust_core_table(r5)
+    show_table(core, "robust_core", {c: "%.2f" for c in core.columns if "share" in c})
+    st.caption(f"Shares: of the {len(r5['scenarios'])} one-change scenarios and of the {r5['draws']['draws']} "
+               "random weight draws. Rank range: best to worst value rank across the scenarios.")
     rec = r5["recommendation"]
     closest = [c["name"] for c in r5["report_facts"]["closest_eligible"][:2]]
     st.info(
@@ -174,10 +193,11 @@ with explore_tab:
             raw = {g["name"]: st.slider(GROUP_LABEL.get(g["name"], g["name"]), gs["min"], gs["max"], float(g["weight"]),
                                         gs["step"], key=f"w_{g['name']}") for g in SIM_CFG["groups"]}
             bs, ag, cons = DASH["budget_slider_eur"], DASH["age_slider"], SIM_CFG["constraints"]
-            budget = st.slider("Budget cap (EUR)", bs["min"], bs["max"], int(cons["budget_cap_eur"]), bs["step"],
-                               format="%d", key="budget")
+            budget = st.select_slider("Budget cap", dash.budget_options(bs), int(cons["budget_cap_eur"]),
+                                      format_func=dash.money_label, key="budget")
             ages = st.slider(f"Age range at {VAL_DATE}", ag["min"], ag["max"], (cons["age_min"], cons["age_max"]),
                              key="age")
+        out = None
         with right:
             row = sel[sel["label"] == label].iloc[0]
             try:
@@ -192,14 +212,17 @@ with explore_tab:
                            f"{SIM_CFG['pool']['min_minutes']}+ minutes; {row['club']} players excluded.")
                 st.altair_chart(percentile_chart(out["profile"], f"{row['name']}, {SEASON}: percentiles in his role"),
                                 width="stretch")
-                st.markdown(f"**Most similar players in his role** ({WORDING}; no price or age filter)")
-                st.dataframe(out["similar"], hide_index=True, width="stretch", column_config=money(None))
-                st.markdown(f"**Value-for-money shortlist** (within EUR {budget / 1e6:g}m, ages {ages[0]}-{ages[1]}; "
-                            f"{out['counts']['eligible']} eligible)")
-                st.dataframe(out["shortlist"], hide_index=True, width="stretch", column_config=money(None))
-                st.caption("The metric groups and their default weights were chosen for the Kanté case "
-                           "(config/similarity.yaml); for other roles they are a starting point, not a tuned model. "
-                           f"Stale valuation: older than {STALE_DAYS} days at {VAL_DATE} (flagged, kept).")
+        if out is not None:   # the lists use the full page width, so every column fits
+            st.markdown(f"**Most similar players in his role** ({WORDING}; no price or age filter)")
+            show_table(out["similar"], "similar", {"Similarity": "%.1f", "Cosine": "%.2f"})
+            st.markdown(f"**Value-for-money shortlist** (within {dash.money_label(budget)}, ages {ages[0]}-{ages[1]}; "
+                        f"{out['counts']['eligible']} eligible)")
+            show_table(out["shortlist"], "shortlist", {"Similarity": "%.1f", "Value score": "%.1f"})
+            st.caption("EUR m: market value on the valuation date. Sim. rank: rank by similarity in the pool. "
+                       f"Score: value score (similarity and cheapness). Stale: valuation older than {STALE_DAYS} days "
+                       f"at {VAL_DATE} (flagged, kept). The metric groups and their default weights were chosen for "
+                       "the Kanté case (config/similarity.yaml); for other roles they are a starting point, not a "
+                       "tuned model.")
 
 # ---------- credits ----------
 st.divider()

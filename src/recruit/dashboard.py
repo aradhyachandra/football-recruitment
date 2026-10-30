@@ -191,9 +191,9 @@ def robust_core_table(r5: dict) -> pd.DataFrame:
         vn, vd = c["value_named"], c["value_draws"]
         rows.append({"Player": c["name"], "Club": c["club"], "Age": c["age"],
                      "Market value (EUR m)": c["market_value_eur"] / 1e6, "R4 value rank": c.get("value_rank"),
-                     f"Top {s['top_n']} share, {vn['scenarios']} scenarios": vn["share_top_n"],
+                     f"Top {s['top_n']} share, scenarios": vn["share_top_n"],
                      f"Top {s['top_k']} share, scenarios": vn["share_top_k"],
-                     f"Top {s['top_n']} share, {vd['scenarios']} weight draws": vd["share_top_n"],
+                     f"Top {s['top_n']} share, draws": vd["share_top_n"],
                      "Median rank (scenarios)": vn["median_rank"],
                      "Rank range (scenarios)": f"{vn['min_rank']:g}-{vn['max_rank']:g}",
                      "Similarity rank": c["similarity_rank"],
@@ -202,3 +202,25 @@ def robust_core_table(r5: dict) -> pd.DataFrame:
     out = pd.DataFrame(rows)
     order = [rec.get(pid, 99) for pid in r5["robust_core"]]
     return out.assign(_o=order).sort_values(["_o", "R4 value rank"], kind="mergesort").drop(columns="_o").reset_index(drop=True)
+
+
+# ---------- display (config/publication.yaml dashboard) ----------
+
+def money_label(eur: float) -> str:
+    """Euros as the dashboard shows them: 10_000_000 -> "EUR 10m", 500_000 -> "EUR 0.5m"."""
+    return f"EUR {eur / 1e6:g}m"
+
+
+def budget_options(slider: dict) -> list[int]:
+    """Every budget the slider offers, in euros (min to max in steps)."""
+    return list(range(int(slider["min"]), int(slider["max"]) + 1, int(slider["step"])))
+
+
+def display_columns(kind: str, df: pd.DataFrame) -> list[str]:
+    """The columns shown for one table: all but the ones hidden in config (data behind it unchanged)."""
+    hide = set(PUB["dashboard"]["table_hide"][kind])
+    return [c for c in df.columns if c not in hide]
+
+
+def short_labels() -> dict:
+    return dict(PUB["dashboard"]["short_labels"])

@@ -72,3 +72,43 @@ dashboard:
   age_reason: >-
     Covers every age in the 900-minute pools of all roles (17 to 39 in whole years at the valuation
     date, checked 2026-10-29); the default is the R4 range.
+  budget_display_reason: >-
+    The budget slider stores euros (as config/similarity.yaml does) but shows them as "EUR 10m": raw
+    euros such as 10000000 were hard to read in the R6 screenshot (R7 polish).
+  max_table_columns: 12
+  table_hide:
+    case_profile: []
+    robust_core: ["Age", "Median rank (scenarios)"]
+    similar: ["Similarity rank"]
+    shortlist: ["League", "Cosine"]
+  table_hide_reason: >-
+    In R6 the wider tables were cut off on the right (Percentile, Similarity rank, Similarity), so a
+    reader had to scroll inside the table. R7 shows at most 12 columns with short headers and gives the
+    Explore tables the full page width. Hidden: Age and median rank in the robust core (the rank range
+    and the top-10/top-3 shares carry the robustness story), Similarity rank in the most-similar list
+    (it equals the row order), League and Cosine in the shortlist (the club names the league; cosine is
+    shown in the most-similar list). Similarity stays in every player list. Nothing is removed from the
+    data behind the tables.
+  short_labels:
+    "Market value (EUR m)": "EUR m"
+    "Stale valuation": "Stale"
+    "Similarity rank": "Sim. rank"
+    "R4 value rank": "R4 rank"
+    "Value rank": "Rank"
+    "Value score": "Score"
+    "On frontier": "Frontier"
+    "Possession-adjusted": "Adj."
+    "Pool median": "Median"
+    "Percentile": "Pctl"
+    "Minutes": "Mins"
+    "Recommendation": "Pick"
+  short_labels_reason: "Shorter column headers so every column fits; the full names are in the hover help."
+
+portfolio:
+  site_repo: ~/Projects/portfolio-site
+  page: projects/football-recruitment.html
+  number_exempt: ["2015/16", "Case study 04", "04", "2-minute read", "0-100", "CC0-1.0", "© 2026", "1200", "630"]
+  number_exempt_reason: >-
+    names and labels, not results: the season label, the page's place in the site's project order,
+    the reading-time label the other case studies carry, the similarity score's scale, the licence name,
+    the footer year, and the link-preview image size (1200 x 630, og:image tags copied from the other pages)

@@ -1,0 +1,478 @@
+{
+  "clone": {
+    "source": "local main",
+    "branch": "main",
+    "commit": "9015035f66c8b5969dd19064ae303c6ef144a219",
+    "clean_after_clone": true,
+    "raw_data": "symlink",
+    "steps_run": [
+      "run_r1",
+      "run_r2",
+      "run_r3",
+      "run_r4",
+      "run_r5",
+      "run_r6"
+    ],
+    "compare_folders": [
+      "results",
+      "docs",
+      "README.md"
+    ]
+  },
+  "environment": {
+    "python": "Python 3.13.5",
+    "platform": "Darwin arm64",
+    "pip_check": "No broken requirements found."
+  },
+  "raw_fingerprints_checked_by_run_r1": true,
+  "comparison": {
+    "summary": {
+      "README.md": {
+        "files": 1,
+        "identical": 0,
+        "same_except_run_time": 1,
+        "different": 0,
+        "missing": 0,
+        "match": 1
+      },
+      "docs": {
+        "files": 20,
+        "identical": 19,
+        "same_except_run_time": 1,
+        "different": 0,
+        "missing": 0,
+        "match": 20
+      },
+      "results": {
+        "files": 6,
+        "identical": 0,
+        "same_except_run_time": 6,
+        "different": 0,
+        "missing": 0,
+        "match": 6
+      }
+    },
+    "all_match": true,
+    "files": [
+      {
+        "file": "README.md",
+        "status": "same_except_run_time_lines",
+        "changed_lines": [
+          {
+            "line": 147,
+            "reference": "Recorded run times: R1's flatten step 155.4 s (the download depends on your",
+            "clone": "Recorded run times: R1's flatten step 176.7 s (the download depends on your"
+          },
+          {
+            "line": 148,
+            "reference": "connection; R1's load and audit were not timed), R2 10.3 s, R3 8.0 s, R4",
+            "clone": "connection; R1's load and audit were not timed), R2 12.7 s, R3 5.2 s, R4"
+          },
+          {
+            "line": 149,
+            "reference": "0.3 s, R5 8.6 s. The parquet files take about 408 MB; peak memory",
+            "clone": "0.2 s, R5 6.3 s. The parquet files take about 408 MB; peak memory"
+          },
+          {
+            "line": 150,
+            "reference": "of any step was about 1,984 MB.",
+            "clone": "of any step was about 1,387 MB."
+          }
+        ],
+        "sha256_reference": "547289315be48bc76de311a1d8f17122080624e81fe87da00273f643ccfe13b8",
+        "sha256_clone": "821262326ef5e9ebfe65eabe85f5ef4106b654fa17dc13014491ae0a35aedd47"
+      },
+      {
+        "file": "docs/R1_data_audit.md",
+        "status": "same_except_run_time_lines",
+        "changed_lines": [
+          {
+            "line": 149,
+            "reference": "| DuckDB database | 357.01 MB |",
+            "clone": "| DuckDB database | 355.26 MB |"
+          },
+          {
+            "line": 150,
+            "reference": "| Peak memory of the flatten step | 362.27 MB (line: 2,048.00 MB) |",
+            "clone": "| Peak memory of the flatten step | 198.25 MB (line: 2,048.00 MB) |"
+          },
+          {
+            "line": 151,
+            "reference": "| Peak memory of the load and audit step | 1,193.44 MB |",
+            "clone": "| Peak memory of the load and audit step | 1,059.75 MB |"
+          },
+          {
+            "line": 152,
+            "reference": "| Flatten time | 155.40 s |",
+            "clone": "| Flatten time | 176.70 s |"
+          }
+        ],
+        "sha256_reference": "94d4f45c2345814b2da4296dd7ea0557ebda1bb3a0d35b51239c8097edf44d05",
+        "sha256_clone": "db9edc4fa92b3b86595d219094a1c61495d736d1e51d17a7e3760170ee5008ad"
+      },
+      {
+        "file": "docs/R2_profiles.md",
+        "status": "identical",
+        "sha256_reference": "9fdf18009e52baccca1fd60b2fdc623d44dcd057db41f2771b3115cff4982d60",
+        "sha256_clone": "9fdf18009e52baccca1fd60b2fdc623d44dcd057db41f2771b3115cff4982d60"
+      },
+      {
+        "file": "docs/R3_market_values.md",
+        "status": "identical",
+        "sha256_reference": "eada0f17176dac18db8facd5b8b3ff132dab841c728be286ca6ce9730f4f8f92",
+        "sha256_clone": "eada0f17176dac18db8facd5b8b3ff132dab841c728be286ca6ce9730f4f8f92"
+      },
+      {
+        "file": "docs/R4_shortlist.md",
+        "status": "identical",
+        "sha256_reference": "d29fe212f8139d043f665d87010d52d6f33d346fee140e79bc3e726c78b43fd6",
+        "sha256_clone": "d29fe212f8139d043f665d87010d52d6f33d346fee140e79bc3e726c78b43fd6"
+      },
+      {
+        "file": "docs/R5_sensitivity.md",
+        "status": "identical",
+        "sha256_reference": "118cf7a7989a809c9520775453780b29cd15df03f096e72c1b412aab6e124069",
+        "sha256_clone": "118cf7a7989a809c9520775453780b29cd15df03f096e72c1b412aab6e124069"
+      },
+      {
+        "file": "docs/R6_publication.md",
+        "status": "identical",
+        "sha256_reference": "ca9ba93f86d153ffefd003fa1f88b1520cd48a4cca03b91482785266e72fc050",
+        "sha256_clone": "ca9ba93f86d153ffefd003fa1f88b1520cd48a4cca03b91482785266e72fc050"
+      },
+      {
+        "file": "docs/REPORT.md",
+        "status": "identical",
+        "sha256_reference": "8d10e5d5a1ce5b25403ca4426e652d4cb27a6db7b22ee7c9672d7ca3d0c3bb98",
+        "sha256_clone": "8d10e5d5a1ce5b25403ca4426e652d4cb27a6db7b22ee7c9672d7ca3d0c3bb98"
+      },
+      {
+        "file": "docs/figures/r4_profile_comparison.png",
+        "status": "identical",
+        "sha256_reference": "d15c07d66274a8dcd55640773b35e51e43072302e25032b1987602e6ddcd0430",
+        "sha256_clone": "d15c07d66274a8dcd55640773b35e51e43072302e25032b1987602e6ddcd0430"
+      },
+      {
+        "file": "docs/figures/r4_similarity_vs_value.png",
+        "status": "identical",
+        "sha256_reference": "56ac719ca1040f103c6ef10a4838d14e9fd1164cd88a885d8dfe60530c03f40a",
+        "sha256_clone": "56ac719ca1040f103c6ef10a4838d14e9fd1164cd88a885d8dfe60530c03f40a"
+      },
+      {
+        "file": "docs/figures/r5_rank_ranges.png",
+        "status": "identical",
+        "sha256_reference": "7714c257af04b19771877473751926dfef47f3a0b3aad7de398dba501a05bfc9",
+        "sha256_clone": "7714c257af04b19771877473751926dfef47f3a0b3aad7de398dba501a05bfc9"
+      },
+      {
+        "file": "docs/figures/r5_top10_by_scenario.png",
+        "status": "identical",
+        "sha256_reference": "c757496ce7cd6d5a3b36b95d7e67f44fb985ed95cfa8d2e8998d3f356c1b5ef6",
+        "sha256_clone": "c757496ce7cd6d5a3b36b95d7e67f44fb985ed95cfa8d2e8998d3f356c1b5ef6"
+      },
+      {
+        "file": "docs/figures/r6_dashboard_case.png",
+        "status": "identical",
+        "sha256_reference": "2ebc93fc6fd7639d000197db44fa379e8930ff853c697fd033cf7517dd4936cc",
+        "sha256_clone": "2ebc93fc6fd7639d000197db44fa379e8930ff853c697fd033cf7517dd4936cc"
+      },
+      {
+        "file": "docs/figures/r6_dashboard_explore.png",
+        "status": "identical",
+        "sha256_reference": "372c72c6f2246d9831d4a91822264a0c87b66c9044dee29b804a7da34422c526",
+        "sha256_clone": "372c72c6f2246d9831d4a91822264a0c87b66c9044dee29b804a7da34422c526"
+      },
+      {
+        "file": "docs/templates/R1_data_audit.md",
+        "status": "identical",
+        "sha256_reference": "3f603b0c8ee2a81c1fbaeb3caac1b1447fc047d615fcd5c8385af4ce61644db6",
+        "sha256_clone": "3f603b0c8ee2a81c1fbaeb3caac1b1447fc047d615fcd5c8385af4ce61644db6"
+      },
+      {
+        "file": "docs/templates/R2_profiles.md",
+        "status": "identical",
+        "sha256_reference": "eb456bd7b4b97ed3ccbdd07c4ef23f9683473a5baafcd98229631c3abb4e7279",
+        "sha256_clone": "eb456bd7b4b97ed3ccbdd07c4ef23f9683473a5baafcd98229631c3abb4e7279"
+      },
+      {
+        "file": "docs/templates/R3_market_values.md",
+        "status": "identical",
+        "sha256_reference": "e2c889f9db6bf5ee340e27fa94497caa9ce6112cdc593e798f383ac6599c71e6",
+        "sha256_clone": "e2c889f9db6bf5ee340e27fa94497caa9ce6112cdc593e798f383ac6599c71e6"
+      },
+      {
+        "file": "docs/templates/R4_shortlist.md",
+        "status": "identical",
+        "sha256_reference": "0b8b55e59ad1e604db1f2a317cf4e26cac788678e4606822f7f0fcb3e16e5eb8",
+        "sha256_clone": "0b8b55e59ad1e604db1f2a317cf4e26cac788678e4606822f7f0fcb3e16e5eb8"
+      },
+      {
+        "file": "docs/templates/R5_sensitivity.md",
+        "status": "identical",
+        "sha256_reference": "a0994f0e876f0f941b5e5b24157a5350ecfdd16e3aac3329ccf45111b15e7129",
+        "sha256_clone": "a0994f0e876f0f941b5e5b24157a5350ecfdd16e3aac3329ccf45111b15e7129"
+      },
+      {
+        "file": "docs/templates/README.md",
+        "status": "identical",
+        "sha256_reference": "9e34a37227d6a8f4f7291aaf5d0faeb358a3e4e4c56f779ea55d6984dadc1fae",
+        "sha256_clone": "9e34a37227d6a8f4f7291aaf5d0faeb358a3e4e4c56f779ea55d6984dadc1fae"
+      },
+      {
+        "file": "docs/templates/REPORT.md",
+        "status": "identical",
+        "sha256_reference": "ea882e01ea8677eb94f73cd80e0c4dcbbe8daf3b0b179c35516c04d167529180",
+        "sha256_clone": "ea882e01ea8677eb94f73cd80e0c4dcbbe8daf3b0b179c35516c04d167529180"
+      },
+      {
+        "file": "results/r1_data_report.json",
+        "ignored_paths": [
+          "gates.resource.duckdb_bytes",
+          "gates.resource.flatten_peak_rss_bytes",
+          "gates.resource.flatten_seconds",
+          "gates.resource.peak_rss_gb",
+          "gates.resource.run_peak_rss_bytes"
+        ],
+        "status": "same_ignoring_run_time_fields",
+        "differing_paths": [],
+        "sha256_reference": "21eeb3b6b72709a4bdeabbf86f76b201ce0bd5052b635f4aabde5d6f6a9d54d9",
+        "sha256_clone": "2a297453e1796ea0335e63224fcd07acf1b11211e70160a25bfac23f3915ad8d"
+      },
+      {
+        "file": "results/r2_profiles_summary.json",
+        "ignored_paths": [
+          "run"
+        ],
+        "differing_paths": [],
+        "status": "same_within_float_tolerance",
+        "floats_within_tolerance": 84,
+        "max_relative_difference": 3.897163792326241e-15,
+        "sha256_reference": "85c516f7027822841ddc5113367044691a0473db6b7d1899d2d3b35fcdcd4402",
+        "sha256_clone": "d3c5b8e4ae49e5c7876808688d30f6bd9c3a65ae9ca66a05bd2b78bd2503fa35"
+      },
+      {
+        "file": "results/r3_join_summary.json",
+        "ignored_paths": [
+          "run"
+        ],
+        "status": "same_ignoring_run_time_fields",
+        "differing_paths": [],
+        "sha256_reference": "acae321d82a1d29ae8b5cdbc31e26e7923ab1aef1d231db15980d440396c0dc3",
+        "sha256_clone": "9247b8388e4517f4ea6c2e6612905b929a30972fb31a5e83928eb6cf463e5c2a"
+      },
+      {
+        "file": "results/r4_shortlist.json",
+        "ignored_paths": [
+          "run"
+        ],
+        "status": "same_ignoring_run_time_fields",
+        "differing_paths": [],
+        "sha256_reference": "4a04171320e3698fe9814dc1af996fa11cf34771e70f4b3d322ccb18cb84d2c3",
+        "sha256_clone": "990c02cb49d000d0d436d9e01055aabc897a7ae1c6a983aac395302e49ca909c"
+      },
+      {
+        "file": "results/r5_sensitivity.json",
+        "ignored_paths": [
+          "run"
+        ],
+        "status": "same_ignoring_run_time_fields",
+        "differing_paths": [],
+        "sha256_reference": "4a8db906f08c9208c030a0951dadb23c65768f5be6d4148f2e86b03b2d0c39ab",
+        "sha256_clone": "9dfc139716ecfd7fc807046bdc787f9925ede675078b0d88d622f62f60a720ea"
+      },
+      {
+        "file": "results/r6_readme.json",
+        "ignored_paths": [
+          "flatten_peak_mb",
+          "max_peak_mb",
+          "seconds"
+        ],
+        "status": "same_ignoring_run_time_fields",
+        "differing_paths": [],
+        "sha256_reference": "7ce6c914288fb5930f7958868bc29665ddba649ba35f304ef679c07a77d3b1a2",
+        "sha256_clone": "033cb36b9f739015fa844b75a04a625099f6383364e9fd2328ae7f83d04064ef"
+      }
+    ]
+  },
+  "processed_parquet_sha256": {
+    "events/competition_11.parquet": {
+      "working_copy": "d55c64b7efac581c6716ff1d7ab298fe81c84cba1c8de14e248525e3bd52d41b",
+      "clone": "d55c64b7efac581c6716ff1d7ab298fe81c84cba1c8de14e248525e3bd52d41b"
+    },
+    "events/competition_12.parquet": {
+      "working_copy": "df01dfc46d8701d32128487a7c2e009a8229df54d8342fcbb13a45ac3bec34cc",
+      "clone": "df01dfc46d8701d32128487a7c2e009a8229df54d8342fcbb13a45ac3bec34cc"
+    },
+    "events/competition_2.parquet": {
+      "working_copy": "ee61f486f9586f81e36772c5ee51b89f8fb130a6e43801840f4c6db1a5b4f426",
+      "clone": "ee61f486f9586f81e36772c5ee51b89f8fb130a6e43801840f4c6db1a5b4f426"
+    },
+    "events/competition_7.parquet": {
+      "working_copy": "ac435a40a9384ecc2ac6b2ba595ce4fd361f54fc2d4a91c6abc647bdb766930d",
+      "clone": "ac435a40a9384ecc2ac6b2ba595ce4fd361f54fc2d4a91c6abc647bdb766930d"
+    },
+    "lineup_players/competition_11.parquet": {
+      "working_copy": "8d6c2b7fadafa391c925cc158016dfd3a52e9184a710260992c957c45094ede8",
+      "clone": "8d6c2b7fadafa391c925cc158016dfd3a52e9184a710260992c957c45094ede8"
+    },
+    "lineup_players/competition_12.parquet": {
+      "working_copy": "b6fda12e79d3f369a708074a9e5d756b20a691ade49928e0131802878f283a5e",
+      "clone": "b6fda12e79d3f369a708074a9e5d756b20a691ade49928e0131802878f283a5e"
+    },
+    "lineup_players/competition_2.parquet": {
+      "working_copy": "87a28f7870ef28bfb858f88eabcf79d20fcf933d7e8740f463cabc41e35ad716",
+      "clone": "87a28f7870ef28bfb858f88eabcf79d20fcf933d7e8740f463cabc41e35ad716"
+    },
+    "lineup_players/competition_7.parquet": {
+      "working_copy": "de6ec8629ae0682f7e93d8aae047c934fba6738ecd08b043d16931486a25dce8",
+      "clone": "de6ec8629ae0682f7e93d8aae047c934fba6738ecd08b043d16931486a25dce8"
+    },
+    "lineup_positions/competition_11.parquet": {
+      "working_copy": "2591f9a067475c6688e73d67660d3d14113e9f8f0912b108926bbbd86bd8568d",
+      "clone": "2591f9a067475c6688e73d67660d3d14113e9f8f0912b108926bbbd86bd8568d"
+    },
+    "lineup_positions/competition_12.parquet": {
+      "working_copy": "1b62f3bf4603bfaec846fd34febec6f7e7daca7003d2114587fcfd94e07ea35c",
+      "clone": "1b62f3bf4603bfaec846fd34febec6f7e7daca7003d2114587fcfd94e07ea35c"
+    },
+    "lineup_positions/competition_2.parquet": {
+      "working_copy": "b6697be9e2284a24323ef4d2ded0d656aefd71e998b758e374cf2b9868660dbf",
+      "clone": "b6697be9e2284a24323ef4d2ded0d656aefd71e998b758e374cf2b9868660dbf"
+    },
+    "lineup_positions/competition_7.parquet": {
+      "working_copy": "abe4c510a4f8f65a3de144cb3625bd2b3e234be414729099aa2967fc45667659",
+      "clone": "abe4c510a4f8f65a3de144cb3625bd2b3e234be414729099aa2967fc45667659"
+    },
+    "matches.parquet": {
+      "working_copy": "a576564105ffaed29e48cbc270e0f849645d88ab1569ce95686d31f890f373e8",
+      "clone": "a576564105ffaed29e48cbc270e0f849645d88ab1569ce95686d31f890f373e8"
+    },
+    "r2/r2_player_match.parquet": {
+      "working_copy": "f81b8e8631238bc4ee92ad03d3898e5e7ae252e3c1f077612973fae88daa81ca",
+      "clone": "70996f9376bb076080ab5dbf1d3f92550805e19f61f15479a4ed4e941e1e8cb5",
+      "values": {
+        "status": "same_within_float_tolerance",
+        "float_columns": 5,
+        "rows": 673536,
+        "max_relative_difference": 8.462943867642365e-16
+      }
+    },
+    "r2/r2_player_season.parquet": {
+      "working_copy": "ea88c109f1565909eebcfe669b88fa708e896dd06b217dcbc9a8d28d22cea416",
+      "clone": "cc6cc23729f87ea288a96fbe4cf451e96047924ab6a28f3df151626340b691f4",
+      "values": {
+        "status": "same_within_float_tolerance",
+        "float_columns": 4,
+        "rows": 34816,
+        "max_relative_difference": 7.149368355189825e-16
+      }
+    },
+    "r2/r2_players.parquet": {
+      "working_copy": "d3481093831e86a41069761dc57c4f3c65a812171f2df9186454e11f54277796",
+      "clone": "d3481093831e86a41069761dc57c4f3c65a812171f2df9186454e11f54277796"
+    },
+    "r2/r2_stints.parquet": {
+      "working_copy": "c4e6b24c5e4605079582368c738ebd177a6b1d9584584552fac520b83e13dd8d",
+      "clone": "c4e6b24c5e4605079582368c738ebd177a6b1d9584584552fac520b83e13dd8d"
+    },
+    "r2/r2_team_possession.parquet": {
+      "working_copy": "a7f8890c85669e4d47573f42bc6cbce9502d32b3e7c5c7199c5ff8201383eaa0",
+      "clone": "7f030fbba30d5193ee8bd4c1324a2b8b1d3b58d43c174edb58c8750b740c263c",
+      "values": {
+        "status": "same_within_float_tolerance",
+        "float_columns": 3,
+        "rows": 3034,
+        "max_relative_difference": 5.795476190999038e-16
+      }
+    },
+    "r3/r3_matches.parquet": {
+      "working_copy": "24e2356f1cdc7dc5b20fe413f9432f71281a6332c887fcaafeb1c8986ce1c018",
+      "clone": "24e2356f1cdc7dc5b20fe413f9432f71281a6332c887fcaafeb1c8986ce1c018"
+    },
+    "r3/r3_plausibility.parquet": {
+      "working_copy": "f39683aaf73c8f80a8266556ecc68414a25c1f5a708a6bd7967d28d9217a92cb",
+      "clone": "f39683aaf73c8f80a8266556ecc68414a25c1f5a708a6bd7967d28d9217a92cb"
+    },
+    "r3/r3_player_values.parquet": {
+      "working_copy": "488aca92e9fd9f94bcc322fa816c73a00ef6de4763978bba38347fa6d25f610d",
+      "clone": "488aca92e9fd9f94bcc322fa816c73a00ef6de4763978bba38347fa6d25f610d"
+    },
+    "r4/r4_similarity.parquet": {
+      "working_copy": "7d26d2523edec083e52c88e87ab31dfaec5ce9887a45227b3557fe50589ae721",
+      "clone": "a6ce00cd62dc692ddfa6f8a283f1a495065dbafe50d5631a7aed7e140acee660",
+      "values": {
+        "status": "same_within_float_tolerance",
+        "float_columns": 44,
+        "rows": 307,
+        "max_relative_difference": 1.186151263974135e-13
+      }
+    }
+  },
+  "tests": {
+    "unit": {
+      "passed": 192,
+      "failed": 1,
+      "skipped": 0,
+      "deselected": 0,
+      "errors": 0,
+      "summary": "1 failed, 192 passed in 8.74s",
+      "exit_code": 1,
+      "failed_tests": [
+        "tests/test_publication.py::test_nothing_from_data_or_event_level_would_be_committed"
+      ]
+    },
+    "realdata": {
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "deselected": 193,
+      "errors": 0,
+      "summary": "193 deselected in 1.03s",
+      "exit_code": 5,
+      "failed_tests": []
+    }
+  },
+  "run": {
+    "started_utc": "2026-10-30T12:49:38+00:00",
+    "total_seconds": 266.8,
+    "install_seconds": 15.6,
+    "steps": [
+      {
+        "step": "run_r1",
+        "seconds": 205.57,
+        "max_resident_bytes": 1126694912,
+        "peak_footprint_bytes": 1907083568
+      },
+      {
+        "step": "run_r2",
+        "seconds": 13.38,
+        "max_resident_bytes": 1387282432,
+        "peak_footprint_bytes": 2297137360
+      },
+      {
+        "step": "run_r3",
+        "seconds": 5.68,
+        "max_resident_bytes": 185892864,
+        "peak_footprint_bytes": 154780368
+      },
+      {
+        "step": "run_r4",
+        "seconds": 4.16,
+        "max_resident_bytes": 277184512,
+        "peak_footprint_bytes": 218006368
+      },
+      {
+        "step": "run_r5",
+        "seconds": 8.52,
+        "max_resident_bytes": 246906880,
+        "peak_footprint_bytes": 213353240
+      },
+      {
+        "step": "run_r6",
+        "seconds": 0.46,
+        "max_resident_bytes": 68419584,
+        "peak_footprint_bytes": 52118008
+      }
+    ]
+  }
+}

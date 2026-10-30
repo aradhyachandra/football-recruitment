@@ -1,0 +1,72 @@
+# R7 clean-clone check: what may differ between a fresh clone's rebuild and the committed files.
+# Every value has a reason. Used by src/recruit/compare_runs.py, src/recruit/clean_clone.py and
+# src/recruit/run_r7.py (docs/R7_reproducibility.md).
+
+clone:
+  source: local main
+  source_reason: >-
+    The GitHub repository does not exist yet (R7 brief), so the check clones the local repository's
+    main branch, which holds exactly what will be pushed. Uncommitted R7 work is not in the clone.
+  raw_data: symlink
+  raw_data_reason: >-
+    data/raw/ in the clone is a symlink to the existing download (4.3 GB), so nothing is re-downloaded
+    or copied. No step writes to data/raw/ (only recruit.download does, and it is not run); R1 checks
+    every raw file's sha256 against config/raw_files.yaml and stops on any difference.
+  steps: [run_r1, run_r2, run_r3, run_r4, run_r5, run_r6]
+  steps_reason: "README Reproduce, step 3, in order; R1 runs in full (flatten, load, audit), not --audit-only."
+  compare_folders: [results, docs, README.md]
+  compare_folders_reason: >-
+    R7 brief: every file in results/ and docs/ (figures and templates included); README.md too, since
+    run_r6 regenerates it from results/.
+
+run_time_keys:
+  - run                      # r2-r5: seconds, peak memory and table row counts of the run
+  - flatten_seconds          # r1 gates.resource: time of the flatten step
+  - flatten_peak_rss_bytes   # r1 gates.resource: memory of the flatten step
+  - run_peak_rss_bytes       # r1 gates.resource: memory of the load-and-audit step
+  - peak_rss_gb              # r1 gates.resource: the flatten memory in GB
+  - duckdb_bytes             # r1 gates.resource: DuckDB file size, see reason
+  - seconds                  # r6_readme.json: the run times above, copied for the README
+  - flatten_peak_mb          # r6_readme.json: the flatten memory in MB
+  - max_peak_mb              # r6_readme.json: highest peak memory of any step
+run_time_keys_reason: >-
+  These fields describe the computer run (time, memory, database file size), not the football or the
+  market; they are expected to differ on every run. The DuckDB file size depends on when DuckDB
+  checkpoints and on which later milestones' tables the file held when R1 measured it (the committed
+  R1 figure was carried over from the first full run, PROGRESS.md R6). A JSON file counts as matching
+  if it is identical once these keys are dropped at any depth. Every ignored path is listed in the record.
+
+float_tolerance:
+  files: [results/r2_profiles_summary.json]
+  relative: 1.0e-9
+  absolute: 1.0e-12
+  reason: >-
+    DuckDB sums floats in parallel, so the order of additions varies between runs and R2's per-90
+    distributions differ at the 15th-16th significant digit (about 1e-15 relative, NOTES.md R6). A
+    relative tolerance of 1e-9 is a million times wider than that noise and far below any digit the
+    docs print (two decimals). Only R2 gets a tolerance; every other file must match exactly.
+
+run_time_line_patterns:
+  - '\d s\b'        # seconds, as the docs print run times ("155.40 s", "R2 10.3 s")
+  - '\d MB\b'       # megabytes: memory and file sizes
+  - '\d GB\b'       # gigabytes
+  - 'not timed'      # README: the run-time sentence wraps over several lines
+run_time_line_patterns_reason: >-
+  Markdown files (README.md, docs/) print run-time fields (times in s, memory and the DuckDB size in
+  MB). A changed line counts as a run-time line only if it carries one of these units AND is identical
+  to the committed line once every number is masked, so wording or structure can never change unseen.
+  A results figure printed on such a line cannot slip through either: every number in the docs comes
+  from results/*.json (tests/test_readme.py, tests/test_report_r5.py), and those files are compared
+  exactly apart from run_time_keys. The changed lines are saved in the record for review.
+
+explained_test_failures:
+  "tests/test_publication.py::test_nothing_from_data_or_event_level_would_be_committed": >-
+    Caused by the check itself, and it found a real gap. The clone's data/raw is a symlink to the
+    download, and .gitignore said "data/raw/": a trailing slash matches directories only, so git listed
+    the symlink as an untracked file that could be committed, and the commit-safety test flagged it.
+    Nothing from the data was at risk (a symlink holds only a path). Fixed in R7 by writing "data/raw"
+    and "data/processed" without the slash; with that .gitignore copied into the clone the test passes
+    (4 of 4 in tests/test_publication.py, re-run by hand after the check). The fix is not committed yet.
+explained_test_failures_reason: >-
+  A test that fails in the clone is reported, never hidden: the doc lists every failed test with the
+  explanation recorded here, or "not explained" if there is none.

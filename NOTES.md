@@ -86,7 +86,34 @@ date and how they were settled.
   the Kante case; for other roles the app says they are a starting point. The selected player's own
   club(s) are excluded as targets (config/publication.yaml), which for Kante is exactly the R4 rule.
 
+- **R7: the portfolio page goes live before the repo exists.** The page links to
+  github.com/aradhyachandra/football-recruitment and its docs/REPORT.md, which do not exist until the repo is
+  created and pushed. Push the project first, then the site.
+- **R7: site copy changed outside the football page.** The home page results strip header now reads "Tested on
+  data the models never saw, or across stated scenarios", the Projects heading "Four business questions" and
+  the lede "...on data it never saw or across stated scenarios", because the football result is a scenario
+  test, not a held-out test. The strip is now 2 columns from 720px and 4 from 1100px. Worth a look.
+- **R7: case-study gutter fix touches every case study.** `.cs-layout { padding: ... 0 ... }` removed the
+  `.wrap` side padding, so on phones the body text of every case study touched the screen edge (and on desktop
+  the contents sat a gutter left of the hero). Now top/bottom padding only. The older phone-churn, phone-demand
+  and phone-tcs screenshots (16 Oct) predate the 26 Oct redesign and were not re-taken.
+- **R7: home-page screenshots are now full page.** desktop-home-*.png used to be the top 3000 px; the new ones
+  (and the new football ones) are the full page, at the same widths (1366 px; phones 375 px at 2x).
+- **R7: Radoja's similarity prints as 89.5 in the R4 figure and 89.6 in the dashboard.** results/ stores 89.55
+  (two decimals); the figure formats that stored value with one decimal (binary float rounds down), the dashboard
+  rounds the unrounded value. The site does not print his score. A one-line fix in r4_figures.py would change a
+  committed figure, so it was left for a decision.
+- **R7: clean clone ran on committed R6 code.** R7's own code (dashboard polish, the check itself) was not in
+  the clone because nothing is committed. Re-running `recruit.clean_clone` after the R7 commit would cover it
+  (about 4-5 minutes).
+- **R7: the README does not mention R7 yet.** It is generated (docs/templates/README.md); adding a line on the
+  clean-clone check was left out so the check compared an unchanged README. Easy to add before pushing.
+
 ## Resolved
+
+- 2026-10-30 (R7): Clean-clone check done (docs/R7_reproducibility.md): every file in results/, docs/ and the
+  README reproduces, R2 within a 1e-9 relative tolerance (config/reproducibility.yaml), which settles the R6
+  item on R2's last digits for the check. The download-retry item (R1) did not come up: nothing was downloaded.
 
 - 2026-10-29 (R6): The report keeps the pre-set recommendation (Sebastián Cristóforo) with the two-route
   framing already in the executive summary; no change to the recommendation rule (Aradhya). The README

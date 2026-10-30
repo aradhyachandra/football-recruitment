@@ -164,10 +164,53 @@ def test_app_explore_kante_defaults_and_sliders():
     names = [list(f["Player"]) for f in frames if "Player" in f.columns]
     assert [e["name"] for e in r4["shortlist"]] in names
     assert [e["name"] for e in r4["top_similar"]] in names
-    at.slider(key="budget").set_value(5_000_000).run()
+    budget = at.select_slider(key="budget")
+    assert budget.value == REAL_CFG["constraints"]["budget_cap_eur"]
+    assert "EUR 10m" in budget.options and "EUR 0.5m" in budget.options  # shown in EUR millions
+    budget.set_value(5_000_000).run()
     assert not at.exception
     capped = [df.value for df in at.dataframe if "Value rank" in df.value.columns][-1]
     assert (capped["Market value (EUR m)"] <= 5).all()
+
+
+# ---------- display: budget in EUR millions, tables narrow enough to show every column ----------
+
+def test_money_label_in_eur_millions():
+    assert dash.money_label(10_000_000) == "EUR 10m"
+    assert dash.money_label(500_000) == "EUR 0.5m"
+    assert dash.money_label(150_000_000) == "EUR 150m"
+    assert dash.money_label(2_250_000) == "EUR 2.25m"
+
+
+def test_budget_options_cover_the_configured_range():
+    bs = config.load("publication")["dashboard"]["budget_slider_eur"]
+    opts = dash.budget_options(bs)
+    assert opts[0] == bs["min"] and opts[-1] == bs["max"]
+    assert all(b - a == bs["step"] for a, b in zip(opts, opts[1:]))
+    assert REAL_CFG["constraints"]["budget_cap_eur"] in opts  # the R4 default can be selected
+    assert all(isinstance(o, int) for o in opts)
+
+
+def test_display_columns_exist_and_keep_similarity():
+    players, season, _ = make_inputs()
+    res = dash.explore(players, season, CFG, METRICS_CFG, TARGET)
+    r = dash.load_results(ROOT)
+    tables = {"similar": dash.similar_players(res), "shortlist": dash.value_shortlist(res),
+              "case_profile": dash.case_profile(r["r2"]), "robust_core": dash.robust_core_table(r["r5"])}
+    hide = config.load("publication")["dashboard"]["table_hide"]
+    assert set(hide) == set(tables)
+    for kind, df in tables.items():
+        assert set(hide[kind]) <= set(df.columns), kind  # no typo in the config
+        shown = dash.display_columns(kind, df)
+        assert shown == [c for c in df.columns if c not in hide[kind]], kind
+        assert len(shown) <= config.load("publication")["dashboard"]["max_table_columns"], kind
+    for kind in ("similar", "shortlist"):
+        assert "Similarity" in dash.display_columns(kind, tables[kind])
+    assert "Similarity rank" in dash.display_columns("robust_core", tables["robust_core"])
+    labels = dash.short_labels()
+    assert all(isinstance(v, str) and v for v in labels.values())
+    every_column = {c for df in tables.values() for c in df.columns}
+    assert set(labels) <= every_column  # no typo in the config
 
 
 def test_dashboard_wording_rules():

@@ -210,3 +210,52 @@ Reproduce (after R1-R5):
     .venv/bin/streamlit run app/streamlit_app.py
 
 Next: R7, portfolio case-study page and clean-clone check (compare R2 with a tolerance; see NOTES.md).
+
+## R7: dashboard polish, clean-clone check, portfolio page (2026-10-30): done, nothing committed or pushed
+
+Dashboard (tests first; tests/test_dashboard.py):
+- Budget slider is a select slider over the configured euro steps, shown as "EUR 10m"
+  (`dashboard.money_label`, `dashboard.budget_options`).
+- Tables: `config/publication.yaml` dashboard `table_hide` (at most 12 columns, each hidden column with a
+  reason) and `short_labels` (full name on hover); `dashboard.display_columns`, `app.show_table` (every row
+  shown, no inner scroll). Explore lists moved to full page width. Similarity kept in every player list.
+  Robust-core column names shortened ("Top 10 share, scenarios"/"draws"; the counts are in the caption).
+- Screenshots re-taken: `docs/figures/r6_dashboard_case.png`, `r6_dashboard_explore.png` (local Chrome,
+  headless, DevTools protocol; capture script kept outside the repo).
+
+Clean-clone check:
+- `config/reproducibility.yaml` (run-time keys, R2 float tolerance 1e-9 relative, markdown run-time line
+  rule, explained test failures; each with a reason), written before the check ran.
+- `src/recruit/compare_runs.py` (JSON with run-time keys dropped, float tolerance for R2 only, markdown lines
+  that differ only in run-time numbers, parquet value comparison), `src/recruit/clean_clone.py` (clone of
+  local main, fresh venv, data/raw symlink, R1-R6 under /usr/bin/time -l, both pytest runs, comparison,
+  parquet sha256), `src/recruit/run_r7.py` + `docs/templates/R7_reproducibility.md`.
+- Outputs: `results/r7_clean_clone_check.json`, `docs/R7_reproducibility.md`. After the check two fields were
+  added to the record from the check's own log/files with the same tested code: the failed test id
+  (`parse_pytest`) and the value comparison of the 4 parquet files that were not byte-identical
+  (`compare_parquet`); `clean_clone.py` now does both itself.
+- Result (figures in docs/R7_reproducibility.md): all 27 compared files match, 19 byte-identical; the rest
+  differ only in run-time fields or R2 float noise. 192 of 193 clone tests passed; the failure was the
+  commit-safety test catching the data/raw symlink, a real .gitignore gap (`data/raw/` matches directories
+  only). Fixed: `.gitignore` now says `data/raw` and `data/processed`; the test passes in the clone with it.
+
+Portfolio (~/Projects/portfolio-site, nothing committed there):
+- New `projects/football-recruitment.html`; `index.html` (feature row 04, results-strip card, "Four business
+  questions", meta descriptions, lede), footers of all case-study pages, prev/next links on the TCS and demand
+  pages, `assets/css/style.css` (results strip 2/4 columns, `.data-credit`, case-study gutter fix),
+  `assets/img/football-similarity-value.png`, `home-football.webp`, `statsbomb-logo.png` (unchanged file,
+  sha256 as in config/publication.yaml), README (logo note), 8 screenshots in `screenshots/`.
+- `src/recruit/portfolio_numbers.py` recomputes every figure on the page from results/ and fails on any
+  number it cannot source; output `docs/R7_portfolio_numbers.md` (the check file, outside the site repo).
+- `docs/R7_summary.md`: short plain-language note.
+
+Tests: 22 new (215 in all, all passing): display helpers, comparison rules on hand-made folders, parsers,
+renderer on a hand-made record, portfolio number check on a hand-made site. `pytest -m realdata` selects
+none (the real-data tests are skip-if tests in the main suite).
+
+Reproduce:
+    .venv/bin/python -m recruit.clean_clone --workdir <empty folder outside the repo>
+    .venv/bin/python -m recruit.run_r7
+    .venv/bin/python -m recruit.portfolio_numbers --site ~/Projects/portfolio-site
+
+Next: Aradhya's review (NOTES.md R7 items), then commit, create the GitHub repo and push; then the site.
