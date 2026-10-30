@@ -16,7 +16,7 @@ steps produced in `results/`, `docs/` and `README.md` with the committed copy, o
 
 ## Result (2026-10-30)
 
-- **Clone:** local `main` at `9015035` (the GitHub repository does not exist yet); clean right
+- **Clone:** local `main` at `16f4da7` (the GitHub repository does not exist yet); clean right
   after the clone: yes. Raw data: symlink to the existing download; R1 checked
   every raw file against the sha256 fingerprints in `config/raw_files.yaml` before running (it stops on
   any difference).
