@@ -1,0 +1,74 @@
+# Settings for what goes public (R6): hindsight check on results/, credits and logo, dashboard.
+# Every value has a reason; the docs, README and dashboard read them from here.
+
+hindsight_check:
+  exempt_keys: [run]
+  exempt_keys_reason: >-
+    results/*.json may only hold dates on or before the valuation date (config/scope.yaml). The "run"
+    block of each file holds run-time fields (seconds, memory, row counts), which describe the
+    computer run, not the football or the market; it is the only part allowed to carry later dates.
+  negative_day_keys: [days_before]
+  negative_day_keys_reason: >-
+    A negative "days before the valuation date" is a record dated after it, even if no date string
+    is printed next to it, so the check flags those too.
+
+statsbomb_logo:
+  path: assets/statsbomb_logo.png
+  doc_width_px: 220
+  doc_width_reason: >-
+    The file is 2258 x 344 px; at 220 px wide it reads clearly at the top of a page without crowding
+    the title (GitHub would otherwise stretch it to the full text width).
+  source_url: "https://statsbomb.com/media-pack/"
+  portal_url: "https://hudl.bynder.com/web/3995540F-A52E-4EB3-855B7726FCBC2983"
+  portal_file: hudl-statsbomb-logo-default (PNG original, 2258 x 344 px, 39,815 bytes)
+  sha256: dd2e9ec3e56bcae1fd644f6f507432a1e18e2c27d0d62572278de35a146dfc92
+  fetched: "2026-10-29"
+  sha256_reason: >-
+    statsbomb.com/media-pack redirects to Hudl's brand portal (collection "Hudl Statsbomb Logos").
+    The checksum proves the file in assets/ is the portal's file, unchanged (tests/test_publication.py).
+  source_line: >-
+    Data: StatsBomb Open Data (github.com/hudl/open-data), used under the StatsBomb Public Data User
+    Agreement. Logo: StatsBomb Media Pack (statsbomb.com/media-pack).
+  reason: >-
+    The StatsBomb Public Data User Agreement asks every published analysis to credit StatsBomb with
+    its logo. The logo file comes unchanged from StatsBomb's own Media Pack (terms in NOTES.md).
+
+transfermarkt_credit: >-
+  Market values: transfermarkt-datasets (github.com/dcaribou/transfermarkt-datasets, CC0-1.0), built by
+  its maintainer from Transfermarkt; used here as published, nothing was scraped.
+
+author: Aradhya Chandra
+
+readme:
+  number_exempt_phrases: ["per 90", "0-100", "8 GB", "Python 3.13", "arm64", "CC0-1.0", "2015/16", "Ligue 1"]
+  number_exempt_reason: >-
+    Names and labels, not results: "per 90" names a rate, "0-100" the score scale, "8 GB" the laptop
+    the run was recorded on (CLAUDE.md), the Python version and platform it ran on, the licence name, the
+    season label and a league's name. Every other number in the README must appear in results/ (tests/test_readme.py);
+    code blocks and inline code (commands, file names) are not checked.
+
+wording:
+  similar: "similar profile under stated assumptions"
+  reason: "PROJECT_PLAN.md wording rule: never 'would succeed' or 'proven'."
+
+dashboard:
+  processed_dir_env: RECRUIT_PROCESSED_DIR
+  processed_dir_env_reason: "Lets the smoke test point the app at an empty folder (no data/processed/ on a fresh clone)."
+  exclude_selected_players_clubs: true
+  exclude_reason: >-
+    In the Explore view the selected player's own club(s) play the part Leicester plays in the case:
+    their players are not targets (same rule as config/similarity.yaml exclude_teams, any minutes).
+    For Kante this is exactly the configured exclusion (Leicester City, team 22).
+  group_weight_slider: {min: 0.0, max: 1.0, step: 0.05}
+  group_weight_reason: >-
+    Each group weight can be set from 0 to 1; the app rescales them to add up to 1, as the R4 config
+    requires (group weights are shares of the squared distance), and shows the shares used.
+  budget_slider_eur: {min: 500000, max: 150000000, step: 500000}
+  budget_reason: >-
+    EUR 0.5m to EUR 150m in EUR 0.5m steps: the top end is above every valuation in the 900-minute
+    pools of all roles (highest EUR 120m, checked 2026-10-29), so any player can be priced in; the
+    default is the R4 cap (config/similarity.yaml).
+  age_slider: {min: 16, max: 40}
+  age_reason: >-
+    Covers every age in the 900-minute pools of all roles (17 to 39 in whole years at the valuation
+    date, checked 2026-10-29); the default is the R4 range.

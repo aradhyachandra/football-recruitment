@@ -422,41 +422,31 @@
     "valuation": {
       "players": 2175,
       "with_valuation_before": 2072,
-      "with_valuation_either_side": 2150,
       "share_before": 0.9526436781609195,
-      "share_either_side": 0.9885057471264368,
       "by_league": [
         {
           "league": "ES1",
           "players": 538,
           "with_valuation_before": 505,
-          "with_valuation_either_side": 532,
-          "share_before": 0.9386617100371747,
-          "share_either_side": 0.9888475836431226
+          "share_before": 0.9386617100371747
         },
         {
           "league": "FR1",
           "players": 575,
           "with_valuation_before": 558,
-          "with_valuation_either_side": 571,
-          "share_before": 0.9704347826086956,
-          "share_either_side": 0.9930434782608696
+          "share_before": 0.9704347826086956
         },
         {
           "league": "GB1",
           "players": 549,
           "with_valuation_before": 512,
-          "with_valuation_either_side": 534,
-          "share_before": 0.9326047358834244,
-          "share_either_side": 0.9726775956284153
+          "share_before": 0.9326047358834244
         },
         {
           "league": "IT1",
           "players": 551,
           "with_valuation_before": 534,
-          "with_valuation_either_side": 551,
-          "share_before": 0.969147005444646,
-          "share_either_side": 1.0
+          "share_before": 0.969147005444646
         }
       ],
       "window_months": 6,
@@ -486,24 +476,6 @@
             "market_value_eur": 20000000,
             "club": "Leicester City",
             "days_before": 30
-          },
-          {
-            "date": "2016-08-01",
-            "market_value_eur": 30000000,
-            "club": "Chelsea FC",
-            "days_before": -31
-          },
-          {
-            "date": "2017-02-20",
-            "market_value_eur": 40000000,
-            "club": "Chelsea FC",
-            "days_before": -234
-          },
-          {
-            "date": "2017-06-28",
-            "market_value_eur": 50000000,
-            "club": "Chelsea FC",
-            "days_before": -362
           }
         ]
       },

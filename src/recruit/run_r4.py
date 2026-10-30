@@ -246,7 +246,7 @@ def render(s: dict, template: str) -> str:
                         "srank": e.get("similarity_rank"), "vscore": e.get("value_score"),
                         "front": "yes" if e.get("on_frontier") else "", "ok": "yes" if e["meets_constraints"] else "no"})
         return out
-    base = [("n", "#"), ("name", "Player"), ("club", "Club 2015/16"), ("league", "League"), ("age", "Age"),
+    base = [("n", "#"), ("name", "Player"), ("club", f"Club {config.season_label()}"), ("league", "League"), ("age", "Age"),
             ("mins", "Minutes"), ("value_m", "Value (EUR m)"), ("vdate", "Valued on"), ("sim", "Similarity"),
             ("cos", "Cosine"), ("self", "Split-half rank")]
     keys = list(s["target"]["percentiles"])
@@ -277,7 +277,7 @@ def render(s: dict, template: str) -> str:
                        [("k", "Own profile in"), ("players", "Players"), ("share", "Share", "pct"),
                         ("chance", "By chance", "pct")]),
     }
-    ctx = {**s, "fp_short": s["config_sha256"][:12], "cap_m": s["settings"]["budget_cap_eur"] / 1e6,
+    ctx = {**s, **report.publication_context(), "fp_short": s["config_sha256"][:12], "cap_m": s["settings"]["budget_cap_eur"] / 1e6,
            "target_value_m": _m(s["target"]["market_value_eur"]),
            "top1": st["top_k"][0], "top5": st["top_k"][-1],
            "frontier_count": len(s["frontier"]),

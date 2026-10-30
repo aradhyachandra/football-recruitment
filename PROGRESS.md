@@ -161,3 +161,52 @@ Reproduce (after R1-R4):
     .venv/bin/python -m recruit.run_r5      # about 7 s, peak memory about 0.3 GB
 
 Next: R6, Streamlit dashboard and README (StatsBomb logo still TO VERIFY).
+
+## R6: publication fixes, dashboard and README (2026-10-29): done, nothing committed or pushed
+
+Decisions recorded in NOTES.md (Resolved): the report keeps the pre-set recommendation with the two-route
+framing; the recommendation rule is unchanged.
+
+Publication fixes:
+- Hindsight trim: `sql/r1_departing_valuations.sql` and `sql/r1_valuation_gate.sql` read nothing after the
+  valuation date (history = 12 months up to it; the "either side" counts are gone), `audit.py`,
+  `config/audit.yaml`, the R1 template. `run_r1.py --audit-only` re-runs the audit on the existing DuckDB
+  (fingerprints verified, no download, later milestones' tables kept; size and memory figures carried
+  over from the last full run). `src/recruit/hindsight.py` + `tests/test_hindsight.py`: no date after the
+  valuation date and no negative days-before in any results/*.json (run fields exempt). Before the fix
+  it flagged only the R1 history (3 dates, 3 negative day counts).
+- Season label: `config/scope.yaml` season.label, `config.season_label()`, `report.publication_context()`
+  (label + logo tag) in every renderer; templates use `{{season_label}}` and `{{logo_html}}`; figure credit
+  and title read the label. R1 (audit-only) and R2-R5 re-run: R3-R5 results identical apart from run
+  fields, R1 changed only by the trim, R2 differs only at the 15th-16th digit (committed file kept; see
+  NOTES.md); figures byte-identical.
+- Logo: `assets/statsbomb_logo.png` from the Media Pack (redirects to hudl.bynder.com; file, sha256 and
+  terms in `config/publication.yaml` and NOTES.md); on REPORT.md, every step note, README and dashboard.
+
+Dashboard:
+- `src/recruit/dashboard.py` (pure: loads results/ and data/processed/ parquet, builds the Explore config
+  with `sensitivity.apply_changes` and runs `run_r4.analyse`; display tables). `app/streamlit_app.py`
+  (Case and Explore tabs, logo, credits, wording). `.streamlit/config.toml` (light theme for the logo).
+  Settings and slider ranges in `config/publication.yaml` (dashboard).
+- Screenshots: `docs/figures/r6_dashboard_case.png`, `r6_dashboard_explore.png`, taken with the local
+  Google Chrome in headless mode driven over the DevTools protocol (script kept outside the repo; uses the
+  `websockets` package streamlit already installs; nothing added to requirements.txt).
+- `requirements.txt`: streamlit==1.66.0, altair==6.3.0 (other pins unchanged).
+
+README: `docs/templates/README.md` -> `README.md` by `src/recruit/run_r6.py` (reuses the R5 report
+context and tables; README-only figures saved to `results/r6_readme.json`). `LICENSE` (MIT, code only;
+data and logo not covered, not included).
+
+Tests: 31 new (193 in all, all passing): hindsight scanner and results check, audit-only mode, logo
+checksum and doc placeholders, commit-safety (nothing from data/, no event-level fields in results/),
+dashboard pure functions on hand-made data, Kanté defaults reproduce the R4 lists exactly (real data),
+AppTest smoke test without data/processed and with it (sliders), README up to date, every README number in
+results/, LICENSE.
+
+Reproduce (after R1-R5):
+    .venv/bin/pip install -r requirements.txt
+    .venv/bin/python -m recruit.run_r1 --audit-only   # only if the R1 audit/template changes
+    .venv/bin/python -m recruit.run_r6                # README, under a second
+    .venv/bin/streamlit run app/streamlit_app.py
+
+Next: R7, portfolio case-study page and clean-clone check (compare R2 with a tolerance; see NOTES.md).

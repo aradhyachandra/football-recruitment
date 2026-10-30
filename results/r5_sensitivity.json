@@ -4561,8 +4561,8 @@
     }
   ],
   "run": {
-    "seconds": 5.3,
-    "peak_rss_bytes": 268206080
+    "seconds": 8.6,
+    "peak_rss_bytes": 275202048
   },
   "figures": [
     "docs/figures/r5_top10_by_scenario.png",

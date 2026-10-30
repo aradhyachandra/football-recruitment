@@ -1,0 +1,15 @@
+{
+  "statsbomb_raw_mb": 4601,
+  "statsbomb_raw_files": 3039,
+  "transfermarkt_raw_mb": 56.9,
+  "parquet_mb": 408,
+  "flatten_peak_mb": 380,
+  "max_peak_mb": 1984,
+  "seconds": {
+    "r1_flatten": 155.4,
+    "r2": 10.3,
+    "r3": 8.0,
+    "r4": 0.3,
+    "r5": 8.6
+  }
+}

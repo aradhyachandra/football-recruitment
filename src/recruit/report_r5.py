@@ -94,7 +94,7 @@ def tables(s: dict, r: dict, f: dict) -> dict:
                  "value_m": e["market_value_eur"] / 1e6, "sim": e["similarity"], "srank": e.get("similarity_rank"),
                  "vrank": e.get("value_rank"), "self": e.get("self_match_rank", "not rated")}
                 for i, e in enumerate(items, 1)]
-    pcols = [("n", "#"), ("name", "Player"), ("club", "Club 2015/16"), ("age", "Age"), ("mins", "Minutes"),
+    pcols = [("n", "#"), ("name", "Player"), ("club", f"Club {config.season_label()}"), ("age", "Age"), ("mins", "Minutes"),
              ("value_m", "Value (EUR m)"), ("sim", "Similarity"), ("srank", "Similarity rank")]
     by_id = {c["statsbomb_player_id"]: c for c in s["candidates"]}
     from recruit.r5_figures import main_candidates
@@ -158,7 +158,7 @@ def tables(s: dict, r: dict, f: dict) -> dict:
                                         ("s_top", f"Similarity top {N}, scenarios", "pct"), ("s_med", "Median similarity rank"),
                                         ("s_range", "Range"), ("sd_top", f"Similarity top {N}, random weights", "pct"),
                                         ("n_top", f"Value top {N}, scenarios", "pct")]),
-        "picks": t(picks, [("role", ""), ("name", "Player"), ("club", "Club 2015/16"), ("league", "League"),
+        "picks": t(picks, [("role", ""), ("name", "Player"), ("club", f"Club {config.season_label()}"), ("league", "League"),
                            ("age", "Age"), ("mins", "Minutes"), ("value_m", "Value (EUR m)"), ("vdate", "Valued on"),
                            ("sim", "Similarity"), ("srank", "Similarity rank"), ("n_top", f"Top {N}, scenarios", "pct"),
                            ("n_topk", f"Top {K}, scenarios", "pct"), ("d_top", f"Top {N}, random weights", "pct"),
@@ -172,7 +172,7 @@ def tables(s: dict, r: dict, f: dict) -> dict:
                                 "n_top": c["value_named"]["share_top_n"], "n_topk": c["value_named"]["share_top_k"],
                                 "s_top": c["similarity_named"]["share_top_n"]}
                                for c in (by_id[e["statsbomb_player_id"]] for e in f["closest_eligible"])],
-                              [("name", "Player"), ("club", "Club 2015/16"), ("age", "Age"),
+                              [("name", "Player"), ("club", f"Club {config.season_label()}"), ("age", "Age"),
                                ("value_m", "Value (EUR m)"), ("sim", "Similarity"), ("srank", "Similarity rank"),
                                ("core", "Robust core"), ("n_top", f"Value top {N}, scenarios", "pct"),
                                ("n_topk", f"Value top {K}, scenarios", "pct"),
@@ -205,7 +205,7 @@ def context(s: dict, r: dict, f: dict) -> dict:
     kp = {p["metric"]: p for p in r["r2"]["departing_player"]["profile"]}
     pct = {m: {"raw": _pct100(p["pct_rank"]), "adj": _pct100(p["pct_rank_padj"])} for m, p in kp.items()}
     st = r["r4"]["stability"]
-    return {**s, **r, "f": f, "picks": picks, "kpct": pct, "fp_short": s["config_files"]["config/sensitivity.yaml"][:12],
+    return {**s, **r, **report.publication_context(), "f": f, "picks": picks, "kpct": pct, "fp_short": s["config_files"]["config/sensitivity.yaml"][:12],
             "sim_fp_short": s["config_files"]["config/similarity.yaml"][:12],
             "fp_sens": s["config_files"]["config/sensitivity.yaml"], "fp_sim": s["config_files"]["config/similarity.yaml"],
             "top1": st["top_k"][0], "top5": st["top_k"][-1], "core_list": ", ".join(f["core_names"]),

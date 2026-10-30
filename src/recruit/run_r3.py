@@ -186,7 +186,7 @@ def render(s: dict, template: str) -> str:
                                            for x in thr}} for b in gaps[thr[0]]["buckets"]]
     gap_rows.append({"bucket": "no valuation on or before the date", **{x: gaps[x]["no_valuation_before_date"] for x in thr}})
     d = s["departing_player"]
-    ctx = {**s, "seed": str(s["settings"]["sample_seed"]), "d": d | {"transfermarkt_player_id": str(d["transfermarkt_player_id"]),
+    ctx = {**s, **report.publication_context(), "seed": str(s["settings"]["sample_seed"]), "d": d | {"transfermarkt_player_id": str(d["transfermarkt_player_id"]),
                           "statsbomb_player_id": str(d["statsbomb_player_id"]),
                           "value_m": d["market_value_eur"] / 1e6},
            "all": {x: next(r for r in s["match_rates"] if r["league"] == "All" and r["role"] == "All"

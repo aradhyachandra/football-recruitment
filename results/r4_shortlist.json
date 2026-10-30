@@ -1239,6 +1239,6 @@
   },
   "run": {
     "seconds": 0.3,
-    "peak_rss_bytes": 253935616
+    "peak_rss_bytes": 258260992
   }
 }

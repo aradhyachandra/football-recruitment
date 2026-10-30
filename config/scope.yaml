@@ -2,6 +2,10 @@
 season:
   season_id: 27
   season_name: "2015/2016"
+  label: "2015/16"
+  label_reason: >-
+    The one season label printed in docs, figures, README and the dashboard (R6). season_name is
+    StatsBomb's own name for the season and stays as the source spells it.
   reason: >-
     The departing-player case is Leicester City losing N'Golo Kante in summer 2016, so the profiles
     must come from the season just before (2015/16). StatsBomb Open Data covers whole leagues for it.

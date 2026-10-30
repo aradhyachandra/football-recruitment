@@ -11,9 +11,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.ticker import FuncFormatter  # noqa: E402
 
+from recruit import config  # noqa: E402
+
 SURFACE, INK, INK2, MUTED, GRID = "#fcfcfb", "#0b0b0b", "#52514e", "#b5b4ad", "#e6e5e0"
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a"]
-CREDIT = "Data: StatsBomb Open Data (2015/16 events); market values: transfermarkt-datasets (CC0)."
+CREDIT = (f"Data: StatsBomb Open Data ({config.season_label()} events); "
+          "market values: transfermarkt-datasets (CC0).")
 STALE_NOTE = "* valuation older than 183 days at 2016-07-01 (flagged, kept)"
 
 
@@ -73,7 +76,7 @@ def scatter(res: dict, s: dict, cfg: dict, path: Path) -> None:
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v / 1e6:g}m"))
     ax.set_xlabel("Market value at 2016-07-01 (EUR, log scale)", color=INK2)
     ax.set_ylabel(f"Similarity to {s['target']['name']} (0-100)", color=INK2)
-    ax.set_title(f"Similar profile vs price: {s['pool']['role']}s, {s['pool']['min_minutes']}+ minutes, 2015/16",
+    ax.set_title(f"Similar profile vs price: {s['pool']['role']}s, {s['pool']['min_minutes']}+ minutes, {config.season_label()}",
                  loc="left", color=INK, fontsize=12)
     ax.legend(loc="lower left", fontsize=8.5, frameon=False, labelcolor=INK2)
     fig.text(0.01, 0.035, CREDIT, fontsize=7.5, color=INK2)

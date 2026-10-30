@@ -1,0 +1,10 @@
+# Light theme: the StatsBomb Media Pack logo used here (default version) has dark lettering and is
+# meant for light backgrounds.
+[theme]
+base = "light"
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"

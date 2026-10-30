@@ -16,5 +16,10 @@ def load(name: str, config_dir: Path = CONFIG_DIR) -> dict:
         return yaml.safe_load(fh)
 
 
+def season_label(config_dir: Path = CONFIG_DIR) -> str:
+    """The season as printed in docs, figures and the dashboard (config/scope.yaml season.label)."""
+    return load("scope", config_dir)["season"]["label"]
+
+
 def competition_ids(scope: dict) -> list[int]:
     return [c["competition_id"] for c in scope["competitions"]]

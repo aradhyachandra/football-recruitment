@@ -47,9 +47,7 @@ def valuation_gate(con, scope: dict, cfg: dict) -> dict:
     def shares(r):
         n = int(r["players"])
         return {"players": n, "with_valuation_before": int(r["with_valuation_before"]),
-                "with_valuation_either_side": int(r["with_valuation_either_side"]),
-                "share_before": r["with_valuation_before"] / n if n else 0.0,
-                "share_either_side": r["with_valuation_either_side"] / n if n else 0.0}
+                "share_before": r["with_valuation_before"] / n if n else 0.0}
 
     history = _query(con, "r1_departing_valuations",
                      {"player_id": scope["departing_player_ids"]["transfermarkt_player_id"],

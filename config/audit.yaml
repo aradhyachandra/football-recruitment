@@ -14,8 +14,9 @@ valuation_gate:
   departing_player_reason: "The case cannot be priced without the departing player's own valuation."
   history_months: 12
   history_reason: >-
-    The audit lists the departing player's valuations within 12 months either side of the date, for
-    context only (later valuations are shown, never used for prices).
+    The audit lists the departing player's valuations in the 12 months up to the date, for context.
+    Nothing dated after the date is listed or counted (changed in R6: results/ is public and must hold
+    no hindsight; tests/test_hindsight.py checks it).
 pressure_gate:
   event_type: Pressure
   reason: "Pressures are a core ball-winning metric for the Kante profile; must exist in every league."

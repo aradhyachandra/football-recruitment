@@ -7,3 +7,5 @@ pandas==2.3.3
 pyarrow==25.0.1
 PyYAML==6.0.3
 pytest==9.1.1
+streamlit==1.66.0  # R6 dashboard (app/streamlit_app.py); leaves the pins above unchanged (checked with pip freeze)
+altair==6.3.0      # R6 dashboard charts (installed with streamlit, imported directly)

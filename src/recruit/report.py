@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import re
 
+from recruit import config
+
 PLACEHOLDER = re.compile(r"\{\{\s*([\w.\-: |]+?)\s*\}\}")
 
 
@@ -61,6 +63,14 @@ def _lookup(context: dict, key: str, tables: dict) -> str:
         else:
             raise KeyError(f"Placeholder {{{{{dotted}}}}} not found in the context")
     return fmt(value, style or None)
+
+
+def publication_context(prefix: str = "../") -> dict:
+    """Shared by every doc: the season label and the StatsBomb logo tag (config/scope.yaml, publication.yaml).
+    prefix: path from the doc to the repo root ("../" for docs/, "" for README.md)."""
+    logo = config.load("publication")["statsbomb_logo"]
+    return {"season_label": config.season_label(),
+            "logo_html": f'<img src="{prefix}{logo["path"]}" alt="Hudl StatsBomb logo" width="{logo["doc_width_px"]}">'}
 
 
 def render_template(text: str, context: dict, tables: dict | None = None) -> str:

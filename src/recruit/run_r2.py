@@ -134,7 +134,7 @@ def render(s: dict, template: str, scope: dict) -> str:
             "pct_rank_padj": r["pct_rank_padj"]})
     defensive = [r for r in d["profile"] if r["possession_adjusted"]]
     tm = s["team_minutes"]
-    ctx = {**s, "d": d | {"statsbomb_player_id": str(d["statsbomb_player_id"])},
+    ctx = {**s, **report.publication_context(), "d": d | {"statsbomb_player_id": str(d["statsbomb_player_id"])},
            "tm": {"above_excess_share": tm["above_excess_minutes"] / tm["all_minutes"]
                   if tm["above_excess_minutes"] else 0.0},
            "dm": {"top_quarter_padj": sum(1 for r in defensive if r["pct_rank_padj"] >= 0.75),

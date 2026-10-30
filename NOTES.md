@@ -5,9 +5,6 @@ date and how they were settled.
 
 ## TO VERIFY
 
-- **StatsBomb logo.** The terms require the StatsBomb logo on every published analysis. The R1 and R2
-  pages carry a text credit only; Aradhya will fetch the logo from the Media Pack
-  (https://statsbomb.com/media-pack/) before anything goes public on GitHub (not before R6).
 - **Transfermarkt appearances have holes (R3 finding).** Markel Susaeta (Athletic, 1,985 minutes) has
   no Transfermarkt appearances from May 2015 to August 2016, and Rushian Hepburn-Murphy (Aston Villa, 6
   minutes) none before November 2019, so neither is in the squads built from appearances; both are
@@ -61,14 +58,52 @@ date and how they were settled.
   club's question is "closest we can afford" or "most profile per euro" (docs/REPORT.md).
 - **R5: config amended once after the first run** (reporting only): `outputs.draw_rank_quantiles` in
   config/sensitivity.yaml; fingerprints before/after in PROGRESS.md. Results unchanged.
-- **R5: results/r1_data_report.json holds Kanté's valuations after 2016-07-01** (R1 gate history,
-  including later clubs). Not used anywhere in R2-R5 or the report, but it is post-date information in
-  a public results file; consider trimming the history to dates on or before the valuation date before
-  publishing (R6/R7).
-- **R5: season label.** The report prints the season as "2015/2016" (config/scope.yaml season_name);
-  figures say "2015/16". Cosmetic.
+
+- **R6: logo terms are thin.** statsbomb.com/media-pack now redirects to Hudl's brand portal
+  (hudl.bynder.com, collection "Hudl Statsbomb Logos"). The file used is "hudl-statsbomb-logo-default"
+  (PNG original, unchanged; sha256 in config/publication.yaml). The only usage statement found is the
+  asset's metadata "Usage Rights: External Use Approved"; no written logo guidelines (clear space,
+  minimum size, which variant on which background) were found on the portal. The logo now reads
+  "Hudl StatsBomb", not the older "StatsBomb" mark. Worth a look before publishing, and worth an email
+  to StatsBomb/Hudl if the portfolio page needs certainty.
+- **R6: R2 reruns differ in the last digits.** Rerunning R2 gives per-90 distributions that differ at
+  the 15th-16th significant digit (DuckDB parallel float sums; up to about 1e-15 relative). Rendered docs
+  and every later result are identical. The committed results/r2_profiles_summary.json was kept (the
+  rerun copy was not saved). The R7 clean-clone check should compare R2 with a tolerance, or R2 could
+  run single-threaded if bit-for-bit reruns matter.
+- **R6: README run times come from two sessions.** R2's time is from the committed R2 run; R3-R5's from
+  this session's re-render runs (results/ run fields). R1's load-and-audit step and the download have no
+  saved time, and the README says so.
+- **R6: the valuation date was not varied in R5.** PROJECT_PLAN.md section 4 lists it among the
+  sensitivity changes; R5's scenarios do not include it (the README assumptions table says "not varied").
+  An earlier date would only ever use older valuations (no hindsight), so it could be added in R7 if
+  wanted.
+- **R6: the Case-view screenshot shows the whole pool as dots.** It plots similarity against market value
+  for every priced central midfielder (unlabelled, hover only in the live app), like the R4 figure.
+  These are derived per-player summaries, not event data; worth a glance against the "no per-player full
+  tables" rule before publishing.
+- **R6: Explore view uses the Kante weights for every role.** Group weights and metrics were chosen for
+  the Kante case; for other roles the app says they are a starting point. The selected player's own
+  club(s) are excluded as targets (config/publication.yaml), which for Kante is exactly the R4 rule.
 
 ## Resolved
+
+- 2026-10-29 (R6): The report keeps the pre-set recommendation (Sebastián Cristóforo) with the two-route
+  framing already in the executive summary; no change to the recommendation rule (Aradhya). The README
+  and the dashboard repeat the two routes.
+- 2026-10-29 (R6): Hindsight trim. results/r1_data_report.json no longer holds Kante's valuations after
+  2016-07-01 (three records, two with Chelsea) nor the "valued within 6 months either side" counts, which
+  were built from valuations after the date. The R1 SQL reads nothing after the date; history now runs
+  12 months up to it (config/audit.yaml). R1 re-run with the new `--audit-only` mode (existing DuckDB,
+  raw-file fingerprints verified, nothing re-downloaded). tests/test_hindsight.py fails if any
+  results/*.json holds a date after the valuation date or a negative days-before value (run fields exempt);
+  it found only the R1 records above.
+- 2026-10-29 (R6): Season label "2015/16" everywhere in docs, figures, README and dashboard, from
+  config/scope.yaml season.label (season_name stays StatsBomb's "2015/2016"). R1-R5 re-rendered: R3-R5
+  results identical apart from run fields; R1 changed only by the trim; R2 see TO VERIFY (last-digit
+  noise). Figures unchanged (they already said 2015/16).
+- 2026-10-29 (R6): StatsBomb logo in assets/statsbomb_logo.png, from the Media Pack (see TO VERIFY for
+  its terms), on REPORT.md, every step note, the README and the dashboard, with the source line.
 
 - 2026-10-29 (R4): StatsBomb id 42946 "Jiang Guangtai" = Transfermarkt 156934 "Tyias Browning":
   confirmed by Aradhya; he took the name on naturalisation in China in 2019. Override kept.

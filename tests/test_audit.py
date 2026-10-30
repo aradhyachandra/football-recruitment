@@ -49,13 +49,16 @@ def test_valuation_gate(con, cfg):
     # Delta only played in 2014
     assert g["players"] == 3
     assert g["with_valuation_before"] == 1 and g["share_before"] == pytest.approx(1 / 3)
-    assert g["with_valuation_either_side"] == 2 and g["share_either_side"] == pytest.approx(2 / 3)
+    # no counts built from valuations after the date (no hindsight in public results)
+    assert not any("either_side" in k for k in g) and not any("either_side" in k for k in g["by_league"][0])
     by = {r["league"]: r for r in g["by_league"]}
     assert (by["GB1"]["players"], by["GB1"]["with_valuation_before"]) == (2, 1)
     assert (by["FR1"]["players"], by["FR1"]["with_valuation_before"]) == (1, 0)
     d = g["departing_player"]
     assert d["latest_before"] == {"date": "2016-02-01", "market_value_eur": 18000000, "days_before": 151}
-    assert [h["date"] for h in d["history"]] == ["2015-07-01", "2016-02-01", "2016-07-15"]
+    # the 2016-07-15 Chelsea valuation is after the date and must not be listed
+    assert [h["date"] for h in d["history"]] == ["2015-07-01", "2016-02-01"]
+    assert {h["club"] for h in d["history"]} == {"Leicester City"}
     assert g["passed"] is True
     strict = audit.valuation_gate(con, SCOPE, cfg)  # default 80% line
     assert strict["passed"] is False

@@ -694,8 +694,8 @@
     }
   ],
   "run": {
-    "seconds": 16.9,
-    "peak_rss_bytes": 185008128,
+    "seconds": 8.0,
+    "peak_rss_bytes": 202948608,
     "table_rows": {
       "r3_player_values": 2176,
       "r3_plausibility": 2278,
